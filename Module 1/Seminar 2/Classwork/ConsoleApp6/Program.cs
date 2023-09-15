@@ -15,6 +15,7 @@ namespace ConsoleApp6
         {
             Console.Write("Введите трехзначное натуральное число: ");
             int.TryParse(Console.ReadLine(), out int a);
+            a = (a < 0) ? -a : a;
             int one = a % 10;
             a /= 10;
             int two = a % 10;
@@ -23,6 +24,6 @@ namespace ConsoleApp6
             a /= 10;
             Console.WriteLine($"{three}\n{two}\n{one}");
         }
-        
+
     }
 }
