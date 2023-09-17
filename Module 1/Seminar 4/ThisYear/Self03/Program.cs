@@ -16,10 +16,48 @@ namespace Self03
             do
             {
                 Console.Write("Введите код операции: ");
-                int.TryParse(Console.ReadLine(), out n);
-            } while (!(n == 1 | n == 2 | n == 3 | n == 4));
+            } while (!int.TryParse(Console.ReadLine(), out n));
 
-            
+            double a, b;
+            do
+            {
+                Console.Write("Введите A: ");
+            } while (!double.TryParse(Console.ReadLine(), out a));
+
+            do
+            {
+                Console.Write("Введите B: ");
+            } while (!double.TryParse(Console.ReadLine(), out b));
+
+            if (n == 1)
+            {
+                Console.WriteLine(a + b);
+            }
+            else if (n == 2)
+            {
+                Console.WriteLine(a - b);
+            }
+            else if (n == 3)
+            {
+                Console.WriteLine(a * b);
+            }
+            else if (n == 4)
+            {
+                if (b == 0)
+                {
+                    Console.WriteLine("Ошибка");
+                }
+                else
+                {
+                    Console.WriteLine(a / b);
+                }
+                
+            }
+            else
+            {
+                Console.WriteLine("Ошибка");
+            }
+
         }
     }
 }
