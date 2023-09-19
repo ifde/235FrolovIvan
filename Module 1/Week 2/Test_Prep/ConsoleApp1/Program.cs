@@ -19,7 +19,7 @@ namespace ConsoleApp1
         }
         static string Formula(double x)
         {
-            double a = Math.Abs(Math.Log10(Math.Pow(x, 2)));
+            double a = Math.Abs(Math.Log(Math.Pow(x, 2)));
             double b = Math.Sqrt(Math.Pow(Math.E, x / Math.PI) + Math.Pow(x, 1.0 / 3) + 1.4);
             double res = a / b;
             return res.ToString();
