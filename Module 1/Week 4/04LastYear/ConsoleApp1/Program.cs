@@ -15,6 +15,7 @@
             sbyte t = -12;
             uint t1 = (uint)t;
             Console.WriteLine(t1);
+            sbyte c = 12 << 3;
         }
     }
 }
