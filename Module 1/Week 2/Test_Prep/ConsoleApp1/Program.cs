@@ -16,6 +16,9 @@ namespace ConsoleApp1
             Console.WriteLine("Введите число X: ");
             string res = double.TryParse(Console.ReadLine(), out temp) ? Formula(temp) : "Неверные входные данные";
             Console.WriteLine(@"Результат: {0:f5}", res);
+
+            sbyte a = 12, b = 6;
+            sbyte c = a * b;
         }
         static string Formula(double x)
         {
