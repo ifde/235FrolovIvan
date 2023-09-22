@@ -6,8 +6,6 @@
 Дата:        18.09.2023
 */
 
-using System.Xml.Serialization;
-
 namespace ConsoleApp4
 {
     internal class Program

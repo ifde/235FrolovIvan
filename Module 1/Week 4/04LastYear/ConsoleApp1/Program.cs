@@ -16,9 +16,6 @@
                 Console.WriteLine("Неверные данные");
             }
 
-            byte s = (byte)(128);
-            Console.WriteLine(s);
-
 
         }
 
