@@ -14,8 +14,10 @@ namespace Self07
     {
         static void Main(string[] args)
         {
+            // повтор решения
             do
             {
+                Console.Clear();
                 int n;
                 uint k; // вводимое пользователем целое число
 
