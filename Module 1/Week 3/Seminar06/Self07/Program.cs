@@ -1,4 +1,6 @@
-﻿namespace Self07
+﻿using System.Security.Cryptography;
+
+namespace Self07
 {
     internal class Program
     {
@@ -30,6 +32,11 @@
 
                 Console.WriteLine($"Полученное значение: {Formula(x, n):f3}");
 
+                uint a = uint.MaxValue;
+                Console.WriteLine(Convert.ToString(a, 2));
+
+                int[,][] arr = new int[2, 2][];
+
                 Console.WriteLine("\n----------------\nДля выхода из программы нажиме ESC.\nДля нового ввода - любую другую клавишу\n----------------");
             } while (Console.ReadKey().Key != ConsoleKey.Escape);
         }
@@ -51,6 +58,16 @@
             res *= Math.Log(x) - 2.0 / 9;
 
             return res;
+        }
+
+        static double Formula (uint b, double a)
+        {
+            return 0;
+        }
+
+        static double Formula(uint a, double b, uint c = 1)
+        {
+            return 0;
         }
     }
 }
