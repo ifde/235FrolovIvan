@@ -72,10 +72,39 @@ internal class Program
             Console.Write("Модифицирванный массив A: [");
             foreach (uint elem in a)
             {
-                Console.Write(elem == 0 ? "\b\b]" : $"{elem}, ");
+                if (elem == 0)
+                {
+                    Console.Write("\b\b]");
+                    break;
+                }
+                Console.Write($"{elem}, ");
             }
-
+            Console.WriteLine();
+;           Console.Write("Массив A: ");
+            PrintArray(a);
+;
             Console.WriteLine("\n\n-------------\nНажмите ESC для завершения программы.\nДля повтора нажмите любую другую клавишу.\n-------------");
         } while (Console.ReadKey().Key != ConsoleKey.Escape);
+    }
+
+    /// <summary>
+    /// Распечатать массив int[]
+    /// </summary>
+    /// <param name="arr"></param>
+    static void PrintArray(uint[] arr)
+    {
+        if (arr.Length == 0)
+        {
+            Console.WriteLine("[]");
+        }
+        else
+        {
+            Console.Write("[");
+            foreach (int elem in arr)
+            {
+                Console.Write($"{elem}, ");
+            }
+            Console.Write("\b\b]\n");
+        }
     }
 }
