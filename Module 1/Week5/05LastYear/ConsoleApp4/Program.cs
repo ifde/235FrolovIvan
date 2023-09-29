@@ -34,6 +34,11 @@ namespace ConsoleApp4
             } while (Console.ReadKey().Key != ConsoleKey.Escape);
         }
 
+        /// <summary>
+        /// Вычисление значений рекуррентной функции и добавление их в массив
+        /// </summary>
+        /// <param name="a0"></param>
+        /// <returns></returns>
         static uint[] Reccur(uint a0)
         {
             uint[] arr = new uint[0]; // итоговый массив
@@ -55,6 +60,10 @@ namespace ConsoleApp4
             return arr;
         }
 
+        /// <summary>
+        /// Напечатать массив целочисленыых элементов по 5 элементов на строке
+        /// </summary>
+        /// <param name="arr"></param>
         static void PrintReccur(ref uint[] arr)
         {
             for (uint i = 0; i < arr.Length; i++)
