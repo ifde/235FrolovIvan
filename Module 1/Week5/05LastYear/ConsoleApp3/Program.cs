@@ -34,11 +34,27 @@ namespace ConsoleApp3
                 // заполняем массив arr_sin
                 for (uint j = 0; j < n; j++)
                 {
-                    arr_sin[j] = (i % 4 == 3 ? -1 : 1) * Math.Pow(1, i) / Fact(i);
+                    arr_sin[j] = (i % 4 == 3 ? -1.0 : 1.0) / Fact(i);
                     i += 2;
                 }
 
                 PrintArray(arr_sin);
+
+                double x; // вещественное число x
+
+                Console.WriteLine("\nНиже вычисляйте Sin(x). Для завершения нажмите SPACE");
+                do
+                {
+                    Console.WriteLine("Введите вещественное число x:");
+                    while (!double.TryParse(Console.ReadLine(), out x))
+                    {
+                        Console.WriteLine("Wrong input.");
+                        Console.WriteLine("Введите вещественное число x:");
+                    }
+                    Console.WriteLine($"Sin({x}) = {Sin(arr_sin, x):f5} (По разложению в ряд)");
+                    Console.WriteLine($"Sin({x}) = {Math.Sin(x):f5} (По библиотечному методу)");
+                } while (Console.ReadKey().Key != ConsoleKey.Spacebar);
+                
 
                 Console.WriteLine("\n\n-------------\nНажмите ESC для завершения программы.\nДля повтора нажмите любую другую клавишу.\n-------------");
             } while (Console.ReadKey().Key != ConsoleKey.Escape);
@@ -61,6 +77,26 @@ namespace ConsoleApp3
                 res1 += (i % 4 == 3 ? -1 : 1) * Math.Pow(x, i) / Fact(i);
                 i += 2;
             } while (res1 != res);
+
+            return res;
+        }
+        
+        /// <summary>
+        /// Вычисление Sin(x) через массив членов ряда
+        /// </summary>
+        /// <param name="arr_sin"></param>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        static double Sin(double[] arr_sin, double x)
+        {
+            double res = 0; // итоговый результат
+            uint i = 1; // степень
+            // вычисляем sin(x)
+            foreach (double d in arr_sin)
+            {
+                res += d * Math.Pow(x, i);
+                i += 2;
+            }
 
             return res;
         }
@@ -98,9 +134,9 @@ namespace ConsoleApp3
                 Console.Write("[");
                 foreach (double elem in arr)
                 {
-                    Console.Write($"{elem:f3}, ");
+                    Console.Write($"{elem:f10}, ");
                 }
-                Console.Write("\b]\n");
+                Console.Write("\b\b]\n");
             }
         }
     }
