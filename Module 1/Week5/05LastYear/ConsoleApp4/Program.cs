@@ -21,10 +21,10 @@ namespace ConsoleApp4
 
                 Console.WriteLine("Введите целое неотрицательное число a0:");
                 // вводим длину a0
-                while (!uint.TryParse(Console.ReadLine(), out a0))
+                while (!uint.TryParse(Console.ReadLine(), out a0) || a0 == 0)
                 {
                     Console.WriteLine("Wrong input.");
-                    Console.WriteLine("Введите цеое неотрицательное число a0:");
+                    Console.WriteLine("Введите целое неотрицательное число a0:");
                 }
 
                 uint[] arr = Reccur(a0);
