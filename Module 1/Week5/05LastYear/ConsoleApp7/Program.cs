@@ -29,36 +29,14 @@ namespace ConsoleApp07
 
                 PrintArray(Numerals(n));
 
+                //int[] test = { 0, 1 };
+                //int[][,][] test1 = new int[2][,][];
+                //test1[0] = new int[3,3][] { { new int[5], new int[4], new int[3] }, { new int[5], new int[4], new int[3] }, { new int[5], new int[4], new int[3] } };
+                //Test(test);
+                //Console.WriteLine(test[0]);
+
                 Console.WriteLine("\n\n-------------\nНажмите ESC для завершения программы.\nДля повтора нажмите любую другую клавишу.\n-------------");
             } while (Console.ReadKey().Key != ConsoleKey.Escape);
-        }
-
-        /// <summary>
-        /// Squize int[]
-        /// </summary>
-        /// <param name="arr"></param>
-        static void Squize(ref int[] arr)
-        {
-            int[] arr_temp = new int[arr.Length]; // temporary array
-            int k = 0; // size of arr_temp
-            // iterate elements of arr
-            for (int i = 0; i < arr.Length - 1; i++)
-            {
-                // check the condition and squize arr if true
-                if ((arr[i] + arr[i + 1]) % 3 == 0)
-                {
-                    arr_temp[k++] = arr[i] * arr[i + 1];
-                    i++;
-                }
-                else
-                {
-                    arr_temp[k++] = arr[i];
-                    if (i == arr.Length - 2) arr_temp[k++] = arr[i + 1]; // include the last element of arr if no squize was done
-                }
-            }
-            Array.Resize(ref arr_temp, k);
-
-            arr = arr_temp;
         }
 
         /// <summary>
@@ -101,5 +79,11 @@ namespace ConsoleApp07
             Array.Reverse(arr);
             return arr;
         }
+
+        static void Test(int[] arr)
+        {
+            arr[0] = 1;
+        }
+
     }
 }
