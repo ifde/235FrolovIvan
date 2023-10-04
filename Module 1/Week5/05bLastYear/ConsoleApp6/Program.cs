@@ -2,18 +2,11 @@
 Дисциплина: "Программирование"
 Группа:      БПИ235(2)
 Студент:     Фролов Иван Григорьевич
-Задача:      5
-// Определить массив массивов для представления треугольника Паскаля.
-// 0-й элемент - массив из одного элемента со значением С(0,0)=1, 
-// 1-й элемент - массив из 2-х элементов С(1,0)=С(1,1)=1.
-// 2-й элемент - массив из 3-х элементов С(2,0)=С(2,2)=1, С(2,1)=2...
-// n-й элемент - массив из n+1 элементов: С(n,0)=С(n,n)=1, 
-//   С(n,k)=C(n-1,k-1)+C(n-1,k). 
-// Вводя неотрицательные значение n, построить массив-массивов  
-// со значениями биномиальных коэффициентов и вывести его на экран 
-// с помощью циклов foreach, размещая значения элементов каждого
-// массива нижнего уровня на отдельной строке...
-  Дата:      03.10.2023
+Задача:      6
+// Определите и инициализируйте массив строк.
+// Выведите строки в порядке возрастания их длин.
+// Порядок элементов в исходном массиве строк не менять (сортировка индексов).
+  Дата:      04.10.2023
 */
 
 
@@ -26,25 +19,39 @@ internal class Program
         {
             Console.Clear();
 
-            int n; // количество строк Треугольника Паскаля
-            Console.WriteLine("Введите количество строк Треугольника Паскаля:");
-            while (!int.TryParse(Console.ReadLine(), out n) || n <= 0)
+            string[] lines = new string[] { "нуль", "один", "два",
+                                            "три", "четыре", "пять", "шесть", 
+                                            "семь", "восемь", "девять", "десять" };
+
+            Console.WriteLine("\nИсходный массив:");
+            foreach (string s in lines)
+                Console.Write(s + " ");
+
+            int[] index = new int[10];
+            for (int i = 0; i < index.Length; i++)
             {
-                Console.WriteLine("Wrong Input");
-                Console.WriteLine("количество строк Треугольника Паскаля:");
+                index[i] = i;
             }
 
-            File.WriteAllText("D:\\Text.txt", PrintPascalTriangle(CreatePascalTriangle(n)));
+            Array.Sort(index, (s1, s2) => CompareLength(lines[s1], lines[s2]));
+            Console.WriteLine("\nОтсортированный массив:");
+            foreach (int i in index)
+                Console.Write(lines[i] + " ");
 
             Console.WriteLine("\n\n-------------\nНажмите ESC для завершения программы.\nДля повтора нажмите любую другую клавишу.\n-------------");
         } while (Console.ReadKey().Key != ConsoleKey.Escape);
+    }
+
+    static int CompareLength(string s1, string s2)
+    {
+        return s1.Length > s2.Length ? 1 : -1;
     }
 
     /// <summary>
     /// Создать и вернуть Треугольник Паскаля - массив int[][];
     /// </summary>
     /// <param name="n">количество строк в треугольнике Паскаля</param>
-    static int[][] CreatePascalTriangle (int n)
+    static int[][] CreatePascalTriangle(int n)
     {
         int[][] pascal = new int[n][]; // массив для треугольника Паскаля
         for (int i = 0; i < n; i++)
