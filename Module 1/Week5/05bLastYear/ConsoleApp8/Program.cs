@@ -53,7 +53,7 @@ internal class Program
             a = CreateMatrix(am, an);
             b = CreateMatrix(bm, bn);
             int[,] c = MatrixMult(a, b); // произведение матриц A и B
-            Console.WriteLine('\n'+ "Матрица A:");
+            Console.WriteLine('\n' + "Матрица A:");
             Console.WriteLine(MatrixToString(a) + '\n');
             Console.WriteLine("Матрица B:");
             Console.WriteLine(MatrixToString(b) + '\n');
