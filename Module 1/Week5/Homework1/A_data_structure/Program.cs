@@ -56,7 +56,7 @@ namespace A_data_structure
                 Console.WriteLine("\n\n-------------\nНажмите ESC для завершения программы.\nДля повтора нажмите любую другую клавишу.\n-------------");
             } while (Console.ReadKey().Key != ConsoleKey.Escape);
         }
-        
+
         /// <summary>
         /// Инициализирует массив и заполняет его по правилу
         /// </summary>
@@ -82,7 +82,7 @@ namespace A_data_structure
         /// </summary>
         /// <param name="file_name"></param>
         /// <returns>Полный путь к файлу</returns>
-        static string CreateFile (string file_name)
+        static string CreateFile(string file_name)
         {
             if (Regex.Match(file_name, @"^\w+$").Success) // проверяем, что название файла состоит из [a_zA_Z0_9]
             {
@@ -103,7 +103,12 @@ namespace A_data_structure
             {
                 for (int j = 0; j < a.GetLength(1); j++)
                 {
-                    if (j == a.GetLength(1) - 1) res += $"{a[i, j]:f2}; "; // после последнего элемента строки ставим точку с запятой
+                    if (j == a.GetLength(1) - 1)
+                    {
+                        // после последнего элемента строки ставим точку с запятой
+                        if (i == a.GetLength(0) - 1) res += $"{a[i, j]:f2};"; // удаляем последний пробел просле двоеточия, если элемент самый последний
+                        else res += $"{a[i, j]:f2}; ";
+                    } 
                     else res += $"{a[i, j]:f2} "; // иначе ставим пробел
                 }
             }
