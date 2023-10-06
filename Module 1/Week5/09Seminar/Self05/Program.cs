@@ -42,6 +42,9 @@ namespace Self05
                 Console.WriteLine("\nМассив A, в котором повторяющиеся элементы заменены на 0:");
                 PrintArray(a);
 
+                string text = "abc";
+                char c = text[0];
+
                 Console.WriteLine("\n\n-------------\nНажмите ESC для завершения программы.\nДля повтора нажмите любую другую клавишу.\n-------------");
             } while (Console.ReadKey().Key != ConsoleKey.Escape);
         }
