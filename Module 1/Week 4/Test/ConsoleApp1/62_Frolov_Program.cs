@@ -49,8 +49,8 @@ namespace ConsoleApp1
             do
             {
                 res = res1;
-                res1 += ((2 * k - 1) % 4 == 3 ? -1 : 1) * Math.Pow(x, 2 * k - 1) / fact * (2 * k + x);
-                fact *= (2 + k + 1) * (2 * k + 2);
+                res1 += (k % 2 == 0 ? 1 : -1) * Math.Pow(x, 2 * k - 1) / fact * (2 * k + x);
+                fact *= (2 * k + 1) * (2 * k + 2);
                 k++;
             } while (Math.Abs(res1 - res) > double.Epsilon); // accurate to epsilon
 
