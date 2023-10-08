@@ -86,7 +86,7 @@ namespace A_data_structure
         {
             if (Regex.Match(file_name, @"^\w+$").Success) // проверяем, что название файла состоит из [a_zA_Z0_9]
             {
-                return Path.Combine(Directory.GetCurrentDirectory()[..^17] /*переходим в директорию проекта*/, file_name + ".txt");
+                return Directory.GetCurrentDirectory() + @"..\..\..\..\" /*переходим в директорию проекта*/+ file_name + ".txt";
             }
             return null; // возвращаем null, если имя файла указано неверно
         }

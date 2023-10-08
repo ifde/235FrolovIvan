@@ -21,8 +21,8 @@ namespace B_data_structure
 
                 double[][] b; // структура данных B
 
-                // Введите название TXT-файла заданного формата, который находится в директории текущего проекта.
-                Console.WriteLine("Введите название TXT-файла заданного формата, который находится в директории текущего проекта.");
+                // Введите название TXT-файла заданного формата, который вы создали в проекте A_data_structure.
+                Console.WriteLine("Введите название TXT-файла заданного формата, который вы создали в проекте A_data_structure");
                 string path = CreateFile(Console.ReadLine());
                 if (!File.Exists(path))
                 {
@@ -69,7 +69,7 @@ namespace B_data_structure
         {
             if (Regex.Match(file_name, @"^\w+$").Success) // проверяем, что название файла состоит из [a_zA_Z0_9]
             {
-                return Path.Combine(Directory.GetCurrentDirectory()[..^17] /*переходим в директорию проекта*/, file_name + ".txt");
+                return Directory.GetCurrentDirectory() + @"..\..\..\..\..\A_data_structure\" /*переходим в директорию проекта A_data_structure*/+ file_name + ".txt";
             }
             return null; // возвращаем null, если имя файла указано неверно
         }
