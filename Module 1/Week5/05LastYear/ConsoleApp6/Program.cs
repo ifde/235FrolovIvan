@@ -82,12 +82,25 @@ namespace ConsoleApp6
         /// <param name="arr"></param>
         static void RepeatSquize(ref int[] arr)
         {
-            int[] arr_temp;
+            int last_length; // длина массива до сжатия
             do
             {
-                arr_temp = arr.Clone() as int[];
+                last_length = arr.Length;
                 Squize(ref arr);
-            } while (arr.Length < arr_temp.Length);
+            } while (arr.Length < last_length); // проверяем, что сжатие есть
+            
+        }/// <summary>
+        /// Repeat Squize(ref int[] arr) until it's not possible anymore
+        /// </summary>
+        /// <param name="arr"></param>
+        static void RepeatSquize(ref int[] arr)
+        {
+            int last_length; // длина массива до сжатия
+            do
+            {
+                last_length = arr.Length;
+                Squize(ref arr);
+            } while (arr.Length < last_length); // проверяем, что сжатие есть
             
         }
 
