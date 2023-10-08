@@ -1,0 +1,113 @@
+/*
+Дисциплина: "Программирование"
+Группа:      БПИ235(2)
+Студент:     Фролов Иван Григорьевич
+Задача:      3
+Переназначение входного потока.
+Связать входной поток с файлом Program.cs.
+Прочитать файл Program.cs,
+проанализировать баланс операторных скобок,
+вычислить количество вхождений каждой строчной буквы латинского алфавита
+ Дата:      08.10.2023
+*/
+
+using System;
+using System.Runtime.ExceptionServices;
+
+namespace ConsoleApp3
+{
+    internal class Program
+    {
+        static int[] stat = new int[26]; // статистика по лат. буквам
+        static void Main(string[] args)
+        {
+            string tmp;
+            int openBrackets = 0; // количество {
+            int closedBrackets = 0; // количество }
+            int total = 0; // общее количество символов файла
+
+            var In = Console.In; // Запоминаем стандартный входной поток
+                                 // Создаем файл и текстовый входной поток: 
+            StreamReader stream_in = new StreamReader(@"..\..\..\Program.cs");
+            // Настраиваем созданный поток на чтение из файла:
+            Console.SetIn(stream_in);
+
+            var Out = Console.Out;
+            StreamWriter stream_out = new StreamWriter(@"..\..\..\Test.txt");
+            Console.SetOut(stream_out);
+
+            while (true) // цикл бесконечен
+            { 
+                tmp = Console.ReadLine();
+                if (tmp == null) break; // условие прерывание цикла
+                total += tmp.Length;
+                // подсчёт количества фигурных скобок
+                BracketsCount(tmp, ref openBrackets, ref closedBrackets);
+                Console.WriteLine(tmp);
+            }
+
+            stream_in.Close();
+            Console.SetIn(In); // восстановление потока
+
+            // обрабатываем данные по скобкам
+            tmp = "Баланс скобок не соблюдён";
+            if (openBrackets == closedBrackets)
+                tmp = "Баланс скобок соблюдён, количество блоков " + closedBrackets;
+            Console.WriteLine(StatToString());
+            Console.WriteLine(tmp);
+
+            stream_out.Close();
+            Console.SetOut(Out);
+
+            Console.WriteLine("Для завершения работы нажмите любую клавишу.");
+            Console.ReadKey();
+
+        }
+
+        /// <summary>
+        /// Вычисляет количество открывающихся и закрывающихся скобок в строке
+        /// </summary>
+        /// <param name="tmp">строка символов</param>
+        /// <param name="openBrackets">количество открывающихся скобок</param>
+        /// <param name="closedBrackets">количество закрывающихся скобок</param>
+        private static void BracketsCount(string tmp, ref int openBrackets, ref int closedBrackets)
+        {
+            
+            int begin_quote = tmp.IndexOf('"'); // первые двойные кавычки в строке
+            int end_quote = tmp.LastIndexOf('"'); // последние двойные кавычки в строке
+
+            for (int i = 0; i < tmp.Length; i++)
+            {
+                // статистика по строчным латинским символам
+                if (tmp[i] >= 'a' && tmp[i] <= 'z')
+                    stat[tmp[i] - 'a']++;
+
+                if (tmp[i] == '\'') // проверяем на одинарную кавыку
+                {
+                    i += 2;
+                    continue;
+                }
+                
+                if (tmp[i] == '{' && begin_quote != -1 && (i < begin_quote || i > end_quote)) openBrackets++;
+                if (tmp[i] == '}' && begin_quote != -1 && (i < begin_quote || i > end_quote)) closedBrackets++;
+            }
+        }
+
+        /// <summary>
+        /// метод формирует строку со статистикой по строчным латинским, 
+        /// символам, содержащимся в тексте файла
+        /// </summary>
+        /// <returns>возвращает строку с представлением статистики</returns>
+        public static string StatToString()
+        {
+            string output = string.Empty;
+            for (int i = 0; i < stat.Length; i++)
+            {
+                output += (char)('a' + i) + " - " + stat[i] + " ";
+            }
+            return output;
+        }
+    }
+}
+a - 76 b - 7 c - 36 d - 18 e - 124 f - 14 g - 23 h - 5 i - 80 j - 0 k - 16 l - 30 m - 56 n - 86 o - 71 p - 42 q - 8 r - 82 s - 77 t - 141 u - 38 v - 6 w - 4 x - 4 y - 8 z - 0 
+Баланс скобок соблюдён, количество блоков 0
