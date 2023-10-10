@@ -6,6 +6,7 @@
   Дата:      05.10.2023
 */
 
+using System.Linq.Expressions;
 using System.Text.RegularExpressions;
 
 namespace A_data_structure
@@ -78,17 +79,23 @@ namespace A_data_structure
         }
 
         /// <summary>
-        /// Путь к TXT-файлу в текущей дериктории с названием, переданным в качестве аргумента
+        /// Путь к TXT-файлу в текущей  директории с названием, переданным в качестве аргумента
         /// </summary>
         /// <param name="file_name"></param>
-        /// <returns>Полный путь к файлу</returns>
+        /// <returns>Полный путь к файлу. Null, если имя файла указано неверно</returns>
         static string CreateFile(string file_name)
         {
-            if (Regex.Match(file_name, @"^\w+$").Success) // проверяем, что название файла состоит из [a_zA_Z0_9]
+            string path = @"..\..\..\" /*переходим в директорию проекта*/ + file_name + ".txt";
+            try
             {
-                return Directory.GetCurrentDirectory() + @"..\..\..\..\" /*переходим в директорию проекта*/+ file_name + ".txt";
+                File.Create(path).Close();
             }
-            return null; // возвращаем null, если имя файла указано неверно
+            catch
+            {
+                return null;
+            }
+            return path;
+
         }
 
         /// <summary>
