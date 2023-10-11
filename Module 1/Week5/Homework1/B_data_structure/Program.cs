@@ -21,40 +21,50 @@ namespace B_data_structure
 
                 double[][] b; // структура данных B
 
-                // Введите название TXT-файла заданного формата, который вы создали в проекте A_data_structure.
-                Console.WriteLine("Введите название TXT-файла заданного формата, который вы создали в проекте A_data_structure");
-                string path = CreateFile(Console.ReadLine());
-                if (!File.Exists(path))
+                // Читаем данные из TXT-файла заданного формата, который был создан в проекте A_data_structure.
+                while (true)
                 {
-                    Console.WriteLine("Такого файла нет");
+                    Console.WriteLine("Введите название TXT-файла заданного формата, который вы создали в проекте A_data_structure");
+                    string path = CreatePath(Console.ReadLine());
+                    try
+                    {
+                        StringToArray(out b, File.ReadAllText(path));
+                        break;
+                    }
+                    catch (ArgumentException ex)
+                    {
+                        Console.WriteLine("Введено некорректное название файла, повторите попытку");
+                        continue;
+                    }
+                    catch (IOException ex)
+                    {
+                        Console.WriteLine("Возникла ошибка при открытии файла и записи структуры, повторите попытку");
+                        continue;
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("Возникла непредвиленная ошибка, повторите попытку");
+                        continue;
+                    }
                 }
-                else
+
+                int k; // сдвиг
+
+                // Ввод k с клавиатуры
+                Console.WriteLine("Введите неотрицательный сдвиг:");
+                while (!int.TryParse(Console.ReadLine(), out k) || k < 0)
                 {
-                    if (!StringToArray(out b, File.ReadAllText(path)))
-                    {
-                        Console.WriteLine("Неверный формат данных в файле");
-                    }
-                    else
-                    {
-                        int k; // сдвиг
-                        // Ввод k с клавиатуры
-                        Console.WriteLine("Введите неотрицательный сдвиг:");
-                        while (!int.TryParse(Console.ReadLine(), out k) || k < 0)
-                        {
-                            Console.WriteLine("Wrong Input");
-                            Console.WriteLine("Введите неотрицательный сдвиг:");
-                        }
-
-                        Console.WriteLine("\nДанные до сдвига:");
-                        Console.WriteLine(ArrayToString(b)); // до изменений
-
-                        ChangeArr(b, k);
-
-                        Console.WriteLine("\nДанные после сдвига:");
-                        Console.WriteLine(ArrayToString(b)); // после изменений
-                    }
-
+                    Console.WriteLine("Wrong Input");
+                    Console.WriteLine("Введите неотрицательный сдвиг:");
                 }
+
+                Console.WriteLine("\nДанные до сдвига:");
+                Console.WriteLine(ArrayToString(b)); // до изменений
+
+                ChangeArr(b, k);
+
+                Console.WriteLine("\nДанные после сдвига:");
+                Console.WriteLine(ArrayToString(b)); // после изменений
 
                 Console.WriteLine("\n\n-------------\nНажмите ESC для завершения программы.\nДля повтора нажмите любую другую клавишу.\n-------------");
             } while (Console.ReadKey().Key != ConsoleKey.Escape);
@@ -65,7 +75,7 @@ namespace B_data_structure
         /// </summary>
         /// <param name="file_name"></param>
         /// <returns>Полный путь к файлу</returns>
-        static string CreateFile(string file_name)
+        static string CreatePath(string file_name)
         {
             return @"..\..\..\..\A_data_structure\" /*переходим в директорию проекта A_data_structure*/+ file_name + ".txt";
         }
@@ -75,8 +85,7 @@ namespace B_data_structure
         /// </summary>
         /// <param name="b"></param>
         /// <param name="text"></param>
-        /// <returns>Если конвертация невозможна, возвращает false. Иначе - true</returns>
-        static bool StringToArray(out double[][] b, string text)
+        static void StringToArray(out double[][] b, string text)
         {
             text += " ";
             string[] rows = text.Split("; ")[..^1]; // разбиваем исходный текст на строки для массива
@@ -87,14 +96,9 @@ namespace B_data_structure
                 b[i] = new double[elems.Length];
                 for (int j = 0; j < elems.Length; j++) // пробегаем по всем элементам каждой из строк
                 {
-                    if (!double.TryParse(elems[j], out b[i][j])) // если данные введены неверно, то возвращаем false
-                    {
-                        return false;
-                    }
+                    b[i][j] = double.Parse(elems[j]); // если данные введены неверно, то поймаем ошибку в Main();
                 }
             }
-
-            return true;
 
         }
 

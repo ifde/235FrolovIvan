@@ -6,6 +6,7 @@
   Дата:      05.10.2023
 */
 
+using System.IO;
 using System.Linq.Expressions;
 using System.Text.RegularExpressions;
 
@@ -40,19 +41,32 @@ namespace A_data_structure
                     Console.WriteLine("Введите число стобцов двумерного массива A:");
                 }
 
-                InitializeArr(out a, n, m);
+                InitializeArr(out a, n, m); // инициализируем массив
 
-                string path;
-                // Ввод имени файла. При некорректном введенном названии запрашиваем ввод повторно.
-                Console.WriteLine("Введите имя txt файла, состоящее только из цифр и латинских букв");
-                path = CreateFile(Console.ReadLine());
-                while (path == null)
+                // записываем массив в файл
+                while (true)
                 {
-                    Console.WriteLine("Неверное название файла. Попробуйте еще раз");
-                    path = CreateFile(Console.ReadLine());
+                    Console.WriteLine("Введите имя txt файла. Расширение не указывайте.");
+                    string path = Console.ReadLine();
+                    try
+                    {
+                        File.WriteAllText(@"..\..\..\" /*переходим в директорию проекта*/ + path + ".txt", ArrayToString(a));
+                        Console.WriteLine("Данные успешно записаны");
+                        break;
+                    }
+                    catch (ArgumentException ex)
+                    {
+                        Console.WriteLine("Введено некорректное название файла, повторите попытку");
+                    }
+                    catch (IOException ex)
+                    {
+                        Console.WriteLine("Возникла ошибка при открытии файла и записи структуры, повторите попытку");
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("Возникла непредвиленная ошибка, повторите попытку");
+                    }
                 }
-
-                File.WriteAllText(path, ArrayToString(a));
 
                 Console.WriteLine("\n\n-------------\nНажмите ESC для завершения программы.\nДля повтора нажмите любую другую клавишу.\n-------------");
             } while (Console.ReadKey().Key != ConsoleKey.Escape);
@@ -76,26 +90,6 @@ namespace A_data_structure
                     cnt++;
                 }
             }
-        }
-
-        /// <summary>
-        /// Путь к TXT-файлу в текущей  директории с названием, переданным в качестве аргумента
-        /// </summary>
-        /// <param name="file_name"></param>
-        /// <returns>Полный путь к файлу. Null, если имя файла указано неверно</returns>
-        static string CreateFile(string file_name)
-        {
-            string path = @"..\..\..\" /*переходим в директорию проекта*/ + file_name + ".txt";
-            try
-            {
-                File.Create(path).Close();
-            }
-            catch
-            {
-                return null;
-            }
-            return path;
-
         }
 
         /// <summary>
