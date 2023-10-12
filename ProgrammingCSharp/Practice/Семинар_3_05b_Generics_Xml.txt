@@ -1,0 +1,1 @@
+https://github.com/vdudarev/HSE_CSharp_Lab_mod3_05b_Generics_Xml

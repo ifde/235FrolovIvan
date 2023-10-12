@@ -1,0 +1,2 @@
+Формулировки заданий и заготовки для решений могут быть найдены здесь:
+https://github.com/vdudarev/HSE_CSharp_Lab_mod2_07_SQLite
