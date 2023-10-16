@@ -54,17 +54,17 @@ namespace A_data_structure
                         Console.WriteLine("Данные успешно записаны");
                         break;
                     }
-                    catch (ArgumentException ex)
+                    catch (ArgumentException)
                     {
-                        Console.WriteLine("Введено некорректное название файла, повторите попытку");
+                        Console.WriteLine("Введено некорректное название файла, повторите попытку.");
                     }
-                    catch (IOException ex)
+                    catch (IOException)
                     {
-                        Console.WriteLine("Возникла ошибка при открытии файла и записи структуры, повторите попытку");
+                        Console.WriteLine("Возникла ошибка при записи в файл, повторите попытку.");
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
-                        Console.WriteLine("Возникла непредвиленная ошибка, повторите попытку");
+                        Console.WriteLine("Возникла непредвиленная ошибка, повторите попытку.");
                     }
                 }
 
