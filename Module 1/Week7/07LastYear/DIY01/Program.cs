@@ -60,7 +60,7 @@ namespace DIY01
                         Console.WriteLine("Программа выполнена успешно!");
                         break;
                     }
-                    catch (Exception e)
+                    catch (Exception)
                     {
                         Console.WriteLine("Ошибка при работе с фалом");
                     }
