@@ -7,16 +7,53 @@
 */
 
 
+using System;
+
 namespace ConsoleApp1
 {
     internal class Program
     {
+        int f = 1;
+
+        void Method1 ()
+        {
+            f++;
+        }
+
+        //static void Method2 ()
+        //{
+        //    f++;
+        //}
         static void Main(string[] args)
         {
+            int f = 2;
+            int @if;
+            void Method()
+            {
+                f++;
+            }
+            Console.WriteLine(Convert.ToString(-1U, toBase: 2));
+            int r = 3;
+            bool w = (r < ++r) || (++r > r++);
+            Console.WriteLine(w);
+
+            Method();
+            {
+                int x = 1, y = 2;
+                int z = ((x | y + ++x) > 5) ? x | y : ++x + 2;
+                Console.WriteLine($"{x} {y} {z}");
+            }
+
+            int[] l = { 1 };
+
             // повтор решения 
             do
             {
-                Console.Clear();
+                //Console.Clear();
+
+                byte t = 56;
+                t += 214;
+                Console.WriteLine(t);
 
                 int[][] c;
                 int n;
@@ -70,6 +107,16 @@ namespace ConsoleApp1
                 Console.WriteLine("Wrong input.");
                 Console.WriteLine("Введите целое число K (0 <= K < 15)");
             }
+        }
+
+        static void Test1(int a, params int[] b)
+        {
+
+        }
+
+        static void Test1(int a, params string[] b)
+        {
+
         }
     }
 }
