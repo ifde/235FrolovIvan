@@ -33,6 +33,7 @@ namespace ConsoleApp3
             this.n = n;
             this.r = r;
         }
+        public Polygon (int k) : this() { }
 
         /// <summary>
         /// Create a string with polygon's data
