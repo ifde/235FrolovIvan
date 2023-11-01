@@ -24,17 +24,28 @@ namespace ConsoleApp4
         char _plateChar;
         ConsoleColor _plateColor;
 
+        /// <summary>
+        /// A Primary constructor.
+        /// </summary>
         public ConsolePlate()
         {
             _plateChar = '+';
             _plateColor = default;
         }
+        /// <summary>
+        /// A Construtor.
+        /// </summary>
+        /// <param name="ch"></param>
+        /// <param name="col"></param>
         public ConsolePlate(char ch, ConsoleColor col)
         {
             _plateChar = ch;
             _plateColor = col;
         }
 
+        /// <summary>
+        /// A property for setting _plateChar
+        /// </summary>
         public char PublicChar
         {
             set
@@ -44,11 +55,18 @@ namespace ConsoleApp4
             }
         }
 
+        /// <summary>
+        /// A property for getting _plateColor
+        /// </summary>
         public ConsoleColor PublicColor
         {
             get { return _plateColor; }
         }
 
+        /// <summary>
+        /// ToString() override
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             return _plateChar.ToString(); 
@@ -59,11 +77,11 @@ namespace ConsoleApp4
     {
         static void Main(string[] args)
         {
-            Random rnd = new Random();
-            ConsolePlate[] arr = new ConsolePlate[10];
+            Random rnd = new Random(); // random numbers generator
+            ConsolePlate[] arr = new ConsolePlate[10]; // an array of type ConsolePlate
             for (int i = 0; i < arr.Length; i++)
             {
-                arr[i] = new ConsolePlate((char)rnd.Next('A', 'z' + 1), ConsoleColor.Red);
+                arr[i] = new ConsolePlate((char)rnd.Next('A', 'z' + 1), ConsoleColor.Red); // initiaziting elements of arr[]
                 Console.ForegroundColor = arr[i].PublicColor;
                 Console.Write(arr[i].ToString());
             }
