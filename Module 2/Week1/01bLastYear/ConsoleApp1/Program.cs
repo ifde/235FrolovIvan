@@ -20,7 +20,7 @@ using System.Data.Common;
 using System.Globalization;
 using System.Runtime.CompilerServices;
 
-namespace ConsoleApp8
+namespace ConsoleApp1
 {
     internal class MyComplex
     {
