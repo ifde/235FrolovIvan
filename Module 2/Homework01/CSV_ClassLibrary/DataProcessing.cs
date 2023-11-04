@@ -12,21 +12,6 @@ namespace CSV_ClassLibrary
 {
     public static class DataProcessing
     {
-        /// <summary>
-        /// Spilts a string from the the .csv file into an array of values of each cell.
-        /// </summary>
-        /// <param name="line"></param>
-        /// <returns></returns>
-        static string[] Split(string line)
-        {
-            string[] temp = new string[12]; // method output
-            int cnt = 0; // a counter
-            foreach (Match match in Regex.Matches(line, @"""[^""]*""(?=;)"))
-            {
-                temp[cnt++] = match.Value;
-            }
-            return temp;
-        }
 
         /// <summary>
         /// Creates an array with lines that contain only selected fields in a .csv file.
@@ -36,7 +21,7 @@ namespace CSV_ClassLibrary
         public static string[] GetSelectedFields(params string[] selected_fields)
         {
             string[] lines = CsvProcessing.Read(); // all lines in a file
-            string[] headers = Split(lines[0]); // headers
+            string[] headers = CsvProcessing.Split(lines[0]); // headers
 
             int[] indices = new int[headers.Length]; // an array where if an element equals 1,
                                                      // it means that this index corresponds to a selected field
@@ -46,19 +31,19 @@ namespace CSV_ClassLibrary
                 if (selected_fields.Contains(headers[i][1..^1])) indices[i]++;
             }
 
-            string[] new_lines = new string[lines.Length - 1]; // Method output. An array of lines with selected fields
+            string[] new_lines = new string[lines.Length]; // Method output. An array of lines with selected fields
             int k = 0; // counter
 
             // filling new_lines[]
-            foreach (string line in lines[2..])
+            foreach (string line in lines)
             {
                 StringBuilder new_line = new StringBuilder(); // a line with only selected fields
-                string[] temp = Split(line);
+                string[] temp = CsvProcessing.Split(line);
 
                 // filling new_line with those elements that correspond to selected fieds
                 for (int i = 0; i < temp.Length; i++)
                 {
-                    if (indices[i] == 1) new_line.Append(temp[i] + ";");
+                    if (indices[i] == 1) new_line.Append($"{temp[i]};");
                 }
                 new_lines[k++] = new_line.ToString();
             }
@@ -74,11 +59,14 @@ namespace CSV_ClassLibrary
             {
                 line_1 ??= "";
                 line_2 ??= "";
-                string field_1 = Split(line_1)[columnIndex];
-                string field_2 = Split(line_2)[columnIndex];
-                string[] temp = { field_1, field_2 };
-                Array.Sort(temp);
-                return field_1 != temp[0] ? 1 : -1;
+                string field_1 = CsvProcessing.Split(line_1)[columnIndex];
+                string field_2 = CsvProcessing.Split(line_2)[columnIndex];
+                if (field_1 == "\"Возможность пересадки\"" || 
+                    field_1 == "\"AvailableTransfer\"" || 
+                    field_2 == "\"Возможность пересадки\"" || 
+                    field_2 == "\"AvailableTransfer\"") return -1; // making sure we don't include headers in sorting
+
+                return String.Compare(field_1, field_2);
             }
         }
 
@@ -97,8 +85,8 @@ namespace CSV_ClassLibrary
             }
             else if (column == "YearOfComissioning")
             {
-                Array.Sort(lines, (a, b) => int.Parse(Split(b)[6][1..^1])
-                                            - int.Parse(Split(a)[6][1..^1]));
+                Array.Sort(lines, (a, b) => int.Parse(CsvProcessing.Split(b)[6][1..^1])
+                                            - int.Parse(CsvProcessing.Split(a)[6][1..^1]));
             }
 
             return lines;

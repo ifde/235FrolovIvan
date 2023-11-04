@@ -16,6 +16,43 @@ namespace CSV_ClassLibrary
         }
 
         /// <summary>
+        /// Prints lines in a .csv file in a readable format
+        /// </summary>
+        /// <param name="lines"></param>
+        public static void Print(string[] lines)
+        {
+            if (lines == null) return; // cheking if the argument is null
+            foreach (string line in lines)
+            {
+                string[] temp = Split(line);
+                foreach (string temp_line in temp)
+                {
+                    Console.Write($"{temp_line};\t");
+                }
+                Console.WriteLine();
+            }
+        }
+
+        /// <summary>
+        /// Spilts a string from the the .csv file into an array of values of each cell.
+        /// </summary>
+        /// <param name="line"></param>
+        /// <returns></returns>
+        public static string[] Split(string line)
+        {
+            if (line == null) return new string[0]; // cheking if the argument is null
+
+            string[] temp = new string[12]; // method output
+            int cnt = 0; // a counter
+            foreach (Match match in Regex.Matches(line, @"""[^""]*""(?=;)"))
+            {
+                temp[cnt++] = match.Value;
+            }
+            Array.Resize(ref temp, cnt);
+            return temp;
+        }
+
+        /// <summary>
         /// Returns an array(string[]) from a file at fPath.
         /// </summary>
         /// <returns></returns>
@@ -23,7 +60,7 @@ namespace CSV_ClassLibrary
         public static string[] Read()
         {
             // cheking if the file exists
-            if (!File.Exists(fPath)) throw new ArgumentNullException();
+            if (!File.Exists(fPath)) throw new ArgumentNullException("Файла по этому пути не существует");
 
             string[] lines = File.ReadAllLines(fPath); // reading the CSV file
 
@@ -32,7 +69,7 @@ namespace CSV_ClassLibrary
                 "\"District\";\"NearStation\";\"YearOfComissioning\";\"Status\";" +
                 "\"AvailableTransfer\";\"CarCapacity\";\"geodata_center\";\"geoarea\";")
             {
-                throw new ArgumentNullException();
+                throw new ArgumentNullException("Данные в файле не соответствуют условию.");
             }
 
             // checking if the Russian header is correct
@@ -41,14 +78,14 @@ namespace CSV_ClassLibrary
                 "\"Год ввода в эксплуатацию\";\"Статус объекта\";\"Возможность пересадки\";\"Количество машиномест\";" +
                 "\"geodata_center\";\"geoarea\";")
             {
-                throw new ArgumentNullException();
+                throw new ArgumentNullException("Данные в файле не соответствуют условию.");
             }
 
             // cheking that each line is in correct format
             for (int i = 2; i < lines.Length; i++)
             {
                 MatchCollection matches = Regex.Matches(lines[i], @"(?<="")[^""]*(?="";)");
-                if (matches.Count != 12) throw new ArgumentNullException();
+                if (matches.Count != 12) throw new ArgumentNullException("Данные в файле не соответствуют условию.");
 
             }
 
