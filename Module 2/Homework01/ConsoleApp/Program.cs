@@ -6,6 +6,7 @@
  Дата:       03.11.23
 */
 using CSV_ClassLibrary;
+using System.Globalization;
 using System.Reflection.Metadata;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
@@ -25,7 +26,7 @@ namespace ConsoleApp
                 {
                     // input path
                     Console.WriteLine("Введите абсолютный путь к файлу с CSV-данными:");
-                    CsvProcessing.path = Console.ReadLine();
+                    CsvProcessing.path = Console.ReadLine() + "";
 
                     CsvProcessing.Read(); // immiadetly catching an exception if the path is incorrect
 
@@ -46,43 +47,97 @@ namespace ConsoleApp
                         Console.WriteLine("Такой команды не существует. Повторите попытку.");
                     }
 
+                    string[] new_lines = null; // selected lines or sorted lines depending on the command
+
                     switch (command)
-                    { 
+                    {
                         case 1:
-                            if (DataProcessing.GetSelectedFields("District").Length == 0)
+                            Console.WriteLine("\nВведите значение выборки District:"); // Нижегородский район
+                            string district = Console.ReadLine() + "";
+
+                            new_lines = DataProcessing.GetSelectedLines((4, district));
+                            if (new_lines.Length == 2)
                             {
                                 Console.WriteLine("Такой выборки не существует.");
                                 break;
                             }
-                            CsvProcessing.Print(DataProcessing.GetSelectedFields("District"));
+                            CsvProcessing.Print(new_lines);
                             break;
 
                         case 2:
-                            if (DataProcessing.GetSelectedFields("CarCapacity").Length == 0)
+                            Console.WriteLine("\nВведите значение выборки CarCapacity:");
+                            string carCapacity = Console.ReadLine() + "";
+
+                            new_lines = DataProcessing.GetSelectedLines((9, carCapacity));
+                            if (new_lines.Length == 2)
                             {
                                 Console.WriteLine("Такой выборки не существует.");
                                 break;
                             }
-                            CsvProcessing.Print(DataProcessing.GetSelectedFields("CarCapacity"));
+                            CsvProcessing.Print(new_lines);
                             break;
 
                         case 3:
-                            if (DataProcessing.GetSelectedFields("Status", "NearStation").Length == 0)
+                            Console.WriteLine("\nВведите значение выборки Status:");
+                            string status = Console.ReadLine() + "";
+
+                            Console.WriteLine("\nВведите значение выборки NearStation:");
+                            string nearStation = Console.ReadLine() + "";
+
+                            nearStation = nearStation.Replace("<", "«");
+                            nearStation = nearStation.Replace(">", "»");
+
+                            new_lines = DataProcessing.GetSelectedLines((7, status), (5, nearStation));
+                            if (new_lines.Length == 2)
                             {
                                 Console.WriteLine("Такой выборки не существует.");
                                 break;
                             }
-                            CsvProcessing.Print(DataProcessing.GetSelectedFields("Status", "NearStation"));
+                            CsvProcessing.Print(new_lines);
                             break;
 
                         case 4:
-                            CsvProcessing.Print(DataProcessing.SortByColumn("AvailableTransfer"));
+                            new_lines = DataProcessing.SortByColumn("AvailableTransfer");
+                            CsvProcessing.Print(new_lines);
                             break;
 
                         case 5:
-                            CsvProcessing.Print(DataProcessing.SortByColumn("YearOfComissioning"));
+                            new_lines = DataProcessing.SortByColumn("YearOfComissioning");
+                            CsvProcessing.Print(new_lines);
                             break;
 
+                        case 6:
+                            break;
+
+                    }
+
+                    // Checking if a user decided to kill program.
+                    if (new_lines == null) throw new Exception("Kill program");
+
+                    Console.WriteLine("\nДля сохранения данных нажмите ENTER.\nИначе нажмите любую другую клавишу.");
+                    if (Console.ReadKey().Key == ConsoleKey.Enter)
+                    {
+                        Console.WriteLine("\nФайл будет сохранен в папке исполнимого файла консольного приложения.\nВведите желаемое имя файла:");
+                        string file_name = Console.ReadLine() + ""; // file_name
+                        while (true)
+                        {
+                            try
+                            {
+                                if (new_lines.Length == 3) CsvProcessing.Write(new_lines[2], file_name + ".csv");
+                                else 
+                                {
+                                    CsvProcessing.path = file_name + ".csv";
+                                    CsvProcessing.Write(new_lines);
+                                }
+                                
+                                break;
+                            }
+                            catch (IOException)
+                            {
+                                Console.WriteLine("Неверно введено имя файла. Введите корректное имя:");
+                                file_name = Console.ReadLine() + ""; // file_name
+                            }
+                        }
                     }
                 }
                 catch (ArgumentNullException e)
@@ -93,12 +148,12 @@ namespace ConsoleApp
                 {
                     Console.WriteLine(e.Message);
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
-                    Console.WriteLine("Возникла непредвиденная ошибка.");
+                    if (e.Message != "Kill program") Console.WriteLine("Возникла непредвиденная ошибка.");
                 }
 
-
+                
                 Console.WriteLine("\n\n-------------\nНажмите ESC для завершения программы.\nДля повтора нажмите любую другую клавишу.\n-------------");
             } while (Console.ReadKey().Key != ConsoleKey.Escape);
 

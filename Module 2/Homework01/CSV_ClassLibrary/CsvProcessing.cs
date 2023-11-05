@@ -4,7 +4,7 @@ namespace CSV_ClassLibrary
 {
     public static class CsvProcessing
     {
-        static string fPath = @"..\..\..\transport-changing-points.csv";
+        static string fPath = "";
 
         /// <summary>
         /// A property for setting and getting fPath
@@ -100,8 +100,8 @@ namespace CSV_ClassLibrary
         /// <exception cref="DirectoryNotFoundException"></exception>
         public static void Write(string text, string nPath)
         {
-            if (!Directory.Exists(nPath)) throw new DirectoryNotFoundException("Путь до файла указан некорректно.");
-            File.AppendAllText(text, nPath);
+            if (!File.Exists(nPath)) File.WriteAllLines(nPath, File.ReadAllLines(fPath)[..2]); // appending headers
+            File.AppendAllText(nPath, text);
         }
 
         /// <summary>
@@ -111,7 +111,6 @@ namespace CSV_ClassLibrary
         /// <exception cref="DirectoryNotFoundException"></exception>
         public static void Write(string[] lines)
         {
-            if (!Directory.Exists(fPath)) throw new DirectoryNotFoundException("Путь до файла указан некорректно.");
             File.WriteAllLines(fPath, lines);
         }
     }
