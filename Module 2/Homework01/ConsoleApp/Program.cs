@@ -59,7 +59,7 @@ namespace ConsoleApp
                             if (new_lines.Length == 2)
                             {
                                 Console.WriteLine("Такой выборки не существует.");
-                                break;
+                                throw new Exception("Kill program");
                             }
                             CsvProcessing.Print(new_lines);
                             break;
@@ -72,7 +72,7 @@ namespace ConsoleApp
                             if (new_lines.Length == 2)
                             {
                                 Console.WriteLine("Такой выборки не существует.");
-                                break;
+                                throw new Exception("Kill program");
                             }
                             CsvProcessing.Print(new_lines);
                             break;
@@ -91,7 +91,7 @@ namespace ConsoleApp
                             if (new_lines.Length == 2)
                             {
                                 Console.WriteLine("Такой выборки не существует.");
-                                break;
+                                throw new Exception("Kill program");
                             }
                             CsvProcessing.Print(new_lines);
                             break;
