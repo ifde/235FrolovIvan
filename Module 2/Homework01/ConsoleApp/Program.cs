@@ -56,6 +56,9 @@ namespace ConsoleApp
                             string district = Console.ReadLine() + "";
 
                             new_lines = DataProcessing.GetSelectedLines((4, district));
+
+                            // cheking if no lines match the selection,
+                            // meaning that new_lines[] contains only headers.
                             if (new_lines.Length == 2)
                             {
                                 Console.WriteLine("Такой выборки не существует.");
@@ -69,6 +72,9 @@ namespace ConsoleApp
                             string carCapacity = Console.ReadLine() + "";
 
                             new_lines = DataProcessing.GetSelectedLines((9, carCapacity));
+
+                            // cheking if no lines match the selection,
+                            // meaning that new_lines[] contains only headers.
                             if (new_lines.Length == 2)
                             {
                                 Console.WriteLine("Такой выборки не существует.");
@@ -88,6 +94,9 @@ namespace ConsoleApp
                             nearStation = nearStation.Replace(">", "»");
 
                             new_lines = DataProcessing.GetSelectedLines((7, status), (5, nearStation));
+
+                            // cheking if no lines match the selection,
+                            // meaning that new_lines[] contains only headers.
                             if (new_lines.Length == 2)
                             {
                                 Console.WriteLine("Такой выборки не существует.");
@@ -117,19 +126,19 @@ namespace ConsoleApp
                     Console.WriteLine("\nДля сохранения данных нажмите ENTER.\nИначе нажмите любую другую клавишу.");
                     if (Console.ReadKey().Key == ConsoleKey.Enter)
                     {
-                        Console.WriteLine("\nФайл будет сохранен в папке исполнимого файла консольного приложения.\nВведите желаемое имя файла:");
+                        Console.WriteLine("\nCSV-Файл будет сохранен в папке исполнимого файла консольного приложения.\nВведите желаемое имя файла:");
                         string file_name = Console.ReadLine() + ""; // file_name
                         while (true)
                         {
                             try
                             {
                                 if (new_lines.Length == 3) CsvProcessing.Write(new_lines[2], file_name + ".csv");
-                                else 
+                                else
                                 {
                                     CsvProcessing.path = file_name + ".csv";
                                     CsvProcessing.Write(new_lines);
                                 }
-                                
+
                                 break;
                             }
                             catch (IOException)
@@ -153,7 +162,7 @@ namespace ConsoleApp
                     if (e.Message != "Kill program") Console.WriteLine("Возникла непредвиденная ошибка.");
                 }
 
-                
+
                 Console.WriteLine("\n\n-------------\nНажмите ESC для завершения программы.\nДля повтора нажмите любую другую клавишу.\n-------------");
             } while (Console.ReadKey().Key != ConsoleKey.Escape);
 
