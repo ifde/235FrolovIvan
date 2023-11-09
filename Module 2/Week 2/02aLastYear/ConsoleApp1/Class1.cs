@@ -87,6 +87,18 @@ namespace ConsoleApp1
             _cart = new Item[_capacity];
         }
 
+        public Item this[string item_name]
+        {
+            get 
+            { 
+                foreach (Item item in _cart)
+                {
+                    if (item.Name == item_name) return item;
+                }
+                throw new Exception("Элемент не найден в корзине.");
+            }
+        }
+
         /// <summary>
         /// Добавляет предмет в корзину
         /// </summary>
