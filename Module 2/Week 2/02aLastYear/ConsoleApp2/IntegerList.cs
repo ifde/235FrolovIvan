@@ -4,6 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+/*
+Дисциплина: "Программирование"
+Группа:      БПИ235(2)
+Студент:     Фролов Иван Григорьевич
+Задача:      2
+Дата:        09.11.23
+*/
+
 namespace ConsoleApp2
 {
     internal class IntegerList
