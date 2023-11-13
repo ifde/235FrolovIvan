@@ -67,7 +67,7 @@ namespace CSV_ClassLibrary
         }
 
         /// <summary>
-        /// Compares two lines in .csv file by thier "Year Of Comissioning" fields in a decreasing order order
+        /// Compares two lines in .csv file by thier "Year Of Comissioning" fields in a decreasing numerical order
         /// </summary>
         class YearOfComissioningComparer : IComparer<string>
         {
@@ -94,7 +94,7 @@ namespace CSV_ClassLibrary
         /// <returns></returns>
         public static string[] SortByColumn(string column)
         {
-            
+
             string[] lines = CsvProcessing.Read(); // all lines in a file
             int length = lines.Length; // the total number of lines
 
@@ -103,33 +103,11 @@ namespace CSV_ClassLibrary
 
             lines = lines[2..]; // remove headers for sorting
 
-            if (column == "AvailableTransfer") // sorting in an alphabetic order
-            {
-                // iterating elements of lines[]
-                //for (int i = 2; i < lines.Length - 1; i++)
-                //{
-                //    for (int j = i + 1; j < lines.Length; j++)
-                //    {
-                //        string field_1 = CsvProcessing.Split(lines[i])[8 /*index of "AvailableTransfer" column*/];
-                //        string field_2 = CsvProcessing.Split(lines[j])[8];
-
-                //        // swapping two lines
-                //        if (String.Compare(field_1, field_2) > 0)
-                //        {
-                //            string temp = lines[i];
-                //            lines[i] = lines[j];
-                //            lines[j] = temp;
-                //        }
-                //    }
-                //}
-                Array.Sort(lines, new AvailableTransferComparer());
+            // sorting in an alphabetic order
+            if (column == "AvailableTransfer") Array.Sort(lines, new AvailableTransferComparer());
+            // sorting in a decreasing numerical order
+            else if (column == "YearOfComissioning") Array.Sort(lines, new YearOfComissioningComparer());
                 
-                
-            }
-            else if (column == "YearOfComissioning")
-            {
-                Array.Sort(lines, new YearOfComissioningComparer());
-            }
 
             string[] new_lines = new string[length]; // the method output
 
@@ -142,8 +120,6 @@ namespace CSV_ClassLibrary
             }
 
             return new_lines;
-
-
         }
     }
 }

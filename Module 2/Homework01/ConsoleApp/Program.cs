@@ -26,7 +26,7 @@ namespace ConsoleApp
                 {
                     // input path
                     Console.WriteLine("Введите абсолютный путь к файлу с CSV-данными:");
-                    CsvProcessing.path = Console.ReadLine() + "";
+                    CsvProcessing.Path = Console.ReadLine() + "";
 
                     CsvProcessing.Read(); // immiadetly catching an exception if the path is incorrect
 

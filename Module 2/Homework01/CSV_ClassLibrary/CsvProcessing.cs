@@ -2,6 +2,12 @@
 
 namespace CSV_ClassLibrary
 {
+    public class Temp
+    {
+        public Temp() { }
+        static Temp() { }
+    }
+
     public static class CsvProcessing
     {
         static string fPath = "";
@@ -9,7 +15,7 @@ namespace CSV_ClassLibrary
         /// <summary>
         /// A property for setting and getting fPath
         /// </summary>
-        public static string path
+        public static string Path
         {
             get { return fPath; }
             set { fPath = value; }
