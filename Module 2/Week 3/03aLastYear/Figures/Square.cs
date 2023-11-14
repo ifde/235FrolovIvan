@@ -30,7 +30,7 @@ namespace Figures
             return $"A square with the center in ({_x}, {_y}) and side {_side}";
         }
 
-        public double Area
+        override public double Area
         {
             get { return _side * _side; }
         }

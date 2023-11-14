@@ -3,6 +3,7 @@
 Группа:      БПИ235(2)
 Студент:     Фролов Иван Григорьевич
 Задача:      КДЗ-1 (2 модуль)
+Вариант:     17
  Дата:       03.11.23
 */
 using CSV_ClassLibrary;
@@ -21,6 +22,18 @@ namespace ConsoleApp
             do
             {
                 Console.Clear();
+
+                    Console.WriteLine("Output of the multiplication table");
+                    Console.WriteLine(new string('-', 45));
+
+                    for (int i = 1; i <= 9; i++)
+                    {
+                        for (int j = 1; j <= 9; j++)
+                            Console.Write(" {0:00} |", i * j);
+
+                        Console.WriteLine();
+                        Console.WriteLine(new string('-', 45));
+                    }
 
                 try
                 {
@@ -132,10 +145,11 @@ namespace ConsoleApp
                         {
                             try
                             {
+                                // if new_lines[] contains only one line (excluding headers), we use the first variation of overriden method Write()
                                 if (new_lines.Length == 3) CsvProcessing.Write(new_lines[2], file_name + ".csv");
                                 else
                                 {
-                                    CsvProcessing.path = file_name + ".csv";
+                                    CsvProcessing.Path = file_name + ".csv";
                                     CsvProcessing.Write(new_lines);
                                 }
 

@@ -1,16 +1,12 @@
 ﻿using System.Text.RegularExpressions;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace CSV_ClassLibrary
 {
-    public class Temp
-    {
-        public Temp() { }
-        static Temp() { }
-    }
 
     public static class CsvProcessing
-    {
-        static string fPath = "";
+    { 
+        private static string fPath = ""; // the path to the .csv file
 
         /// <summary>
         /// A property for setting and getting fPath
@@ -31,9 +27,9 @@ namespace CSV_ClassLibrary
             foreach (string line in lines)
             {
                 string[] temp = Split(line);
-                foreach (string temp_line in temp)
+                foreach (string value in temp)
                 {
-                    Console.Write($"{temp_line};\t");
+                    Console.Write($"{value};\t");
                 }
                 Console.WriteLine();
             }
@@ -103,21 +99,34 @@ namespace CSV_ClassLibrary
         /// </summary>
         /// <param name="text"></param>
         /// <param name="nPath"></param>
-        /// <exception cref="DirectoryNotFoundException"></exception>
         public static void Write(string text, string nPath)
         {
-            if (!File.Exists(nPath)) File.WriteAllLines(nPath, File.ReadAllLines(fPath)[..2]); // appending headers
-            File.AppendAllText(nPath, text);
+            try
+            {
+                if (!File.Exists(nPath)) File.WriteAllLines(nPath, File.ReadAllLines(fPath)[..2]); // appending headers
+                File.AppendAllText(nPath, text);
+            }
+            catch (IOException)
+            {
+                throw new Exception("Путь до файлу указан некорректно или к нему нельзя получить доступ.");
+            }
+            
         }
 
         /// <summary>
         /// Writes lines to a file.
         /// </summary>
         /// <param name="lines"></param>
-        /// <exception cref="DirectoryNotFoundException"></exception>
         public static void Write(string[] lines)
         {
-            File.WriteAllLines(fPath, lines);
+            try
+            {
+                File.WriteAllLines(fPath, lines);
+            }
+            catch (IOException)
+            {
+                throw new Exception("Путь до файлу указан некорректно или к нему нельзя получить доступ.");
+            }
         }
     }
 }

@@ -51,7 +51,7 @@ namespace CSV_ClassLibrary
         }
 
         /// <summary>
-        /// Compares two lines in .csv file by thier "Available Transfer" fields in alphabetical order
+        /// Compares two lines in .csv file by thier "Available Transfer" fields in an alphabetical order
         /// </summary>
         class AvailableTransferComparer : IComparer<string>
         {
@@ -105,6 +105,7 @@ namespace CSV_ClassLibrary
 
             // sorting in an alphabetic order
             if (column == "AvailableTransfer") Array.Sort(lines, new AvailableTransferComparer());
+
             // sorting in a decreasing numerical order
             else if (column == "YearOfComissioning") Array.Sort(lines, new YearOfComissioningComparer());
                 

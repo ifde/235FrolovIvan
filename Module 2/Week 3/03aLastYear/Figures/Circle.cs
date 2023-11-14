@@ -27,7 +27,7 @@ namespace Figures
             return $"A circle with the center in ({_x}, {_y}) and raduis {_rad}";
         }
 
-        public double Area
+        override public double Area
         {
             get { return Math.PI * _rad * _rad; }
         }
