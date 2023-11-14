@@ -1,4 +1,12 @@
-﻿namespace ConsoleApp1
+﻿/*
+Дисциплина: "Программирование"
+Группа:      БПИ235(2)
+Студент:     Фролов Иван Григорьевич
+Задача:      1
+ Дата:       13.11.2023
+*/
+
+namespace ConsoleApp1
 {
     internal class Program
     {
