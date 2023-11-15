@@ -38,7 +38,7 @@ namespace Figures
         /// <summary>
         /// Gets the perimetr of the square
         /// </summary>
-        public double Len
+        override public double Len
         {
             get { return 4 * _side; }
         }

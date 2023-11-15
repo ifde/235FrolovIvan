@@ -20,5 +20,10 @@
         {
             get { return 0; }
         }
+
+        virtual public double Len
+        {
+            get { return 0; }
+        }
     }
 }

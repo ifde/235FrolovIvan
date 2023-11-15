@@ -23,17 +23,7 @@ namespace ConsoleApp
             {
                 Console.Clear();
 
-                    Console.WriteLine("Output of the multiplication table");
-                    Console.WriteLine(new string('-', 45));
-
-                    for (int i = 1; i <= 9; i++)
-                    {
-                        for (int j = 1; j <= 9; j++)
-                            Console.Write(" {0:00} |", i * j);
-
-                        Console.WriteLine();
-                        Console.WriteLine(new string('-', 45));
-                    }
+                
 
                 try
                 {
@@ -42,6 +32,20 @@ namespace ConsoleApp
                     CsvProcessing.Path = Console.ReadLine() + "";
 
                     CsvProcessing.Read(); // immiadetly catching an exception if the path is incorrect
+
+                    string[] lines = CsvProcessing.Read();
+                    int len = CsvProcessing.Split(lines[0]).Length;
+
+                    for (int j = 0; j < len; j++)
+                    {
+                        int max_length = 0;
+                        for (int i = 0; i < lines.Length; i++)
+                        {
+                            if (i == 1) continue;
+                            if (CsvProcessing.Split(lines[i])[j].Length > max_length) max_length = CsvProcessing.Split(lines[i])[j].Length;
+                        }
+                        Console.WriteLine($"{j}: {max_length}");
+                    }
 
                     int command; // chosen command
                     Console.WriteLine("\n---------\nМеню:\n" +
@@ -77,7 +81,7 @@ namespace ConsoleApp
                                 Console.WriteLine("Такой выборки не существует.");
                                 throw new Exception("Kill program");
                             }
-                            CsvProcessing.Print(new_lines);
+                            CsvProcessing.Print(new_lines, 4);
                             break;
 
                         case 2:
@@ -93,7 +97,7 @@ namespace ConsoleApp
                                 Console.WriteLine("Такой выборки не существует.");
                                 throw new Exception("Kill program");
                             }
-                            CsvProcessing.Print(new_lines);
+                            CsvProcessing.Print(new_lines, 9);
                             break;
 
                         case 3:
@@ -115,17 +119,17 @@ namespace ConsoleApp
                                 Console.WriteLine("Такой выборки не существует.");
                                 throw new Exception("Kill program");
                             }
-                            CsvProcessing.Print(new_lines);
+                            CsvProcessing.Print(new_lines, 5, 7);
                             break;
 
                         case 4:
                             new_lines = DataProcessing.SortByColumn("AvailableTransfer");
-                            CsvProcessing.Print(new_lines);
+                            CsvProcessing.Print(new_lines, 8);
                             break;
 
                         case 5:
                             new_lines = DataProcessing.SortByColumn("YearOfComissioning");
-                            CsvProcessing.Print(new_lines);
+                            CsvProcessing.Print(new_lines, 6);
                             break;
 
                         case 6:
@@ -168,6 +172,10 @@ namespace ConsoleApp
                     Console.WriteLine(e.ParamName);
                 }
                 catch (DirectoryNotFoundException e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+                catch (IOException e)
                 {
                     Console.WriteLine(e.Message);
                 }

@@ -35,7 +35,7 @@ namespace Figures
         /// <summary>
         /// Get the legnth of the circle
         /// </summary>
-        public double Len
+        override public double Len
         {
             get { return 2 * Math.PI * _rad; }
         }

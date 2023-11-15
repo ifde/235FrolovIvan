@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Data.Common;
+using System.Text.RegularExpressions;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace CSV_ClassLibrary
@@ -17,21 +18,54 @@ namespace CSV_ClassLibrary
             set { fPath = value; }
         }
 
+
         /// <summary>
-        /// Prints lines in a .csv file in a readable format
+        /// Prints lines in a.csv file in a readable format
         /// </summary>
         /// <param name="lines"></param>
-        public static void Print(string[] lines)
+        /// <param name="columns">Indices of columns by which the file for is sorted</param>
+        public static void Print(string[] lines, params int[] columns)
         {
             if (lines == null) return; // cheking if the argument is null
+
+            Console.WriteLine(Environment.NewLine);
             foreach (string line in lines)
             {
+                if (line == lines[1]) continue; // we don't print Russian headers because they are too long
+
                 string[] temp = Split(line);
-                foreach (string value in temp)
+                string output = ""; // formatted line
+                for (int i = 0; i < temp.Length; i++)
                 {
-                    Console.Write($"{value};\t");
+
+                    string value = temp[i][1..^1]; // deleting " from the value
+                    if (i >= 0 && i <=3 || columns.Contains(i))
+                    {
+                        output += i switch
+                        {
+                            0 => $"|{value,-4}",
+                            1 => $"|{value,-64}",
+                            2 => $"|{value,-10}",
+                            3 => $"|{value,-40}",
+                            4 => $"|{value,-33}",
+                            5 => $"|{value,-63}",
+                            6 => $"|{value,-23}",
+                            7 => $"|{value,-9}",
+                            8 => $"|{value,-118}",
+                            9 => $"|{value,-13}",
+                            _ => ""
+                        };
+                    }
+                    
                 }
-                Console.WriteLine();
+
+                //foreach (string value in temp)
+                //{
+                //    Console.Write($"{value};\t");
+                //}
+                Console.WriteLine(output);
+                //Console.WriteLine(new string('-', output.Length));
+                //Console.WriteLine();
             }
         }
 
