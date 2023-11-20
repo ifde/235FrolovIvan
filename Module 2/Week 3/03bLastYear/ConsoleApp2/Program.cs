@@ -5,6 +5,7 @@
 Задача:      2
  Дата:       19.11.2023
 */
+
 using MyLib;
 
 namespace ConsoleApp2
