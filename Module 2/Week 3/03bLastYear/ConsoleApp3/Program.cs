@@ -8,6 +8,7 @@
 
 using MyLib;
 using System;
+using System.Data;
 
 namespace ConsoleApp3
 {
@@ -16,14 +17,21 @@ namespace ConsoleApp3
         static void Main(string[] args)
         {
             bool flag;
-            RusString str;
+            MyString str;
             int n;
             char start, finish, ch;
+            int mode;
+            MyString[] arr = new MyString[10];
             do
             {
                 flag = false;
                 try
                 {
+                    Console.WriteLine("Нажмите 1, чтобы создать строку из латинских символов.");
+                    Console.WriteLine("Нажмите 2, чтобы создать строку из кириллических символов.");
+                    mode = int.Parse(Console.ReadLine());
+                    if (mode != 1 && mode != 2) throw new ArgumentException();
+
                     Console.Write("Введите длину строки: ");
                     n = int.Parse(Console.ReadLine());
                     Console.Write("Введите минимально возможную букву в строке: ");
@@ -32,7 +40,7 @@ namespace ConsoleApp3
                     finish = char.Parse(Console.ReadLine());
                     Console.Write(Environment.NewLine);
 
-                    str = new RusString(start, finish, n);
+                    str = mode == 2 ? new RusString(start, finish, n) : new LatString(start, finish, n);
 
                     Console.WriteLine(str);
                     if (str.isPlindrom) Console.WriteLine("Строка является палиндромом!");
@@ -41,7 +49,7 @@ namespace ConsoleApp3
 
                     do
                     {
-                        Console.WriteLine("Введите любой символ Кириллицы.");
+                        Console.WriteLine("Введите любой символ.");
                         ch = char.Parse(Console.ReadLine());
                         Console.WriteLine($"Количество вхождений {ch} в строке равно {str.CountLetter(ch)}");
                         Console.WriteLine("\n-----------\nНажмите ESC для прекращения действия");
@@ -51,6 +59,11 @@ namespace ConsoleApp3
                 }
                 catch (ArgumentOutOfRangeException)
                 { 
+                    flag = true;
+                    Console.WriteLine("Некорректные входные данные!");
+                }
+                catch (ArgumentException)
+                {
                     flag = true;
                     Console.WriteLine("Некорректные входные данные!");
                 }

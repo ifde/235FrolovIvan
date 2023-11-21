@@ -6,12 +6,10 @@ using System.Threading.Tasks;
 
 namespace MyLib
 {
-    /// <summary>
-    /// Represents strings containing letters of Russian alphabet.
-    /// </summary>
-    public class RusString : MyString
+    public class LatString : MyString
     {
-        public RusString(char start, char finish, int n)
+
+        public LatString(char start, char finish, int n)
         {
             if (finish < start || n <= 0) throw new ArgumentOutOfRangeException();
             string output = ""; // the created rusString
@@ -22,24 +20,23 @@ namespace MyLib
             if (!Validate()) throw new ArgumentException();
             str = output;
         }
-
         /// <summary>
-        /// Validates that the string consists of Cyrillic symbols
+        /// Validates that the string consists of Latin symbols
         /// </summary>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
         public override bool Validate()
         {
-            char[] cyrillic_alphabet = new char['я' - 'А' + 1]; // Cyrillic alpahbet
-            for (int i = 0;i < cyrillic_alphabet.Length;i++)
+            char[] latin_alphabet = new char['z' - 'A' + 1]; // Cyrillic alpahbet
+            for (int i = 0; i < latin_alphabet.Length; i++)
             {
-                cyrillic_alphabet[i] = (char)('А' + i);
+                latin_alphabet[i] = (char)('A' + i);
             }
 
             bool flag = true;
             foreach (char c in str)
             {
-                if (!cyrillic_alphabet.Contains(c))
+                if (!latin_alphabet.Contains(c))
                 {
                     flag = false;
                     break;
@@ -48,7 +45,5 @@ namespace MyLib
 
             return flag;
         }
-
-        
     }
 }
