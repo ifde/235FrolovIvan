@@ -32,6 +32,7 @@
             buttonPrintSquare = new Button();
             textBox1 = new TextBox();
             labelResult = new Label();
+            buttonOpenHome = new Button();
             SuspendLayout();
             // 
             // label1
@@ -73,15 +74,27 @@
             labelResult.Size = new Size(0, 21);
             labelResult.TabIndex = 3;
             // 
+            // buttonOpenHome
+            // 
+            buttonOpenHome.Location = new Point(376, 41);
+            buttonOpenHome.Name = "buttonOpenHome";
+            buttonOpenHome.Size = new Size(166, 71);
+            buttonOpenHome.TabIndex = 5;
+            buttonOpenHome.Text = "Open Home";
+            buttonOpenHome.UseVisualStyleBackColor = true;
+            buttonOpenHome.Click += buttonOpenHome_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(298, 224);
+            ClientSize = new Size(620, 386);
+            Controls.Add(buttonOpenHome);
             Controls.Add(labelResult);
             Controls.Add(textBox1);
             Controls.Add(buttonPrintSquare);
             Controls.Add(label1);
+            IsMdiContainer = true;
             Name = "Form1";
             Text = "My first application";
             Load += Form1_Load;
@@ -95,5 +108,6 @@
         private Button buttonPrintSquare;
         private TextBox textBox1;
         private Label labelResult;
+        private Button buttonOpenHome;
     }
 }
