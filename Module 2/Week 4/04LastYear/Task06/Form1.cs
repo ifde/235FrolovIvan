@@ -5,7 +5,6 @@ namespace Task06
         public Form1()
         {
             InitializeComponent();
-            
         }
 
         static string sample = "0123456789";
