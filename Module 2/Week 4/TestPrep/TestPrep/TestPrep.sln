@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp1", "ConsoleApp1\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Figures", "Figures\Figures.csproj", "{DCCEED44-FC64-43AE-841C-DC32EA9A5F98}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp2", "ConsoleApp2\ConsoleApp2.csproj", "{240AA5C4-5241-4585-BA15-B79E240681F1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Drinks", "Drinks\Drinks.csproj", "{9FD405F7-3BB4-4E48-9B57-4DF1A1F07394}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{DCCEED44-FC64-43AE-841C-DC32EA9A5F98}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DCCEED44-FC64-43AE-841C-DC32EA9A5F98}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DCCEED44-FC64-43AE-841C-DC32EA9A5F98}.Release|Any CPU.Build.0 = Release|Any CPU
+		{240AA5C4-5241-4585-BA15-B79E240681F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{240AA5C4-5241-4585-BA15-B79E240681F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{240AA5C4-5241-4585-BA15-B79E240681F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{240AA5C4-5241-4585-BA15-B79E240681F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9FD405F7-3BB4-4E48-9B57-4DF1A1F07394}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9FD405F7-3BB4-4E48-9B57-4DF1A1F07394}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9FD405F7-3BB4-4E48-9B57-4DF1A1F07394}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9FD405F7-3BB4-4E48-9B57-4DF1A1F07394}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
