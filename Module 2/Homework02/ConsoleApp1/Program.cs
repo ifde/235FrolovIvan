@@ -83,9 +83,14 @@ namespace ConsoleApp1
                     lines.Add("\n");
                 }
             }
+            catch (ArgumentException e) // catching an exeption thrown by the NumbJagged object
+            {
+                Console.WriteLine(e.Message);
+                throw new Exception("Kill program.");
+            }
             catch (FormatException)
             {
-                Console.WriteLine("Неверный формат файла.");
+                Console.WriteLine("Неверный формат данных в файле.");
                 throw new Exception("Kill program.");
             }
 
@@ -94,12 +99,19 @@ namespace ConsoleApp1
 
        static void WriteFile(string[] lines)
        {
+            // printing data to the console
+            foreach (string line in lines)
+            {
+                Console.WriteLine(line);
+            }
             Console.WriteLine("Введите имя TXT-файла, в который хотите сохранить результат.");
             
+            // writing to the file
             while(true)
             {
                 try
                 {
+                    
                     File.WriteAllLines(Console.ReadLine() + ".txt", lines);
                     break;
                 }

@@ -24,7 +24,7 @@ namespace ClassLibrary1
         public NumbJagged(int n)
         {
             // Because "n" is the argument of the NumbJagged() method, it is reasonable to throw ArgumentException() if the value of "n" is unacceptable
-            if (n < 0) throw new ArgumentException("Значение не может быть отрицательным.");
+            if (n < 0) throw new ArgumentException("Значение аргумента не может быть отрицательным.");
             jarArr = new int[n][];
             List<int> list = new List<int>(); // contatins elements of the string
             Random rnd = new Random(); // randomizer
