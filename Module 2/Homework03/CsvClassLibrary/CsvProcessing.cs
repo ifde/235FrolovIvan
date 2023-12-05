@@ -13,6 +13,29 @@ namespace CsvClassLibrary
 {
     public static class CsvProcessing
     {
+
+        private static string GetHeader(string[] columns)
+        {
+            string output = ""; // formatted header
+
+            output += $"|{"ROWNUM",-7}";
+            output += $"|{"CommonName",-55}";
+            output += $"|{"Email",-35}";
+            output += $"|{"WebSite",-32}";
+
+            // adding values to the header
+            if (columns.Contains("MainHallCapacity") && columns.Contains("AdditionalHallCapacity") && columns.Length == 2)
+                output += $"|{"MainHallCapacity",-30}" + $"|{"MainHallCapacity",-30}";
+
+            else if (columns.Contains("ChiefName") && columns.Length == 1) output += $"|{"ChiefName",-30}";
+            else if (columns.Contains("AdmArea") && columns.Length == 1) output += $"|{"AdmArea",-30}";
+            else if (columns.Length == 0) output += "";
+
+            else throw new ArgumentException();
+
+            return output;
+        } 
+
         public static Театр[] Read(string path)
         {
             string[] lines = File.ReadAllLines(path);
@@ -33,7 +56,7 @@ namespace CsvClassLibrary
                 if (matches.Count != 21) throw new ArgumentNullException("Данные в файле не соответствуют условию.");
                 Match[] values = matches.ToArray(); // values of the line
 
-                theatres[i - 1] = new Театр(values);
+                theatres[i - 1] = new Театр(values, i);
             }
 
             return theatres;
@@ -49,24 +72,30 @@ namespace CsvClassLibrary
             if (columns == null || theatres == null) throw new ArgumentNullException(); // cheking if the argument is null
 
             Console.WriteLine(Environment.NewLine);
+            Console.WriteLine(GetHeader(columns)); // print header
 
+            string output; // formatted line
             foreach (Театр theatre in theatres)
             {
-                string output = ""; // formatted line
+                output = "";
+                output += $"|{theatre.RowNum,-7}";
+                output += $"|{theatre.CommonName,-55}";
+                if (theatre.Email.Contains(" ")) output += $"|{Regex.Match(theatre.Email, @".*?(?=[,;])").Value,-35}";
+                else output += $"|{theatre.Email,-35}";
 
-                output += $"|{theatre.CommonName,-30}";
-                output += $"|{theatre.Email,-50}";
-                output += $"|{theatre.Website,-15}";
+                if (theatre.Website.Contains(" ")) output += $"|{Regex.Match(theatre.Website, @".*?(?=[,;])").Value,-32}";
+                else output += $"|{theatre.Website,-32}";
 
                 // adding colums to the output
-                if (columns.Contains("MainHallCapacity") && columns.Contains("AdditionalHallCapacity") && columns.Length == 2)
+                if (columns.Contains("MainHallCapacity") && columns.Contains("AdditionalHallCapacity"))
+                {
+                    if (theatre.MainHallCapacity == "") continue;
                     output += $"|{theatre.MainHallCapacity,-30}" + $"|{theatre.AdditionalHallCapacity,-30}";
+                }
+                    
 
-                else if (columns.Contains("ChiefName") && columns.Length == 1) output += $"|{theatre.ChiefName,-30}";
-                else if (columns.Contains("AdmArea") && columns.Length == 1) output += $"|{theatre.AdmArea,-30}";
-                else if (columns.Length == 0) output += "";
-
-                else throw new ArgumentException();
+                else if (columns.Contains("ChiefName")) output += $"|{theatre.ChiefName,-30}";
+                else if (columns.Contains("AdmArea")) output += $"|{theatre.AdmArea,-30}";
 
                 Console.WriteLine(output);
             }
@@ -76,10 +105,13 @@ namespace CsvClassLibrary
         public static void Write(Театр[] theatres, string path)
         {
             if (path == null || theatres == null) throw new ArgumentNullException();
-            string[] lines = new string[theatres.Length];
+            string[] lines = new string[theatres.Length + 1];
+            lines[0] = "ROWNUM;CommonName;FullName;ShortName;AdmArea;District;Address;ChiefName;" +
+                "ChiefPosition;PublicPhone;Fax;Email;WorkingHours;ClarificationOfWorkingHours;WebSite;" +
+                "OKPO;INN;MainHallCapacity;AdditionalHallCapacity;X_WGS;Y_WGS;GLOBALID;"; // write header
             for (int i = 0; i < theatres.Length; i++)
             {
-                lines[i] = theatres[i].ToString();
+                lines[i + 1] = theatres[i].ToString();
             }
             File.WriteAllLines(path, lines);
         }
@@ -92,11 +124,17 @@ namespace CsvClassLibrary
         /// <returns></returns>
         public static Театр[] SortByCapacity(Театр[] theatres, bool mode)
         {
-            if (mode) Array.Sort(theatres, (a, b) => int.Parse(a.MainHallCapacity) + int.Parse(a.AdditionalHallCapacity) 
-            - int.Parse(b.MainHallCapacity) - int.Parse(b.AdditionalHallCapacity));
+            if (mode) Array.Sort(theatres, (a, b) => 
+            (a.MainHallCapacity == "" ? 0 : int.Parse(a.MainHallCapacity)) +
+            (a.AdditionalHallCapacity == "" ? 0 : int.Parse(a.AdditionalHallCapacity)) -
+            (b.MainHallCapacity == "" ? 0 : int.Parse(b.MainHallCapacity)) -
+            (b.AdditionalHallCapacity == "" ? 0 : int.Parse(b.AdditionalHallCapacity)) );
 
-            else Array.Sort(theatres, (a, b) => int.Parse(b.MainHallCapacity) + int.Parse(b.AdditionalHallCapacity)
-            - int.Parse(a.MainHallCapacity) - int.Parse(a.AdditionalHallCapacity));
+            else Array.Sort(theatres, (a, b) =>
+            - (a.MainHallCapacity == "" ? 0 : int.Parse(a.MainHallCapacity)) -
+            (a.AdditionalHallCapacity == "" ? 0 : int.Parse(a.AdditionalHallCapacity)) +
+            (b.MainHallCapacity == "" ? 0 : int.Parse(b.MainHallCapacity)) +
+            (b.AdditionalHallCapacity == "" ? 0 : int.Parse(b.AdditionalHallCapacity)));
 
             return theatres;
         }

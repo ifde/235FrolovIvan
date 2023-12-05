@@ -22,10 +22,16 @@ namespace Homework03
                 string path = $@"..\..\..\..\{Console.ReadLine()}.csv";
 
                 theatres = CsvProcessing.Read(path);
+                //int[] maxes = new int[22];
+                //for (int i = 0; i < theatres.Length - 1; i++)
+                //{
+                    
+                //}
                 CsvProcessing.Print(theatres);
-                theatres = CsvProcessing.SortByCapacity(theatres, true);
+                Console.WriteLine(theatres[0].MainHallCapacity);
+                theatres = CsvProcessing.SortByCapacity(theatres, false);
                 CsvProcessing.Print(theatres, "MainHallCapacity", "AdditionalHallCapacity");
-                CsvProcessing.Write(theatres, @"..\..\..\Output");
+                CsvProcessing.Write(theatres, @"..\..\..\..\Output");
 
             }
             catch (Exception)

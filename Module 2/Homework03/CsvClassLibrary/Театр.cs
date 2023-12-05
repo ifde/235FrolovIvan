@@ -4,6 +4,7 @@ namespace CsvClassLibrary
 {
     public class Театр
     {
+        private int rowNum;
         private string commonName, fullName, shortName, admArea,
             district,
             chiefName, chiefPosition, fax,
@@ -13,6 +14,7 @@ namespace CsvClassLibrary
             additionalHallCapacity ,
             x_WGS, y_WGS, gLOBALID;
 
+        public int RowNum => rowNum;
         public string MainHallCapacity => mainHallCapacity;
         public string AdditionalHallCapacity => additionalHallCapacity;
 
@@ -27,11 +29,12 @@ namespace CsvClassLibrary
 
         private Контакты contacts;
 
-        public Театр(Match[] values)
+        public Театр(Match[] values, int rowNum)
         {
             contacts = new Контакты();
 
             // initializing fields of Театр
+            this.rowNum = rowNum;
             commonName = values[0].Value;
             fullName = values[1].Value;
             shortName = values[2].Value;
@@ -68,7 +71,7 @@ namespace CsvClassLibrary
         /// <returns></returns>
         override public string ToString()
         {
-            return $"\"{commonName}\";\"{fullName}\";\"{shortName}\";\"{admArea}\";\"{district}\";\"{contacts.street}, {contacts.number}\";\"{chiefName}\";\"{chiefPosition}\";" +
+            return $"{rowNum};\"{commonName}\";\"{fullName}\";\"{shortName}\";\"{admArea}\";\"{district}\";\"{contacts.street}, {contacts.number}\";\"{chiefName}\";\"{chiefPosition}\";" +
                 $"\"{contacts.publicPhone}\";" +
                 $"\"{fax}\";\"{email}\";\"{workingHours}\";\"{clarificationOfWorkingHours}\";\"{webSite}\";\"{oKPO}\";\"{contacts.iNN}\";\"{mainHallCapacity}\";" +
                 $"\"{additionalHallCapacity}\";\"{x_WGS}\";\"{y_WGS}\";\"{gLOBALID}\";";
