@@ -13,17 +13,27 @@ namespace CsvClassLibrary
 {
     public static class CsvProcessing
     {
+        private static string header = "ROWNUM;CommonName;FullName;ShortName;AdmArea;District;Address;ChiefName;" +
+                "ChiefPosition;PublicPhone;Fax;Email;WorkingHours;ClarificationOfWorkingHours;WebSite;" +
+                "OKPO;INN;MainHallCapacity;AdditionalHallCapacity;X_WGS;Y_WGS;GLOBALID;";
 
+        /// <summary>
+        /// Returns a header with essential colums and additional colums passed in the argument
+        /// </summary>
+        /// <param name="columns">Additional colums</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException"></exception>
         private static string GetHeader(string[] columns)
         {
             string output = ""; // formatted header
 
+            // Adding essential colums
             output += $"|{"ROWNUM",-7}";
             output += $"|{"CommonName",-55}";
             output += $"|{"Email",-35}";
             output += $"|{"WebSite",-32}";
 
-            // adding values to the header
+            // including additional colums
             if (columns.Contains("MainHallCapacity") && columns.Contains("AdditionalHallCapacity") && columns.Length == 2)
                 output += $"|{"MainHallCapacity",-30}" + $"|{"MainHallCapacity",-30}";
 
@@ -31,20 +41,24 @@ namespace CsvClassLibrary
             else if (columns.Contains("AdmArea") && columns.Length == 1) output += $"|{"AdmArea",-30}";
             else if (columns.Length == 0) output += "";
 
-            else throw new ArgumentException();
+            else throw new ArgumentException("Такие значения заголовков не предусмотрены.");
 
             return output;
         } 
 
+        /// <summary>
+        /// Reads .csv file and returns Театр[] array
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
         public static Театр[] Read(string path)
         {
             string[] lines = File.ReadAllLines(path);
             Театр[] theatres = new Театр[lines.Length - 1];
 
             // checking if the header is correct
-            if (lines[0] != "ROWNUM;CommonName;FullName;ShortName;AdmArea;District;Address;ChiefName;" +
-                "ChiefPosition;PublicPhone;Fax;Email;WorkingHours;ClarificationOfWorkingHours;WebSite;" +
-                "OKPO;INN;MainHallCapacity;AdditionalHallCapacity;X_WGS;Y_WGS;GLOBALID;")
+            if (lines[0] != header)
             {
                 throw new ArgumentNullException("Данные в файле не соответствуют условию.");
             }
@@ -66,7 +80,7 @@ namespace CsvClassLibrary
         /// Prints theatres in a readable format
         /// </summary>
         /// <param name="theatres"></param>
-        /// <param name="columns">Indices of columns by which the file for is sorted</param>
+        /// <param name="columns">Additional colums to print</param>
         public static void Print(Театр[] theatres, params string[] columns)
         {
             if (columns == null || theatres == null) throw new ArgumentNullException(); // cheking if the argument is null
@@ -80,9 +94,12 @@ namespace CsvClassLibrary
                 output = "";
                 output += $"|{theatre.RowNum,-7}";
                 output += $"|{theatre.CommonName,-55}";
+
+                // including "Email" field. If there are 2 or more emails, we output only the first one
                 if (theatre.Email.Contains(" ")) output += $"|{Regex.Match(theatre.Email, @".*?(?=[,;])").Value,-35}";
                 else output += $"|{theatre.Email,-35}";
 
+                // including "Website" field. If there are 2 or more websites, we output only the first one
                 if (theatre.Website.Contains(" ")) output += $"|{Regex.Match(theatre.Website, @".*?(?=[,;])").Value,-32}";
                 else output += $"|{theatre.Website,-32}";
 
@@ -91,8 +108,7 @@ namespace CsvClassLibrary
                 {
                     if (theatre.MainHallCapacity == "") continue;
                     output += $"|{theatre.MainHallCapacity,-30}" + $"|{theatre.AdditionalHallCapacity,-30}";
-                }
-                    
+                }  
 
                 else if (columns.Contains("ChiefName")) output += $"|{theatre.ChiefName,-30}";
                 else if (columns.Contains("AdmArea")) output += $"|{theatre.AdmArea,-30}";
@@ -101,19 +117,40 @@ namespace CsvClassLibrary
             }
         }
 
-        
-        public static void Write(Театр[] theatres, string path)
+
+        /// <summary>
+        /// Writes data about thatres into a .csv file
+        /// </summary>
+        /// <param name="theatres"></param>
+        /// <param name="path"></param>
+        /// <param name="mode">"Write" to write over. "Append" to add to an existing file.</param>
+        /// <exception cref="ArgumentNullException"></exception>
+        public static void Write(Театр[] theatres, string path, string mode)
         {
             if (path == null || theatres == null) throw new ArgumentNullException();
             string[] lines = new string[theatres.Length + 1];
-            lines[0] = "ROWNUM;CommonName;FullName;ShortName;AdmArea;District;Address;ChiefName;" +
-                "ChiefPosition;PublicPhone;Fax;Email;WorkingHours;ClarificationOfWorkingHours;WebSite;" +
-                "OKPO;INN;MainHallCapacity;AdditionalHallCapacity;X_WGS;Y_WGS;GLOBALID;"; // write header
+            lines[0] = header; // write header
             for (int i = 0; i < theatres.Length; i++)
             {
                 lines[i + 1] = theatres[i].ToString();
             }
-            File.WriteAllLines(path, lines);
+
+            if (mode == "Write") File.WriteAllLines(path, lines);
+            else if (mode == "Append")
+            {
+                try
+                {
+                    Театр[] oldTheatres = Read(path);
+                }
+                catch(Exception)
+                {
+                    throw new ArgumentException("Данные в существующем файле не соответствуют условию.");
+                }
+                
+                File.AppendAllLines(path, lines[1..]); // here we don't write headers as they already exist.
+            }
+            else throw new ArgumentException("Такой тип сохранения в файл не предусмотрен.");
+
         }
 
         /// <summary>
@@ -165,7 +202,7 @@ namespace CsvClassLibrary
                 }
             }
 
-            else throw new ArgumentException();
+            else throw new ArgumentException("Фильтрация по этому полю не предусмотрена.");
 
             return newTheatres.ToArray();
         }

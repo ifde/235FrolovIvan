@@ -30,10 +30,6 @@ namespace Homework03
                     string path = $@"{Console.ReadLine()}.csv";
                     theatres = CsvProcessing.Read(path);
 
-                    theatres = CsvProcessing.SortByCapacity(theatres, false);
-                    CsvProcessing.Print(theatres, "MainHallCapacity", "AdditionalHallCapacity");
-                    CsvProcessing.Write(theatres, @"..\..\..\..\Output");
-
                     int command; // chosen command
                     Console.WriteLine("\n---------\nМеню:\n" +
                         "1. Произвести выборку по значению ChiefName\n" +
@@ -48,159 +44,135 @@ namespace Homework03
                     while (true)
                     {
 
-                        if (int.TryParse(Console.ReadLine(), out command)) break;
+                        if (int.TryParse(Console.ReadLine(), out command) && command >= 1 && command <= 5) break;
                         Console.WriteLine("Такой команды не существует. Повторите попытку.");
                     }
-
-                    string[] new_lines = null; // selected lines or sorted lines depending on the command
 
                     switch (command)
                     {
                         case 1:
-                            Console.WriteLine("\nВведите значение выборки ChiefName:"); // Нижегородский район
-                            string value = Console.ReadLine() + "";
+                            Console.WriteLine("\nВведите значение выборки ChiefName:");
+                            string chiefName;
+                            while (true)
+                            {
+                                chiefName = Console.ReadLine() + "";
+                                if (Console.ReadLine() + "" != "") break;
+                                Console.WriteLine("Значение не может быть пустым. Повторите попытку.");
+                            }
 
-                            theatres = CsvProcessing.Filter(theatres, "ChiefName", value);
-                            CsvProcessing.Print(theatres, "ChiefName");
+                            theatres = CsvProcessing.Filter(theatres, "ChiefName", chiefName);
 
-                            // cheking if no lines match the selection,
-                            // meaning that new_lines[] contains only headers.
-                            if (new_lines.Length == 2)
+                            // cheking if no theatres match the selection
+                            if (theatres.Length == 0)
                             {
                                 Console.WriteLine("Такой выборки не существует.");
                                 throw new Exception("Kill program");
                             }
-                            CsvProcessing.Print(new_lines, 4);
+                            CsvProcessing.Print(theatres, "ChiefName");
                             break;
 
                         case 2:
-                            Console.WriteLine("\nВведите значение выборки CarCapacity:");
-                            string carCapacity = Console.ReadLine() + "";
+                            Console.WriteLine("\nВведите значение выборки AdmArea:");
+                            string admArea;
+                            while (true)
+                            {
+                                admArea = Console.ReadLine() + "";
+                                if (Console.ReadLine() + "" != "") break;
+                                Console.WriteLine("Значение не может быть пустым. Повторите попытку.");
+                            }
 
-                            new_lines = DataProcessing.GetSelectedLines((9, carCapacity));
+                            theatres = CsvProcessing.Filter(theatres, "AdmArea", admArea);
 
-                            // cheking if no lines match the selection,
-                            // meaning that new_lines[] contains only headers.
-                            if (new_lines.Length == 2)
+                            // cheking if no theatres match the selection
+                            if (theatres.Length == 0)
                             {
                                 Console.WriteLine("Такой выборки не существует.");
                                 throw new Exception("Kill program");
                             }
-                            CsvProcessing.Print(new_lines, 9);
+                            CsvProcessing.Print(theatres, "AdmArea");
                             break;
 
                         case 3:
-                            Console.WriteLine("\nВведите значение выборки Status:");
-                            string status = Console.ReadLine() + "";
-
-                            Console.WriteLine("\nВведите значение выборки NearStation:");
-                            string nearStation = Console.ReadLine() + "";
-
-                            nearStation = nearStation.Replace("<", "«");
-                            nearStation = nearStation.Replace(">", "»");
-
-                            new_lines = DataProcessing.GetSelectedLines((7, status), (5, nearStation));
-
-                            // cheking if no lines match the selection,
-                            // meaning that new_lines[] contains only headers.
-                            if (new_lines.Length == 2)
-                            {
-                                Console.WriteLine("Такой выборки не существует.");
-                                throw new Exception("Kill program");
-                            }
-                            CsvProcessing.Print(new_lines, 5, 7);
+                            theatres = CsvProcessing.SortByCapacity(theatres, true);
+                            CsvProcessing.Print(theatres, "MainHallCapacity", "AdditionalHallCapacity");
                             break;
 
                         case 4:
-                            new_lines = DataProcessing.SortByColumn("AvailableTransfer");
-                            CsvProcessing.Print(new_lines, 8);
+                            theatres = CsvProcessing.SortByCapacity(theatres, false);
+                            CsvProcessing.Print(theatres, "MainHallCapacity", "AdditionalHallCapacity");
                             break;
 
                         case 5:
-                            new_lines = DataProcessing.SortByColumn("YearOfComissioning");
-                            CsvProcessing.Print(new_lines, 6);
-                            break;
-
-                        case 6:
-                            break;
+                            throw new Exception("Kill program");
 
                     }
 
-                    // Checking if a user decided to kill program.
-                    if (new_lines == null) throw new Exception("Kill program");
+                    Console.WriteLine("\n---------\nВыберите режим сохранения файла:\n" +
+                        "1. Создание нового файла.\n" +
+                        "2. Замена уже существующего файла.\n" +
+                        "3. Добавление сохраняемых данных к содержимому уже существующего файла.");
 
-                    Console.WriteLine("\n-------------\nДля сохранения данных нажмите ENTER.\nИначе нажмите любую другую клавишу.\n-------------");
-                    if (Console.ReadKey().Key == ConsoleKey.Enter)
+                    // input command
+                    while (true)
                     {
-                        Console.WriteLine("\nCSV-Файл будет сохранен в папке исполнимого файла консольного приложения.\nВведите желаемое имя файла:");
-                        string file_name = Console.ReadLine() + ""; // file_name
-                        while (true)
-                        {
-                            try
-                            {
-                                // if new_lines[] contains only one line (excluding headers), we use the first variation of overriden method Write()
-                                if (new_lines.Length == 3) CsvProcessing.Write(new_lines[2], file_name + ".csv");
-                                else
-                                {
-                                    CsvProcessing.Path = file_name + ".csv";
-                                    CsvProcessing.Write(new_lines);
-                                }
 
-                                break;
-                            }
-                            catch (IOException)
+                        if (int.TryParse(Console.ReadLine(), out command) && command >= 1 && command <= 3) break;
+                        Console.WriteLine("Такой команды не существует. Повторите попытку.");
+                    }
+
+                    Console.WriteLine("Введите имя файла, который лежит / будет создан в папке исполнимого файла консольного приложения. Расширение не указывайте.");
+                    path = Console.ReadLine() + ".csv";
+
+                    switch (command)
+                    {
+
+                        case 1:
+                            CsvProcessing.Write(theatres, path, "Write");
+                            break;
+
+                        case 2:
+                            if (!File.Exists(path))
                             {
-                                Console.WriteLine("Неверно введено имя файла. Введите корректное имя:");
-                                file_name = Console.ReadLine() + ""; // file_name
+                                Console.WriteLine("Файла с таким именем не существует.");
+                                throw new Exception("Kill program");
                             }
-                        }
+                            CsvProcessing.Write(theatres, path, "Write");
+                            break;
+
+                        case 3:
+                            if (!File.Exists(path))
+                            {
+                                Console.WriteLine("Файла с таким именем не существует.");
+                                throw new Exception("Kill program");
+                            }
+                            CsvProcessing.Write(theatres, path, "Append");
+                            break;
+
                     }
                 }
                 catch (ArgumentNullException e)
                 {
                     Console.WriteLine(e.ParamName);
                 }
+                catch (ArgumentException e)
+                {
+                    Console.WriteLine(e.Message);
+                }
                 catch (DirectoryNotFoundException e)
                 {
                     Console.WriteLine(e.Message);
                 }
-                catch (IOException e)
+                catch (IOException)
                 {
-                    Console.WriteLine(e.Message);
+                    Console.WriteLine("Возникла ошибка при работе с файлом.");
                 }
                 catch (Exception e)
                 {
                     if (e.Message != "Kill program") Console.WriteLine("Возникла непредвиденная ошибка.");
                 }
 
-
                 Console.WriteLine("\n\n-------------\nНажмите ESC для завершения программы.\nДля повтора нажмите любую другую клавишу.\n-------------");
             } while (Console.ReadKey().Key != ConsoleKey.Escape);
-
-            try
-            {
-                Театр[] theatres;
-                Console.WriteLine("Введите имя файла:");
-                string path = $@"..\..\..\..\{Console.ReadLine()}.csv";
-
-                theatres = CsvProcessing.Read(path);
-                //int[] maxes = new int[22];
-                //for (int i = 0; i < theatres.Length - 1; i++)
-                //{
-                    
-                //}
-                CsvProcessing.Print(theatres);
-                Console.WriteLine(theatres[0].MainHallCapacity);
-                theatres = CsvProcessing.SortByCapacity(theatres, false);
-                CsvProcessing.Print(theatres, "MainHallCapacity", "AdditionalHallCapacity");
-                CsvProcessing.Write(theatres, @"..\..\..\..\Output");
-
-            }
-            catch (Exception)
-            {
-                Console.WriteLine("Возникла ошибка.");
-            }
-            
 
         }
     }
