@@ -12,6 +12,7 @@ using System.Xml;
 
 namespace Homework03
 {
+
     internal class Program
     {
         static void Main(string[] args)
@@ -30,7 +31,31 @@ namespace Homework03
                     string path = $@"{Console.ReadLine()}.csv";
                     theatres = CsvProcessing.Read(path);
 
+                    Console.WriteLine("0 - просмотреть первые N записей. 1 - просмотреть последние N записей.");
                     int command; // chosen command
+                    // input command
+                    while (true)
+                    {
+
+                        if (int.TryParse(Console.ReadLine(), out command) && command >= 0 && command <= 1) break;
+                        Console.WriteLine("Такой команды не существует. Повторите попытку.");
+                    }
+
+                    Console.WriteLine("Введите натуральное число N > 1.");
+                    int n;
+                    // input n
+                    while (true)
+                    {
+
+                        if (int.TryParse(Console.ReadLine(), out n) && n > 1 && n <= theatres.Length) break;
+                        Console.WriteLine("Такое значение N недопустимо. Повторите попытку.");
+                    }
+
+                    // printing .csv file
+                    if (command == (int)Operation.Top) CsvProcessing.Print(theatres[..n]);
+                    else CsvProcessing.Print(theatres[^n..]);
+
+
                     Console.WriteLine("\n---------\nМеню:\n" +
                         "1. Произвести выборку по значению ChiefName\n" +
                         "2. Произвести выборку по значению AdmArea\n" +
@@ -56,7 +81,7 @@ namespace Homework03
                             while (true)
                             {
                                 chiefName = Console.ReadLine() + "";
-                                if (Console.ReadLine() + "" != "") break;
+                                if (chiefName != "") break;
                                 Console.WriteLine("Значение не может быть пустым. Повторите попытку.");
                             }
 
@@ -77,7 +102,7 @@ namespace Homework03
                             while (true)
                             {
                                 admArea = Console.ReadLine() + "";
-                                if (Console.ReadLine() + "" != "") break;
+                                if (admArea != "") break;
                                 Console.WriteLine("Значение не может быть пустым. Повторите попытку.");
                             }
 

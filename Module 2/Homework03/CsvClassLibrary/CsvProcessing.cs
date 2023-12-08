@@ -11,6 +11,11 @@ using System.Threading.Tasks;
 
 namespace CsvClassLibrary
 {
+    public enum Operation
+    {
+        Top,
+        Bottom
+    }
     public static class CsvProcessing
     {
         private static string header = "ROWNUM;CommonName;FullName;ShortName;AdmArea;District;Address;ChiefName;" +
