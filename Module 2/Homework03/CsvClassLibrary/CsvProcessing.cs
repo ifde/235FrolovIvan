@@ -11,16 +11,22 @@ using System.Threading.Tasks;
 
 namespace CsvClassLibrary
 {
+    /// <summary>
+    /// Enum for selection Top or Bottom lines in a file.
+    /// </summary>
     public enum Operation
     {
         Top,
         Bottom
     }
+    /// <summary>
+    /// Provides methods to process a .csv file and Театры[]
+    /// </summary>
     public static class CsvProcessing
     {
         private static string header = "ROWNUM;CommonName;FullName;ShortName;AdmArea;District;Address;ChiefName;" +
                 "ChiefPosition;PublicPhone;Fax;Email;WorkingHours;ClarificationOfWorkingHours;WebSite;" +
-                "OKPO;INN;MainHallCapacity;AdditionalHallCapacity;X_WGS;Y_WGS;GLOBALID;";
+                "OKPO;INN;MainHallCapacity;AdditionalHallCapacity;X_WGS;Y_WGS;GLOBALID;"; // header of the Театры.csv file
 
         /// <summary>
         /// Returns a header with essential colums and additional colums passed in the argument
@@ -38,7 +44,7 @@ namespace CsvClassLibrary
             output += $"|{"Email",-35}";
             output += $"|{"WebSite",-32}";
 
-            // including additional colums
+            // including additional colums provided in colums[]
             if (columns.Contains("MainHallCapacity") && columns.Contains("AdditionalHallCapacity") && columns.Length == 2)
                 output += $"|{"MainHallCapacity",-30}" + $"|{"MainHallCapacity",-30}";
 

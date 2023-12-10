@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace CsvClassLibrary
 {
+    /// <summary>
+    /// Represents Contanct informaton of a theatre. 
+    /// In composition to Театры.
+    /// </summary>
     public class Контакты
     {
 
@@ -15,6 +19,13 @@ namespace CsvClassLibrary
             number = "", // Номер дома
             publicPhone = ""; // телефон
 
-        public Контакты() { }
+        // // Below are the properties for private fileds listed above.
+        public string INN => iNN;
+        public string City => city;
+        public string Street => street;
+        public string Number => number;
+        public string PublicPhone => publicPhone;
+
+        public Контакты() { } // basic constructor
     }
 }

@@ -2,8 +2,12 @@
 
 namespace CsvClassLibrary
 {
+    /// <summary>
+    /// Represents a theatre
+    /// </summary>
     public class Театр
     {
+        // Below are the fileds corresposding to headers of the Театры.csv file.
         private int rowNum;
         private string commonName, fullName, shortName, admArea,
             district,
@@ -14,21 +18,34 @@ namespace CsvClassLibrary
             additionalHallCapacity ,
             x_WGS, y_WGS, gLOBALID;
 
+        // Below are the properties for private fileds listed above.
         public int RowNum => rowNum;
+        public string CommonName => commonName;
+        public string FullName => fullName;
+        public string ShortName => shortName;
+        public string AdmArea => admArea;
+        public string District => district;
+        public string ChiefName => chiefName;
+        public string ChiefPosition => chiefPosition;
+        public string Fax => fax;
+        public string Email => email;
+        public string WorkHours => workingHours;
+        public string ClarificationOfWorkingHours => clarificationOfWorkingHours;
+        public string Website => webSite;
+        public string OKPO => oKPO;
         public string MainHallCapacity => mainHallCapacity;
         public string AdditionalHallCapacity => additionalHallCapacity;
-
-        public string CommonName => commonName;
-
-        public string Email => email;
-
-        public string Website => webSite;
-
-        public string ChiefName => chiefName;
-        public string AdmArea => admArea;
+        public string X_WGS => x_WGS;
+        public string Y_WGS => y_WGS;
+        public string GLOBALID => gLOBALID;
 
         private Контакты contacts;
 
+        /// <summary>
+        /// A constructor.
+        /// </summary>
+        /// <param name="values">values of the theatre in the Театры.csv file </param>
+        /// <param name="rowNum">the number of theatre in the Театры.csv file</param>
         public Театр(Match[] values, int rowNum)
         {
             contacts = new Контакты();
