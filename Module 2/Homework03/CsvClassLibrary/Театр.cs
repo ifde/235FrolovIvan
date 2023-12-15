@@ -42,6 +42,11 @@ namespace CsvClassLibrary
         private Контакты contacts;
 
         /// <summary>
+        /// A basic Constructor
+        /// </summary>
+        public Театр() : this(Regex.Matches("000000000000", @"0").ToArray(), 0) { }
+
+        /// <summary>
         /// A constructor.
         /// </summary>
         /// <param name="values">values of the theatre in the Театры.csv file </param>

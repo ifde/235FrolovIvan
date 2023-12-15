@@ -52,7 +52,8 @@ namespace CsvClassLibrary
             else if (columns.Contains("AdmArea") && columns.Length == 1) output += $"|{"AdmArea",-30}";
             else if (columns.Length == 0) output += "";
 
-            else throw new ArgumentException("Такие значения заголовков не предусмотрены.");
+            else throw new ArgumentException("Такие значения заголовков не предусмотрены."); // Because columns[] is given in the argument,
+                                                                                             // it is reasonable to throw ArgumentException().
 
             return output;
         } 
@@ -71,14 +72,16 @@ namespace CsvClassLibrary
             // checking if the header is correct
             if (lines[0] != header)
             {
-                throw new ArgumentNullException("Данные в файле не соответствуют условию.");
+                throw new ArgumentNullException("Данные в файле не соответствуют условию."); // Because the file at given in the argument path ins't correct,
+                                                                                             // it is reasonable to throw ArgumentNullException() as we consider it null.
             }
 
             // cheking that each line is in correct format
             for (int i = 1; i < lines.Length; i++)
             {
                 MatchCollection matches = Regex.Matches(lines[i], @"(?<="")[^""]*(?="";)");
-                if (matches.Count != 21) throw new ArgumentNullException("Данные в файле не соответствуют условию.");
+                if (matches.Count != 21) throw new ArgumentNullException("Данные в файле не соответствуют условию."); // Because the file at given in the argument path ins't correct,
+                                                                                                                     // it is reasonable to throw ArgumentNullException() as we consider it null.
                 Match[] values = matches.ToArray(); // values of the line
 
                 theatres[i - 1] = new Театр(values, i);
@@ -94,7 +97,7 @@ namespace CsvClassLibrary
         /// <param name="columns">Additional colums to print</param>
         public static void Print(Театр[] theatres, params string[] columns)
         {
-            if (columns == null || theatres == null) throw new ArgumentNullException(); // cheking if the argument is null
+            if (columns == null || theatres == null) throw new ArgumentNullException(); // Throwing the exact exception for null.
 
             Console.WriteLine(Environment.NewLine);
             Console.WriteLine(GetHeader(columns)); // print header
@@ -138,7 +141,7 @@ namespace CsvClassLibrary
         /// <exception cref="ArgumentNullException"></exception>
         public static void Write(Театр[] theatres, string path, string mode)
         {
-            if (path == null || theatres == null) throw new ArgumentNullException();
+            if (path == null || theatres == null) throw new ArgumentNullException(); // Throwing the exact exception for null.
             string[] lines = new string[theatres.Length + 1];
             lines[0] = header; // write header
             for (int i = 0; i < theatres.Length; i++)
@@ -155,12 +158,14 @@ namespace CsvClassLibrary
                 }
                 catch(Exception)
                 {
-                    throw new ArgumentException("Данные в существующем файле не соответствуют условию.");
+                    throw new ArgumentException("Данные в существующем файле не соответствуют условию."); // Because the file at given in the argument path ins't correct,
+                                                                                                          // it is reasonable to throw ArgumentNullException() as we consider it null.
                 }
-                
+
                 File.AppendAllLines(path, lines[1..]); // here we don't write headers as they already exist.
             }
-            else throw new ArgumentException("Такой тип сохранения в файл не предусмотрен.");
+            else throw new ArgumentException("Такой тип сохранения в файл не предусмотрен.");  // Because "mode" is given in the argument,
+                                                                                               // it is reasonable to throw ArgumentException().
 
         }
 
@@ -213,7 +218,8 @@ namespace CsvClassLibrary
                 }
             }
 
-            else throw new ArgumentException("Фильтрация по этому полю не предусмотрена.");
+            else throw new ArgumentException("Фильтрация по этому полю не предусмотрена."); // Because "field" is given in the argument,
+                                                                                            // it is reasonable to throw ArgumentException().
 
             return newTheatres.ToArray();
         }
