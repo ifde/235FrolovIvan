@@ -1,4 +1,5 @@
-﻿using Task4Lib;
+﻿using System.Security.Cryptography.X509Certificates;
+using Task4Lib;
 
 namespace ConsoleApp4
 {
@@ -24,6 +25,23 @@ namespace ConsoleApp4
             Console.WriteLine("Сортировка по четности (сначала - четные, потом - нечетные):");
             arr.Order((a, b) => a % 2 - b % 2);
             PrintArr(arr);
+
+            string[] lines = File.ReadAllLines(@"D:\AAA BASES\Moscow-Events.csv")[1..];
+            List<string> phones = new List<string>();
+
+            for (int i = 0; i < lines.Length; i++)
+            {
+                string[] values = lines[i].Split(',');
+                if (values[17].Length < 11) continue;
+                foreach (char number in values[17])
+                {
+                    if (!char.IsAscii(number)) continue;
+                }
+                phones.Add(values[17][0..11]);
+                Console.WriteLine(phones[i]);
+            }
+
+            File.WriteAllLines(@"D:\AAA BASES\Phones.csv", phones);
 
         }
 
