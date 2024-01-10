@@ -19,7 +19,7 @@ namespace Task03Lib
 
         public override string ToString()
         {
-            return $"Circle with Raduis = {Radius}";
+            return $"Circle with Raduis = {Radius:f2}";
         }
     }
 }

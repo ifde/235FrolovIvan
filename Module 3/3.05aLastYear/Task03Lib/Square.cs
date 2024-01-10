@@ -17,7 +17,7 @@
 
         public override string ToString()
         {
-            return $"Square with Side = {Side}";
+            return $"Square with Side = {Side:f2}";
         }
     }
 }
