@@ -34,7 +34,7 @@ namespace MainProgram
                 }
                 catch (ArgumentException e)
                 {
-                    Console.WriteLine(e.ParamName);
+                    Console.WriteLine(e.Message);
                 }
                 catch (Exception e)
                 {
@@ -66,7 +66,12 @@ namespace MainProgram
             while (true)
             {
 
-                if (int.TryParse(Console.ReadLine(), out command) && command >= 1 && command <= 3) break;
+                if (int.TryParse(Console.ReadLine(), out command) && command >= 1 && command <= 3)
+                {
+                    Console.WriteLine("Команда считана!");
+                    break;
+                }
+
                 Console.WriteLine("Такой команды не существует. Повторите попытку.");
             }
 
@@ -75,16 +80,22 @@ namespace MainProgram
             switch (command)
             {
                 case 1:
+                    Console.WriteLine("Введите данные файла. Для завершения ввода нажмите CTRL + Z");
                     customers = JsonParser.ReadJson();
                     break;
                 case 2:
                     // inputting file and changing Stream
                     Console.WriteLine("Введите имя JSON-файла в папке исполнимого файла консольного приложения (без указания расширения):");
                     path = $@"{Console.ReadLine()}.json";
-                    Console.SetIn(new StreamReader(path));
 
+                    FileStream fs = new FileStream(path, FileMode.Open);
+                    TextReader tmp = Console.In;
+                    StreamReader sw = new StreamReader(fs);
+                    Console.SetIn(sw);
                     customers = JsonParser.ReadJson();
-                    Console.SetIn(new StreamReader(Console.OpenStandardInput())); // restoring stream;
+                    Console.SetIn(tmp); // restoring the input stream
+                    sw.Close();
+                    fs.Close();
                     break;
                 case 3:
                     throw new Exception("Kill program");
@@ -188,22 +199,38 @@ namespace MainProgram
                     switch (command)
                     {
                         case 1:
-                            if (path == null) throw new ArgumentException("Исходного файла на существует.");
+                            if (path == null)
+                            {
+                                Console.WriteLine("Исходного файла на существует. Будет создан новый файл.");
+                                goto case 2;
+                            };
 
-                            Console.SetOut(new StreamWriter(path));
+                            FileStream fs = new FileStream(path, FileMode.Create);
+                            TextWriter tmp = Console.Out;
+                            StreamWriter sw = new StreamWriter(fs);
+                            Console.SetOut(sw);
                             JsonParser.WriteJson(customers);
-                            Console.SetOut(new StreamWriter(Console.OpenStandardOutput())); // restoring stream;
+                            Console.SetOut(tmp); // restoring the output stream
+                            sw.Close();
+                            fs.Close();
                             break;
                         case 2:
                             Console.WriteLine("Введите название файла без указания расширения.\nОн будет сохранен в папке в папке исполнимого файла консольного приложения.");
-                            path = Console.ReadLine() + "";
-                            Console.SetOut(new StreamWriter(path));
+                            path = $@"{Console.ReadLine()}.json";
+
+                            fs = new FileStream(path, FileMode.Create);
+                            tmp = Console.Out;
+                            sw = new StreamWriter(fs);
+                            Console.SetOut(sw);
                             JsonParser.WriteJson(customers);
-                            Console.SetOut(new StreamWriter(Console.OpenStandardOutput())); // restoring stream;
+                            Console.SetOut(tmp); // restoring the output stream
+                            sw.Close();
+                            fs.Close();
+
                             break;
                     }
-
                     break;
+
                 case 3:
                     throw new Exception("Kill program");
             }

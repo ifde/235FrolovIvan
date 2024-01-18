@@ -27,17 +27,13 @@ namespace JsonLib
                                           + $"\t\"email\": \"{customers[i].email}\",\n"
                                           + $"\t\"age\": {customers[i].age},\n"
                                           + $"\t\"city\": \"{customers[i].city}\",\n"
-                                          + $"\t\"is_premium\": {customers[i].is_premium},\n"
+                                          + $"\t\"is_premium\": {(customers[i].is_premium ? "true" : "false")},\n"
                                           + $"\t\"orders\": {ArrayToString(customers[i].orders)}"
                                           + "\n\t}";
             }
 
             string res = "[\n\t" + string.Join(",\n\t", customers_info) + "\n]";
-            Console.Clear();
-            // CultureInfo culture = Thread.CurrentThread.CurrentCulture;
-            // Thread.CurrentThread.CurrentCulture = new CultureInfo("en");
             Console.Write(res);
-            // Thread.CurrentThread.CurrentCulture = culture;
         }
 
         /// <summary>
@@ -48,13 +44,16 @@ namespace JsonLib
         /// <returns></returns>
         static string ArrayToString(double[] arr)
         {
+            CultureInfo culture = Thread.CurrentThread.CurrentCulture;
+            Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US"); // changing the culture to write double numbers with '.'
             string res = "[\n\t";
-            foreach (double d in arr)
+            for (int i = 0; i < arr.Length - 1; i++)
             {
-                res += $"{d:f2}" + "\n\t";
+                res += $"{arr[i]:f2}," + "\n\t";
             }
+            res += $"{arr[arr.Length - 1]:f2}" + "\n\t";
             res += "]";
-            res = res.Replace(",", ".");
+            Thread.CurrentThread.CurrentCulture = culture;
             return res;
         }
 
