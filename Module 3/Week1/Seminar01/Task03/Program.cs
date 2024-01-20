@@ -7,6 +7,6 @@ namespace Task03
         static void Main(string[] args)
         {
             test_cs.Main();
-        }
+        } 
     }
 }
