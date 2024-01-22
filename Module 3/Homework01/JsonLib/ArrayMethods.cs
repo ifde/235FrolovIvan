@@ -77,26 +77,33 @@ namespace JsonLib
             {
                 switch(field)
                 {
-                    case "name" when customer.name == value: 
-                        res.Add(customer);
+                    case "name":
+                        if (customer.name == value) res.Add(customer);
                         break;
-                    case "email" when customer.email == value: 
-                        res.Add(customer);
+                    case "email":
+                        if (customer.email == value) res.Add(customer);
                         break;
-                    case "customer_id" when customer.customer_id == int.Parse(value):
-                        res.Add(customer);
+                    case "customer_id":
+                        if (customer.customer_id == int.Parse(value)) res.Add(customer);
                         break;
-                    case "age" when customer.age == int.Parse(value):
-                        res.Add(customer);
+                    case "age":
+                        if (customer.age == int.Parse(value)) res.Add(customer);
                         break;
-                    case "city" when customer.city == value:
-                        res.Add(customer);
+                    case "city":
+                        if (customer.city == value) res.Add(customer);
                         break;
-                    case "is_premium" when customer.is_premium == (value == "true" ? true : false):
-                        res.Add(customer);
+                    case "is_premium":
+                        if (customer.is_premium == (value == "true" ? true : false)) res.Add(customer);
                         break;
-                    case "orders" when customer.orders == StringToArray(value):
-                        res.Add(customer);
+                    case "orders":
+                        // checking if the orders match
+                        if (customer.orders.Length != StringToArray(value).Length) break;
+                        bool flag = true;
+                        for (int i = 0; i < value.Length; i++)
+                        {
+                            if (customer.orders[i] != StringToArray(value)[i]) flag = false; break;
+                        }
+                        if (flag) res.Add(customer);
                         break;
                     default:
                         throw new ArgumentException("Такого поля не существует. Фильтрация невозможна");

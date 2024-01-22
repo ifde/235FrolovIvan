@@ -21,7 +21,7 @@ namespace JsonLib
             email = values.Groups["email"].Value[1..^1];
             age = int.Parse(values.Groups["age"].Value);
             city = values.Groups["city"].Value[1..^1];
-            is_premium = values.Groups["is_premium"].Value[1..^1] == "true" ? true : false;
+            is_premium = values.Groups["is_premium"].Value == "true" ? true : false;
 
             List<double> temp_orders = new List<double>();
             foreach(string temp in values.Groups["orders"].Value[1..^1].Replace(" ", "").Split(','))

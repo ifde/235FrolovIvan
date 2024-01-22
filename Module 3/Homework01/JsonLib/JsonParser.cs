@@ -77,7 +77,7 @@ namespace JsonLib
             }
 
             // Each match contains information about the customer
-            MatchCollection matches = Regex.Matches(text, @"""customer_id"":\s(?'customer_id'\w+),\s+""name"":\s(?'name'.*?),\s+""email"":\s(?'email'.*?),\s+""age"":\s(?'age'\w+),\s+""city"":\s(?'city'.*?),\s+""is_premium"":\s(?'is_premium'\w+),\s+""orders"":\s(?'orders'\[[^\[]*?\])");
+            MatchCollection matches = Regex.Matches(text, @"""customer_id"":\s(?'customer_id'\w+),\s*""name"":\s(?'name'.*?),\s*""email"":\s(?'email'.*?),\s*""age"":\s(?'age'\w+),\s*""city"":\s(?'city'.*?),\s*""is_premium"":\s(?'is_premium'\w+),\s*""orders"":\s(?'orders'\[[^\[]*?\])");
             List<Customer> customers = new List<Customer>();
 
             // Creating instances of "Customer" objects using given information 

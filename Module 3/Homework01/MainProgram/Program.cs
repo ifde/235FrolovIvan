@@ -132,6 +132,7 @@ namespace MainProgram
                     string field = Console.ReadLine() + ""; // given field
 
                     if (field == "orders") Console.WriteLine("Введите массив в виде \"a, b, c\". Дробные числа вводите с точностью ровно два знака. Разделитель - точка.");
+                    else if (field == "is_premium") Console.WriteLine("Выберите значение поля (\"true\" / \"false\"):");
                     else Console.WriteLine("Выберите значение поля:");
                     string value = Console.ReadLine() + ""; // value of the given field
 
