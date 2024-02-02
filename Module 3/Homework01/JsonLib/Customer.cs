@@ -24,7 +24,7 @@ namespace JsonLib
             is_premium = values.Groups["is_premium"].Value == "true" ? true : false;
 
             List<double> temp_orders = new List<double>();
-            foreach(string temp in values.Groups["orders"].Value[1..^1].Replace(" ", "").Split(','))
+            foreach (string temp in values.Groups["orders"].Value[1..^1].Replace(" ", "").Split(','))
             {
                 temp_orders.Add(double.Parse(temp, new CultureInfo("en")));
             }

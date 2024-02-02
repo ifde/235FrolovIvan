@@ -57,7 +57,7 @@ namespace JsonLib
             return res;
         }
 
-        
+
 
         /// <summary>
         /// Reads JSON-file from the Stream and returns an array of customers.
@@ -65,12 +65,12 @@ namespace JsonLib
         /// <returns></returns>
         public static Customer[] ReadJson()
         {
-            
+
             string text = ""; // all text from the file
 
             // Reading lines from the Stream;
             string? line = Console.ReadLine();
-            while(line != null)
+            while (line != null)
             {
                 text += line;
                 line = Console.ReadLine();
@@ -81,7 +81,7 @@ namespace JsonLib
             List<Customer> customers = new List<Customer>();
 
             // Creating instances of "Customer" objects using given information 
-            foreach(Match match in matches)
+            foreach (Match match in matches)
             {
                 customers.Add(new Customer(match));
             }

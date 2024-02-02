@@ -38,7 +38,7 @@ namespace JsonLib
         /// <param name="mode">1 - Increasing order. 2 - Decreasing order.</param>
         public static void Sort(Customer[] customers, string field, int mode)
         {
-            switch(field)
+            switch (field)
             {
                 case "name":
                     Array.Sort(customers, (a, b) => a.name.CompareTo(b.name) * mode);
@@ -73,9 +73,9 @@ namespace JsonLib
         {
             List<Customer> res = new List<Customer>(); // method output 
 
-            foreach(Customer customer in customers)
+            foreach (Customer customer in customers)
             {
-                switch(field)
+                switch (field)
                 {
                     case "name":
                         if (customer.name == value) res.Add(customer);
