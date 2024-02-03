@@ -48,7 +48,11 @@ namespace FuncTest
                         Console.Write($"e = {eps, -5}|");
                     }
 
-                    Func<double, double> f = x => -x * x + 4;
+                    Func<double, double> f = delegate (double a)
+                    {
+                        return a;
+                    };
+
                     Console.Write($"\nf1(x)   ");
                     foreach (double eps in new double[] { 0.1, 0.01, 0.005, 0.001 })
                     {
