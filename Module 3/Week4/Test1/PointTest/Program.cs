@@ -48,25 +48,21 @@ namespace FuncTest
                         Console.Write($"e = {eps, -5}|");
                     }
 
-                    Func<double, double> f = delegate (double a)
-                    {
-                        return a;
-                    };
-
-                    Console.Write($"\nf1(x)   ");
-                    foreach (double eps in new double[] { 0.1, 0.01, 0.005, 0.001 })
-                    {
-                        Console.Write(point.IsNearFunc(f, eps) ? $"Yes      |": $"No       |");
-                    }
                     PrintFunc(x => -x * x + 4, "f1(x)", point);
                     PrintFunc(x => x * Math.Sin(x), "f2(x)", point);
                     PrintFunc(x => Math.Pow(x, 4) / 4 - Math.Pow(x, 3) / 3 - Math.Pow(x, 2), "f3(x)", point);
+                    Console.WriteLine();
+
+                    Func<double, double> f = x => x;
+                    Console.WriteLine("e =    |{0,5}|{1,5}|{2,5}|{3,5}|", 0.1, 0.01, 0.005, 0.001);
+                    Console.WriteLine("f(x) = |{0,5}|{1,5}|{2,5}|{3,5}|", point.IsNearFunc(f, 0.1), point.IsNearFunc(f, 0.01), point.IsNearFunc(f, 0.005), point.IsNearFunc(f, 0.001));
+
 
 
                 }
-                catch (ArgumentException e)
+                catch (ArgumentNullException e)
                 {
-                    Console.WriteLine(e.ParamName);
+                    Console.WriteLine($"One of the arguments is null");
                 }
                 catch (Exception)
                 {

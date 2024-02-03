@@ -1,6 +1,10 @@
 ﻿namespace PointLib
 {
-    public class Point
+    public interface INearFunc
+    {
+        bool IsNearFunc(Func<double, double> f, double eps);
+    }
+    public class Point : INearFunc
     {
         double x, y; // the coordinates of the point
 
@@ -17,8 +21,9 @@
 
         public bool IsNearFunc(Func<double, double> f, double eps)
         {
+            if (f == null) throw new ArgumentNullException(nameof(f));
             return f(x) >= f(x - eps) && f(x) <= f(x + eps);
-        } 
+        }
 
     }
 }
