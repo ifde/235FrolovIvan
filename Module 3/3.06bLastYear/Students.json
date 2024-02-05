@@ -1,0 +1,211 @@
+[
+  {
+    "_id": "5ac899c026edaa9e12346fde",
+    "age": 18,
+    "eyeColor": "green",
+    "name": "Shelby Valencia",
+    "gender": "female",
+    "studentGroup": 176,
+    "algebra": 1,
+    "programming": 4,
+    "english": 7
+  },
+  {
+    "_id": "5ac899c00915c3427d9020af",
+    "age": 23,
+    "eyeColor": "green",
+    "name": "Hernandez Mercado",
+    "gender": "male",
+    "studentGroup": 171,
+    "algebra": 8,
+    "programming": 5,
+    "english": 4
+  },
+  {
+    "_id": "5ac899c094bf526c196babcf",
+    "age": 18,
+    "eyeColor": "green",
+    "name": "Goodman Lara",
+    "gender": "male",
+    "studentGroup": 177,
+    "algebra": 10,
+    "programming": 5,
+    "english": 4
+  },
+  {
+    "_id": "5ac899c08039c8ea48e2a0d6",
+    "age": 21,
+    "eyeColor": "green",
+    "name": "Abby Trevino",
+    "gender": "female",
+    "studentGroup": 174,
+    "algebra": 5,
+    "programming": 10,
+    "english": 8
+  },
+  {
+    "_id": "5ac899c0934bceb052d09812",
+    "age": 23,
+    "eyeColor": "green",
+    "name": "Carr Faulkner",
+    "gender": "male",
+    "studentGroup": 171,
+    "algebra": 7,
+    "programming": 9,
+    "english": 3
+  },
+  {
+    "_id": "5ac899c0e1db84031ffb339c",
+    "age": 20,
+    "eyeColor": "brown",
+    "name": "Petra Mendoza",
+    "gender": "female",
+    "studentGroup": 171,
+    "algebra": 3,
+    "programming": 4,
+    "english": 2
+  },
+  {
+    "_id": "5ac899c066efd2b6f5302637",
+    "age": 21,
+    "eyeColor": "blue",
+    "name": "Griffin Powell",
+    "gender": "male",
+    "studentGroup": 177,
+    "algebra": 9,
+    "programming": 6,
+    "english": 9
+  },
+  {
+    "_id": "5ac899c0413f868c63cc5db9",
+    "age": 19,
+    "eyeColor": "green",
+    "name": "Sullivan Ramos",
+    "gender": "male",
+    "studentGroup": 171,
+    "algebra": 9,
+    "programming": 1,
+    "english": 10
+  },
+  {
+    "_id": "5ac899c0df4e0ee1d871be18",
+    "age": 20,
+    "eyeColor": "brown",
+    "name": "Frost Gill",
+    "gender": "male",
+    "studentGroup": 174,
+    "algebra": 6,
+    "programming": 10,
+    "english": 8
+  },
+  {
+    "_id": "5ac899c0d06fd306262b4a25",
+    "age": 22,
+    "eyeColor": "brown",
+    "name": "Hyde Mathis",
+    "gender": "male",
+    "studentGroup": 174,
+    "algebra": 6,
+    "programming": 10,
+    "english": 10
+  },
+  {
+    "_id": "5ac899c0688834046a9d299e",
+    "age": 18,
+    "eyeColor": "green",
+    "name": "Ashley Snyder",
+    "gender": "male",
+    "studentGroup": 175,
+    "algebra": 10,
+    "programming": 6,
+    "english": 8
+  },
+  {
+    "_id": "5ac899c05cba8f6ff5061b54",
+    "age": 21,
+    "eyeColor": "brown",
+    "name": "Madeline Wheeler",
+    "gender": "female",
+    "studentGroup": 173,
+    "algebra": 6,
+    "programming": 7,
+    "english": 5
+  },
+  {
+    "_id": "5ac899c01c80b0e7f2b0e41f",
+    "age": 22,
+    "eyeColor": "brown",
+    "name": "Marta Dixon",
+    "gender": "female",
+    "studentGroup": 171,
+    "algebra": 4,
+    "programming": 1,
+    "english": 7
+  },
+  {
+    "_id": "5ac899c0c3fd1ae9e72b3935",
+    "age": 23,
+    "eyeColor": "brown",
+    "name": "Acosta Thornton",
+    "gender": "male",
+    "studentGroup": 174,
+    "algebra": 9,
+    "programming": 8,
+    "english": 6
+  },
+  {
+    "_id": "5ac899c0a126c26fa2aa1fd9",
+    "age": 20,
+    "eyeColor": "brown",
+    "name": "Spence Welch",
+    "gender": "male",
+    "studentGroup": 177,
+    "algebra": 3,
+    "programming": 10,
+    "english": 9
+  },
+  {
+    "_id": "5ac899c07a5dc2b6b393d28e",
+    "age": 19,
+    "eyeColor": "brown",
+    "name": "Shelton Shaw",
+    "gender": "male",
+    "studentGroup": 174,
+    "algebra": 3,
+    "programming": 6,
+    "english": 7
+  },
+  {
+    "_id": "5ac899c0c404fdf33b6806a8",
+    "age": 21,
+    "eyeColor": "blue",
+    "name": "Alejandra Weaver",
+    "gender": "female",
+    "studentGroup": 176,
+    "algebra": 3,
+    "programming": 10,
+    "english": 1
+  },
+  {
+    "_id": "5ac899c053e70b022e9f415d",
+    "age": 17,
+    "eyeColor": "green",
+    "name": "Ella Morrison",
+    "gender": "female",
+    "studentGroup": 173,
+    "algebra": 1,
+    "programming": 6,
+    "english": 9
+  },
+  {
+    "_id": "5ac899c061dbadff747a77be",
+    "age": 22,
+    "eyeColor": "blue",
+    "name": "Myra French",
+    "gender": "female",
+    "studentGroup": 173,
+    "algebra": 6,
+    "programming": 8,
+    "english": 4
+  }
+]
