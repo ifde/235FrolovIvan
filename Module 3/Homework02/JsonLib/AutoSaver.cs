@@ -31,7 +31,7 @@ namespace JsonLib
         {
             if (e.Dt - lastUpdate <= TimeSpan.FromSeconds(15))
             {
-                File.WriteAllText($"../../../{_originalJsonFileName}_tmp.json", JsonSerializer.Serialize(books));
+                File.WriteAllText($"../../../{_originalJsonFileName}_tmp.json", JsonSerializer.Serialize(books, new JsonSerializerOptions { WriteIndented = true }));
             }
         }
     }

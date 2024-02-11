@@ -1,5 +1,6 @@
 ﻿using System.Runtime.CompilerServices;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace JsonLib
 {
@@ -8,12 +9,19 @@ namespace JsonLib
         public event EventHandler<EventArgs> AccessibilityChanged;
         public event EventHandler<ChangeArgs> Updated;
 
+        [JsonInclude]
         public string BookId { get; private set; }
+        [JsonInclude]
         public string Title { get; private set; }
+        [JsonInclude]
         public string Author { get; private set; }
+        [JsonInclude]
         public int PublicationYear { get; private set; }
+        [JsonInclude]
         public string Genre { get; private set; }
+        [JsonInclude]
         public bool IsAvailable { get; private set; }
+        [JsonInclude]
         public List<Borrower> Borrowers { get; private set; }
 
         public Book(string bookId, string title, string author, int publicationYear, string genre, bool isAvailable, List<Borrower> borrowers)
@@ -27,11 +35,10 @@ namespace JsonLib
             Borrowers = borrowers;
         }
 
-        public void ChangeField (string fieldName, string value)
+        public void ChangeField(string fieldName, string value)
         {
             switch (fieldName)
             {
-                case "bookId": BookId = value; break;
                 case "title": Title = value; break;
                 case "author": Author = value; break;
                 case "publicationYear": PublicationYear = int.Parse(value); break;
@@ -39,13 +46,20 @@ namespace JsonLib
                 default: throw new ArgumentException("Такого поля не предусмотрено");
             }
             OnUpdated(DateTime.Now);
-        } 
+        }
+
+        public void ChangeBorrowerField (int number, string field, string value)
+        {
+            Borrower borrower = Borrowers[number];
+            borrower.ChangeField(field, value);
+            OnUpdated(DateTime.Now);
+        }
 
         public Book() { }
 
         public string ToJSON()
         {
-            return JsonSerializer.Serialize(this);
+            return JsonSerializer.Serialize(this, new JsonSerializerOptions { WriteIndented = true });
         }
 
         public void OnUpdated(DateTime dt)
