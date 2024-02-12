@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace JsonLib
 {
+    /// <summary>
+    /// Represent's book's subscribers
+    /// </summary>
     public class WaitingList
     {
         private readonly Book book;
@@ -17,6 +20,10 @@ namespace JsonLib
             _subscribers = new List<string>();
         }
 
+        /// <summary>
+        /// Subscribes a person to a book
+        /// </summary>
+        /// <param name="subscriber"></param>
         public void Subscribe(string subscriber)
         {
             _subscribers.Add(subscriber);
@@ -27,6 +34,10 @@ namespace JsonLib
             }
         }
 
+        /// <summary>
+        /// Handles the AccessibilityChanged event from "Book"
+        /// </summary>
+        /// <param name="book"></param>
         private void OnAccessibilityChangedEventHandler(Book book)
         {
             foreach (string subscriber in _subscribers)

@@ -4,6 +4,9 @@ using System.Text.Json.Serialization;
 
 namespace JsonLib
 {
+    /// <summary>
+    /// Represents a book from the JSON file
+    /// </summary>
     public class Book
     {
         public event EventHandler<EventArgs> AccessibilityChanged;
@@ -35,6 +38,12 @@ namespace JsonLib
             Borrowers = borrowers;
         }
 
+        /// <summary>
+        /// Changes the value of the given field
+        /// </summary>
+        /// <param name="fieldName"></param>
+        /// <param name="value"></param>
+        /// <exception cref="ArgumentException"></exception>
         public void ChangeField(string fieldName, string value)
         {
             switch (fieldName)
@@ -48,7 +57,13 @@ namespace JsonLib
             OnUpdated(DateTime.Now);
         }
 
-        public void ChangeBorrowerField (int number, string field, string value)
+        /// <summary>
+        /// Changes the value of the given field of the borrower
+        /// </summary>
+        /// <param name="number"></param>
+        /// <param name="field"></param>
+        /// <param name="value"></param>
+        public void ChangeBorrowerField(int number, string field, string value)
         {
             Borrower borrower = Borrowers[number];
             borrower.ChangeField(field, value);
@@ -57,16 +72,27 @@ namespace JsonLib
 
         public Book() { }
 
+        /// <summary>
+        /// Convers book to JSON format
+        /// </summary>
+        /// <returns></returns>
         public string ToJSON()
         {
             return JsonSerializer.Serialize(this, new JsonSerializerOptions { WriteIndented = true });
         }
 
+        /// <summary>
+        /// Invokes "Updated" event
+        /// </summary>
+        /// <param name="dt"></param>
         public void OnUpdated(DateTime dt)
         {
             Updated?.Invoke(this, new ChangeArgs(dt));
         }
 
+        /// <summary>
+        /// Invokes "AccessibilityChanged" event
+        /// </summary>
         public void OnAccessibilityChanged()
         {
             IsAvailable = !IsAvailable;

@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace JsonLib
 {
+    /// <summary>
+    /// Provides arguments to pass to "Updated" event from "Book"
+    /// </summary>
     public class ChangeArgs : EventArgs
     {
         public DateTime Dt { get; private set; }
