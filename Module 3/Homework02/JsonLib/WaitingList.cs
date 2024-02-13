@@ -18,6 +18,7 @@ namespace JsonLib
         {
             this.book = book;
             _subscribers = new List<string>();
+            book.AccessibilityChanged += OnAccessibilityChangedEventHandler; // connecting the waiting list to the bok
         }
 
         /// <summary>
@@ -27,18 +28,13 @@ namespace JsonLib
         public void Subscribe(string subscriber)
         {
             _subscribers.Add(subscriber);
-
-            if (book.IsAvailable)
-            {
-                OnAccessibilityChangedEventHandler(book);
-            }
         }
 
         /// <summary>
         /// Handles the AccessibilityChanged event from "Book"
         /// </summary>
         /// <param name="book"></param>
-        private void OnAccessibilityChangedEventHandler(Book book)
+        private void OnAccessibilityChangedEventHandler(object? sender, EventArgs e)
         {
             foreach (string subscriber in _subscribers)
             {

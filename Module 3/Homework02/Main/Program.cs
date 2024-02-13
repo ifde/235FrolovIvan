@@ -27,7 +27,15 @@ namespace Main
 
                 try
                 {
+
                     List<Book> books = CollectionMethods.GetBooks(); // getting a list of books from .json
+
+                    /* Book tmp = books.ElementAt(0);
+                    WaitingList wl = new WaitingList(tmp);
+                    wl.Subscribe("Anna");
+
+
+                    tmp.OnAccessibilityChanged(); */
 
                     // creating an auto saver
                     AutoSaver saver = new AutoSaver("11V", books);
@@ -61,15 +69,8 @@ namespace Main
                         }
 
                     }
-                    /*WaitingList wl = new WaitingList(books.ElementAt(0));
-                    wl.Subscribe("Anna");
 
                     
-
-                    Book book1 = books.ElementAt(0);
-                    Book book2 = books.ElementAt(1);
-                    book1.ChangeField("title", "New Title");
-                    book1.ChangeField("author", "New Author"); */
 
                 }
                 catch (ArgumentException e)
