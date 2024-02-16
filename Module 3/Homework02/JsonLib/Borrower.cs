@@ -66,10 +66,18 @@ namespace JsonLib
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        public void OnAccessibilityChangedEventHandler(object sender, ChangeArgs e)
+        public void OnAccessibilityChangedEventHandler(object? sender, EventArgs e)
         {
             Book book = (Book)sender;
-            Console.WriteLine($"Теперь книгу {book.Title} можно забрать!");
+            Console.WriteLine($"{BorrowerName}, Теперь книгу \"{book.Title}\" можно забрать!");
+        }
+
+        /// <summary>
+        /// Congratulates a borrower who recieved a book.
+        /// </summary>
+        public void ReceiveBook(Book book)
+        {
+            Console.WriteLine($"------\n{BorrowerName}, вы получили книгу \"{book.Title}\"!\n------\n");
         }
     }
 }

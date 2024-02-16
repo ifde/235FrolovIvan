@@ -39,6 +39,14 @@ namespace JsonLib
         }
 
         /// <summary>
+        /// Subscribes borrowes of a book to "AccessibilityChanged" event.
+        /// </summary>
+        public void SubscribeBorrowers()
+        {
+            foreach (Borrower borrower in Borrowers) AccessibilityChanged += borrower.OnAccessibilityChangedEventHandler;
+        }
+
+        /// <summary>
         /// Changes the value of the given field
         /// </summary>
         /// <param name="fieldName"></param>
@@ -96,7 +104,23 @@ namespace JsonLib
         public void OnAccessibilityChanged()
         {
             IsAvailable = !IsAvailable;
-            if (IsAvailable) AccessibilityChanged?.Invoke(this, new EventArgs());
+
+            // If a book became unavailable, we do nothing
+            if (!IsAvailable)
+            {
+                OnUpdated(DateTime.Now);
+                return;
+            }
+            
+            AccessibilityChanged?.Invoke(this, new EventArgs());
+
+            // Randomly selecting a borrower who receives a book.
+            Random rnd = new Random();
+            Borrower borrower = Borrowers.ElementAt(rnd.Next(Borrowers.Count)); // randomly selected borrower
+            borrower.ReceiveBook(this);
+            Borrowers.Remove(borrower); // removing the borrower who received the book
+            IsAvailable = !IsAvailable; // making a book unavailable
+
             OnUpdated(DateTime.Now);
         }
     }

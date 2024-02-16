@@ -29,6 +29,10 @@ namespace Main
                 {
 
                     List<Book> books = CollectionMethods.GetBooks(); // getting a list of books from .json
+                    books.SubscribeBorrowersForAllBooks(); // subscibing all borrowers
+
+                    Book tmp = books.ElementAt(0);
+                    tmp.OnAccessibilityChanged();
 
                     /* Book tmp = books.ElementAt(0);
                     WaitingList wl = new WaitingList(tmp);

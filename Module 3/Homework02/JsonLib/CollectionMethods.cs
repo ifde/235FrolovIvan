@@ -15,7 +15,7 @@ namespace JsonLib
     /// <summary>
     /// Neccessary methods used to work with the list of books
     /// </summary>
-    public class CollectionMethods
+    public static class CollectionMethods
     {
         /// <summary>
         /// Sorts books by a field given the specific mode
@@ -49,6 +49,18 @@ namespace JsonLib
         }
 
         /// <summary>
+        /// Applies SubscribeBorrowers() to each book
+        /// </summary>
+        /// <param name="books"></param>
+        public static void SubscribeBorrowersForAllBooks(this List<Book> books)
+        {
+            foreach (Book book in books)
+            {
+                book.SubscribeBorrowers();
+            }
+        }
+
+        /// <summary>
         /// Find a book by a given id
         /// </summary>
         /// <param name="books"></param>
@@ -72,8 +84,7 @@ namespace JsonLib
 
             Console.WriteLine(book.ToJSON());
 
-            Console.WriteLine("Введите поле для изменения.\nВарианты: title, author, publicationYear, genre, borrowers");
-            string field = Console.ReadLine() + ""; // given field
+            string field = GetField("title", "author", "publicationYear", "genre", "isAvailable", "borrowers"); // given field
 
             string value;
 
@@ -102,6 +113,10 @@ namespace JsonLib
                     default:
                         throw new ArgumentException("Такого поля не существует. Изменение невозможно.");
                 }
+            }
+            else if (field == "isAvailable")
+            {
+                book.OnAccessibilityChanged();
             }
             else
             {
@@ -137,7 +152,7 @@ namespace JsonLib
         {
             Console.WriteLine($"Введите поле для изменения.\nВарианты: {string.Join(", ", fields)}");
             string input;
-            while(true)
+            while (true)
             {
                 input = Console.ReadLine() + "";
                 if (fields.Contains(input)) break;

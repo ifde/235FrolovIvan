@@ -6,20 +6,7 @@
     "PublicationYear": 1953,
     "Genre": "Non-Fiction",
     "IsAvailable": false,
-    "Borrowers": [
-      {
-        "BorrowerId": "4bea3717-424b-4103-a841-d2adca148b46",
-        "BorrowerName": "Ryan Spears",
-        "BorrowDate": "2020-04-08",
-        "DueDate": "2020-07-05"
-      },
-      {
-        "BorrowerId": "46921ca7-09b5-4433-8c0b-479a0c0ddc4a",
-        "BorrowerName": "Carolyn Clayton",
-        "BorrowDate": "2023-09-30",
-        "DueDate": "2020-07-24"
-      }
-    ]
+    "Borrowers": []
   },
   {
     "BookId": "569bfe22-0547-4daf-a048-e59fc6408b9e",
@@ -91,10 +78,10 @@
   },
   {
     "BookId": "6933784b-cf26-4650-9eab-e5c247555f1c",
-    "Title": "ABC",
+    "Title": "Seamless 5thgeneration flexibility",
     "Author": "Caitlin Butler",
-    "PublicationYear": 1992,
-    "Genre": "Novel",
+    "PublicationYear": 1831,
+    "Genre": "Mystery",
     "IsAvailable": false,
     "Borrowers": [
       {
