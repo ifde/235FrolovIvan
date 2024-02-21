@@ -7,4 +7,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Self01Lib\Self01Lib.csproj" />
+  </ItemGroup>
+
 </Project>
