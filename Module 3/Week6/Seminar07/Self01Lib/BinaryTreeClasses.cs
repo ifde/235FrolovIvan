@@ -1,8 +1,9 @@
 ﻿namespace Self01Lib
 {
     public class BinaryTree<BTNode, T>
-        where T: notnull
+        where T : notnull
     {
+
         BTNode<T> root;
         public BinaryTree() { root = new BTNode<T>(default); }
 
@@ -10,13 +11,12 @@
         {
             if (newNode.LeftLink != null) throw new ArgumentException("Узел не является частью дерева");
             root.InsertValue(newNode);
-
         }
 
         public string Preorder(BTNode<T> node, ref string res)
         {
-            if (node.LeftLink == null && node != root) throw new ArgumentException("Узел не является частью дерева");
-            foreach(var childNode in node.RightLink)
+            if (node.LeftLink == null && node != root) return "";
+            foreach (var childNode in node.RightLink)
             {
                 if (childNode.RightLink.Count == 0) res += $"|{childNode.Value}|\n";
                 else Preorder(childNode, ref res);
@@ -32,11 +32,16 @@
             return Preorder(root, ref res);
         }
 
+        public void Delete(BTNode<T> node)
+        {
+            node.DeleteThisNode();
+        }
+
         public bool IsEmpty => root == null;
     }
 
     public class BTNode<T>
-        where T: notnull
+        where T : notnull
     {
         T value;
         int cnt;
@@ -63,6 +68,18 @@
             newNode.leftLink = this;
             rightLink.Add(newNode);
             cnt++;
+        }
+
+        public void DeleteThisNode()
+        {
+            if (leftLink == null) return;
+            List<BTNode<T>> newRightLinks = new List<BTNode<T>>();
+            foreach (var elem in leftLink.RightLink)
+            {
+                if (elem != leftLink) newRightLinks.Add(elem);
+            }
+            leftLink.rightLink = newRightLinks;
+            leftLink = null;
         }
     }
 }

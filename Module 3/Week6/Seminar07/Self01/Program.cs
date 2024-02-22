@@ -14,6 +14,8 @@ namespace Self01
             node1.InsertValue(node2);
             node1.InsertValue(node3);
             Console.WriteLine(tree);
+            tree.Delete(node2);
+            Console.WriteLine(tree);
         }
     }
 }
