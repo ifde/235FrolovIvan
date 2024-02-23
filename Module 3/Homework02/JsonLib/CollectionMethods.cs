@@ -18,11 +18,11 @@ namespace JsonLib
     public static class CollectionMethods
     {
         /// <summary>
-        /// Sorts books by a field given the specific mode
+        /// Sorts books by a field given in the specific mode
         /// </summary>
         /// <param name="books"></param>
         /// <param name="field"></param>
-        /// <param name="mode"></param>
+        /// <param name="mode"> "1" = Increasing order. "-1" = Decreasing order.</param>
         /// <exception cref="ArgumentException"></exception>
         public static void Sort(List<Book> books, string field, int mode)
         {

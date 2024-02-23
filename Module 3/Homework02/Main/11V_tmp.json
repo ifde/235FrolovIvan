@@ -1,208 +1,95 @@
 [
   {
-    "BookId": "90fbf5d0-ff5a-4ca9-97db-d1d827527c71",
-    "Title": "Re-contextualized tertiary portal",
-    "Author": "Elijah Miles",
-    "PublicationYear": 1953,
-    "Genre": "Non-Fiction",
-    "IsAvailable": false,
-    "Borrowers": []
-  },
-  {
-    "BookId": "569bfe22-0547-4daf-a048-e59fc6408b9e",
-    "Title": "Re-contextualized client-server instruction set",
-    "Author": "Steven Larson",
-    "PublicationYear": 1885,
-    "Genre": "Non-Fiction",
+    "BookId": "079e4d23-d7fa-4eea-8372-67c23ae5ca94",
+    "Title": "Advanced well-modulated firmware",
+    "Author": "Brian Myers",
+    "PublicationYear": 1846,
+    "Genre": "Science Fiction",
     "IsAvailable": true,
     "Borrowers": [
       {
-        "BorrowerId": "cb4f4285-bbfa-42d2-8081-e2b7847284b3",
-        "BorrowerName": "Tanya King",
-        "BorrowDate": "2022-10-29",
-        "DueDate": "2021-03-20"
+        "BorrowerId": "4675e10f-c12e-4be0-be11-b8cbedd62644",
+        "BorrowerName": "Kevin Cooper",
+        "BorrowDate": "2020-03-26",
+        "DueDate": "2023-02-11"
       },
       {
-        "BorrowerId": "8b9ea520-992d-48e7-b2b3-d7639d6d6fc9",
-        "BorrowerName": "Michael Newman",
-        "BorrowDate": "2020-04-19",
-        "DueDate": "2023-07-29"
-      },
-      {
-        "BorrowerId": "7953a1ea-6dc0-45f1-b5b3-a89d26fc6db1",
-        "BorrowerName": "George Fitzpatrick",
-        "BorrowDate": "2021-11-21",
-        "DueDate": "2021-10-02"
-      },
-      {
-        "BorrowerId": "8aa19c8a-c741-4790-a3b0-c730d40e260d",
-        "BorrowerName": "Elizabeth Schneider",
-        "BorrowDate": "2020-08-29",
-        "DueDate": "2023-10-30"
+        "BorrowerId": "81fbce0e-0eb3-46cf-848e-db626f4aae0c",
+        "BorrowerName": "Todd Lam",
+        "BorrowDate": "2022-04-27",
+        "DueDate": "2022-09-27"
       }
     ]
   },
   {
-    "BookId": "e7a6524c-7fb9-447a-aa05-f3c9f745bc49",
-    "Title": "Integrated regional instruction set",
-    "Author": "Mariah Walls",
-    "PublicationYear": 1907,
+    "BookId": "0070d2d8-8b36-488b-8ded-4f8aa34df8f3",
+    "Title": "Cross-platform coherent portal",
+    "Author": "Chase Brooks",
+    "PublicationYear": 2017,
+    "Genre": "Mystery",
+    "IsAvailable": true,
+    "Borrowers": [
+      {
+        "BorrowerId": "df801d28-aeb6-45b8-aa98-86b7d1f564c0",
+        "BorrowerName": "Kristen Jones",
+        "BorrowDate": "2023-12-21",
+        "DueDate": "2021-09-03"
+      },
+      {
+        "BorrowerId": "df4852a7-1198-41c2-9514-2b1feb0a3ce8",
+        "BorrowerName": "Christopher King",
+        "BorrowDate": "2021-06-09",
+        "DueDate": "2021-11-04"
+      },
+      {
+        "BorrowerId": "20967dc1-a53e-4b08-8c2d-00459c6359f7",
+        "BorrowerName": "Alicia Swanson",
+        "BorrowDate": "2022-03-20",
+        "DueDate": "2021-07-22"
+      }
+    ]
+  },
+  {
+    "BookId": "a43a54f2-e5c6-47e3-b746-9cb0fb79d14c",
+    "Title": "Extended radical instruction set",
+    "Author": "Tanya Gonzalez",
+    "PublicationYear": 1865,
     "Genre": "Non-Fiction",
     "IsAvailable": false,
     "Borrowers": [
       {
-        "BorrowerId": "8eb32d71-8bcc-4f9a-90ec-61c63d9c76ca",
-        "BorrowerName": "Steven Lewis",
-        "BorrowDate": "2021-10-12",
-        "DueDate": "2023-09-21"
+        "BorrowerId": "8cab59d2-ead2-43b5-9f3c-bb539befc020",
+        "BorrowerName": "Blake Myers",
+        "BorrowDate": "2021-05-15",
+        "DueDate": "2023-06-20"
       },
       {
-        "BorrowerId": "a69f8fc0-8330-4e5a-a5d1-84efaa52f0a4",
-        "BorrowerName": "Aaron David",
-        "BorrowDate": "2020-04-07",
-        "DueDate": "2023-03-02"
-      },
-      {
-        "BorrowerId": "8a4e2eba-c34d-470d-9848-ec2d8ff983ab",
-        "BorrowerName": "Morgan Moore",
-        "BorrowDate": "2021-03-02",
-        "DueDate": "2021-10-27"
-      },
-      {
-        "BorrowerId": "3c688949-8d79-41f8-a7c0-b76310210301",
-        "BorrowerName": "Stephen Calderon",
-        "BorrowDate": "2022-08-13",
-        "DueDate": "2022-06-18"
+        "BorrowerId": "947a28c7-4072-4f2a-a178-e4b97981abf9",
+        "BorrowerName": "Kevin Lowe",
+        "BorrowDate": "2023-01-31",
+        "DueDate": "2022-02-28"
       }
     ]
   },
   {
-    "BookId": "6933784b-cf26-4650-9eab-e5c247555f1c",
-    "Title": "Seamless 5thgeneration flexibility",
-    "Author": "Caitlin Butler",
-    "PublicationYear": 1831,
+    "BookId": "abe5affa-afdf-4403-9e72-ab26ed38186e",
+    "Title": "Face-to-face homogeneous Local Area Network",
+    "Author": "Brendan Schmidt",
+    "PublicationYear": 1952,
     "Genre": "Mystery",
     "IsAvailable": false,
     "Borrowers": [
       {
-        "BorrowerId": "5f11d8fd-2288-4241-a534-a9c5524d4d15",
-        "BorrowerName": "Jason Jones",
-        "BorrowDate": "2021-02-22",
-        "DueDate": "2020-08-15"
+        "BorrowerId": "3e70bca9-3a71-4b52-a6f6-dc260669bcc0",
+        "BorrowerName": "Paul Ferguson",
+        "BorrowDate": "2021-09-26",
+        "DueDate": "2020-09-26"
       },
       {
-        "BorrowerId": "886ff905-eeb7-4d4c-808c-4c1aca2352f0",
-        "BorrowerName": "Matthew Vaughan",
-        "BorrowDate": "2020-09-16",
-        "DueDate": "2022-02-23"
-      },
-      {
-        "BorrowerId": "9168ea64-0eb4-4070-bbc4-2bf90fc35687",
-        "BorrowerName": "Jessica Brady",
-        "BorrowDate": "2022-12-06",
-        "DueDate": "2023-02-20"
-      }
-    ]
-  },
-  {
-    "BookId": "79d0f553-eaa9-4f3a-86fb-ec63de6ec761",
-    "Title": "Vision-oriented 4thgeneration moratorium",
-    "Author": "James Farley",
-    "PublicationYear": 1995,
-    "Genre": "Science Fiction",
-    "IsAvailable": false,
-    "Borrowers": [
-      {
-        "BorrowerId": "60defd3d-8ffa-4d27-92b9-e745ce21f745",
-        "BorrowerName": "Lee Mccoy",
-        "BorrowDate": "2023-02-09",
-        "DueDate": "2023-06-26"
-      },
-      {
-        "BorrowerId": "1322de93-8776-4512-ae79-a6ba49817876",
-        "BorrowerName": "Diana Wells",
-        "BorrowDate": "2022-02-03",
-        "DueDate": "2020-04-02"
-      },
-      {
-        "BorrowerId": "23ebfb46-9b9a-45e4-9e78-494559d99e1d",
-        "BorrowerName": "Isaiah Lopez",
-        "BorrowDate": "2023-09-26",
-        "DueDate": "2024-01-17"
-      },
-      {
-        "BorrowerId": "fd2b2f65-ffe5-4557-ac80-8df710272344",
-        "BorrowerName": "Jasmin Cooper",
-        "BorrowDate": "2020-01-11",
-        "DueDate": "2022-02-22"
-      }
-    ]
-  },
-  {
-    "BookId": "b8cedf43-2146-40f4-8c47-9888bd532842",
-    "Title": "Right-sized modular monitoring",
-    "Author": "Ebony Hicks",
-    "PublicationYear": 1963,
-    "Genre": "Science Fiction",
-    "IsAvailable": true,
-    "Borrowers": [
-      {
-        "BorrowerId": "c0cc514a-2625-4b35-9c86-88eff7525e0a",
-        "BorrowerName": "Lisa Brown",
-        "BorrowDate": "2022-04-05",
-        "DueDate": "2022-12-21"
-      },
-      {
-        "BorrowerId": "7271b94c-d05a-425a-a704-52f354369e05",
-        "BorrowerName": "Helen Sharp",
-        "BorrowDate": "2020-10-15",
-        "DueDate": "2021-02-06"
-      },
-      {
-        "BorrowerId": "ce3b179a-2699-4328-a787-bbbd0038703a",
-        "BorrowerName": "Shelia Jackson",
-        "BorrowDate": "2020-06-07",
-        "DueDate": "2023-02-08"
-      },
-      {
-        "BorrowerId": "70e7a5e7-0274-4c70-8388-de81b70699a2",
-        "BorrowerName": "Ian Gutierrez",
-        "BorrowDate": "2021-01-16",
-        "DueDate": "2024-01-26"
-      }
-    ]
-  },
-  {
-    "BookId": "d29a64d2-04fb-46dc-8adb-f02e759d9d24",
-    "Title": "Multi-tiered executive service-desk",
-    "Author": "Aaron Nguyen",
-    "PublicationYear": 1873,
-    "Genre": "Fiction",
-    "IsAvailable": false,
-    "Borrowers": [
-      {
-        "BorrowerId": "45ab88d3-9126-49d4-b631-54c31da258e8",
-        "BorrowerName": "Joshua Patel",
-        "BorrowDate": "2021-09-14",
-        "DueDate": "2020-05-19"
-      },
-      {
-        "BorrowerId": "cbc0f634-b0f7-418d-93c4-22a6d3666975",
-        "BorrowerName": "Victoria Hughes",
-        "BorrowDate": "2022-05-22",
-        "DueDate": "2021-07-13"
-      },
-      {
-        "BorrowerId": "e5453e77-15c1-4915-b8c6-033a8bc32bd9",
-        "BorrowerName": "Andrew Walton",
-        "BorrowDate": "2021-04-20",
-        "DueDate": "2023-05-13"
-      },
-      {
-        "BorrowerId": "6faf55d7-b0cc-4a77-8763-0ddbc554a7a8",
-        "BorrowerName": "Jill Green",
-        "BorrowDate": "2021-05-08",
-        "DueDate": "2021-12-27"
+        "BorrowerId": "ce3a6975-b4a5-4fe0-8b06-16b514bf8ce9",
+        "BorrowerName": "Sylvia Pacheco",
+        "BorrowDate": "2020-03-07",
+        "DueDate": "2021-04-04"
       }
     ]
   },
@@ -241,24 +128,92 @@
     ]
   },
   {
-    "BookId": "46849e9a-5f78-46c0-a20f-50d8ae3b2961",
-    "Title": "Re-engineered bottom-line data-warehouse",
-    "Author": "Charles Wright",
-    "PublicationYear": 1992,
-    "Genre": "Non-Fiction",
-    "IsAvailable": true,
+    "BookId": "e2661b1b-9be4-4968-a693-9a6a48f6077b",
+    "Title": "Integrated local installation",
+    "Author": "Deanna Mueller",
+    "PublicationYear": 1884,
+    "Genre": "Mystery",
+    "IsAvailable": false,
     "Borrowers": [
       {
-        "BorrowerId": "a50e971e-48e0-46fe-a7f2-0be53b3b55f5",
-        "BorrowerName": "Anthony Russell",
-        "BorrowDate": "2020-05-12",
-        "DueDate": "2020-02-02"
+        "BorrowerId": "c0075fc3-7d54-4384-8714-ae901db88ef6",
+        "BorrowerName": "Brandon Roy",
+        "BorrowDate": "2022-01-03",
+        "DueDate": "2021-09-19"
       },
       {
-        "BorrowerId": "bd38e0b8-410a-4e58-9a82-3d63ff5bc973",
-        "BorrowerName": "Monica Weaver",
-        "BorrowDate": "2020-05-11",
-        "DueDate": "2022-01-19"
+        "BorrowerId": "cd5f8010-6568-444b-b9dc-ae13d36faa0d",
+        "BorrowerName": "Brian Edwards",
+        "BorrowDate": "2022-10-17",
+        "DueDate": "2022-09-17"
+      }
+    ]
+  },
+  {
+    "BookId": "e7a6524c-7fb9-447a-aa05-f3c9f745bc49",
+    "Title": "Integrated regional instruction set",
+    "Author": "Mariah Walls",
+    "PublicationYear": 1907,
+    "Genre": "Non-Fiction",
+    "IsAvailable": false,
+    "Borrowers": [
+      {
+        "BorrowerId": "8eb32d71-8bcc-4f9a-90ec-61c63d9c76ca",
+        "BorrowerName": "Steven Lewis",
+        "BorrowDate": "2021-10-12",
+        "DueDate": "2023-09-21"
+      },
+      {
+        "BorrowerId": "a69f8fc0-8330-4e5a-a5d1-84efaa52f0a4",
+        "BorrowerName": "Aaron David",
+        "BorrowDate": "2020-04-07",
+        "DueDate": "2023-03-02"
+      },
+      {
+        "BorrowerId": "8a4e2eba-c34d-470d-9848-ec2d8ff983ab",
+        "BorrowerName": "Morgan Moore",
+        "BorrowDate": "2021-03-02",
+        "DueDate": "2021-10-27"
+      },
+      {
+        "BorrowerId": "3c688949-8d79-41f8-a7c0-b76310210301",
+        "BorrowerName": "Stephen Calderon",
+        "BorrowDate": "2022-08-13",
+        "DueDate": "2022-06-18"
+      }
+    ]
+  },
+  {
+    "BookId": "d29a64d2-04fb-46dc-8adb-f02e759d9d24",
+    "Title": "Multi-tiered executive service-desk",
+    "Author": "Aaron Nguyen",
+    "PublicationYear": 1873,
+    "Genre": "Fiction",
+    "IsAvailable": false,
+    "Borrowers": [
+      {
+        "BorrowerId": "45ab88d3-9126-49d4-b631-54c31da258e8",
+        "BorrowerName": "Joshua Patel",
+        "BorrowDate": "2021-09-14",
+        "DueDate": "2020-05-19"
+      },
+      {
+        "BorrowerId": "cbc0f634-b0f7-418d-93c4-22a6d3666975",
+        "BorrowerName": "Victoria Hughes",
+        "BorrowDate": "2022-05-22",
+        "DueDate": "2021-07-13"
+      },
+      {
+        "BorrowerId": "e5453e77-15c1-4915-b8c6-033a8bc32bd9",
+        "BorrowerName": "Andrew Walton",
+        "BorrowDate": "2021-04-20",
+        "DueDate": "2023-05-13"
+      },
+      {
+        "BorrowerId": "6faf55d7-b0cc-4a77-8763-0ddbc554a7a8",
+        "BorrowerName": "Jill Green",
+        "BorrowDate": "2021-05-08",
+        "DueDate": "2021-12-27"
       }
     ]
   },
@@ -297,80 +252,24 @@
     ]
   },
   {
-    "BookId": "e2661b1b-9be4-4968-a693-9a6a48f6077b",
-    "Title": "Integrated local installation",
-    "Author": "Deanna Mueller",
-    "PublicationYear": 1884,
-    "Genre": "Mystery",
-    "IsAvailable": false,
-    "Borrowers": [
-      {
-        "BorrowerId": "c0075fc3-7d54-4384-8714-ae901db88ef6",
-        "BorrowerName": "Brandon Roy",
-        "BorrowDate": "2022-01-03",
-        "DueDate": "2021-09-19"
-      },
-      {
-        "BorrowerId": "cd5f8010-6568-444b-b9dc-ae13d36faa0d",
-        "BorrowerName": "Brian Edwards",
-        "BorrowDate": "2022-10-17",
-        "DueDate": "2022-09-17"
-      }
-    ]
-  },
-  {
-    "BookId": "a43a54f2-e5c6-47e3-b746-9cb0fb79d14c",
-    "Title": "Extended radical instruction set",
-    "Author": "Tanya Gonzalez",
-    "PublicationYear": 1865,
-    "Genre": "Non-Fiction",
-    "IsAvailable": false,
-    "Borrowers": [
-      {
-        "BorrowerId": "8cab59d2-ead2-43b5-9f3c-bb539befc020",
-        "BorrowerName": "Blake Myers",
-        "BorrowDate": "2021-05-15",
-        "DueDate": "2023-06-20"
-      },
-      {
-        "BorrowerId": "947a28c7-4072-4f2a-a178-e4b97981abf9",
-        "BorrowerName": "Kevin Lowe",
-        "BorrowDate": "2023-01-31",
-        "DueDate": "2022-02-28"
-      }
-    ]
-  },
-  {
-    "BookId": "e1198f8b-d9bd-4117-af55-8d7c0c99b426",
-    "Title": "Triple-buffered 5thgeneration attitude",
-    "Author": "Andrea Myers",
-    "PublicationYear": 1865,
-    "Genre": "Mystery",
+    "BookId": "6ff792a7-53b1-49f7-9716-a829fe7e4aff",
+    "Title": "Networked exuding system engine",
+    "Author": "Danielle Griffin",
+    "PublicationYear": 1879,
+    "Genre": "Science Fiction",
     "IsAvailable": true,
     "Borrowers": [
       {
-        "BorrowerId": "614d6d0d-6155-401e-8779-a781dbf7c896",
-        "BorrowerName": "Jose Ortiz",
-        "BorrowDate": "2023-05-09",
-        "DueDate": "2020-03-01"
+        "BorrowerId": "acfb7407-06be-4a9f-b2f3-ac29c7876a49",
+        "BorrowerName": "Spencer Gomez",
+        "BorrowDate": "2020-08-31",
+        "DueDate": "2022-06-12"
       },
       {
-        "BorrowerId": "745e3c7b-4b40-48d0-8bf8-e8f093817564",
-        "BorrowerName": "Robert Lewis",
-        "BorrowDate": "2020-09-19",
-        "DueDate": "2021-06-02"
-      },
-      {
-        "BorrowerId": "fa55c8bf-50b2-4474-b55e-5fdc444cb83e",
-        "BorrowerName": "Joshua Wilson",
-        "BorrowDate": "2020-05-28",
-        "DueDate": "2023-10-02"
-      },
-      {
-        "BorrowerId": "d811b804-44ca-48af-8ec0-36f792490643",
-        "BorrowerName": "Theodore Underwood",
-        "BorrowDate": "2023-06-22",
-        "DueDate": "2022-06-11"
+        "BorrowerId": "1d1ebbf1-eecf-483e-acdb-a0ff5deafff5",
+        "BorrowerName": "Tara Davis",
+        "BorrowDate": "2023-11-24",
+        "DueDate": "2022-03-27"
       }
     ]
   },
@@ -393,6 +292,84 @@
         "BorrowerName": "Deanna Silva",
         "BorrowDate": "2020-06-18",
         "DueDate": "2023-08-06"
+      }
+    ]
+  },
+  {
+    "BookId": "569bfe22-0547-4daf-a048-e59fc6408b9e",
+    "Title": "Re-contextualized client-server instruction set",
+    "Author": "Steven Larson",
+    "PublicationYear": 1885,
+    "Genre": "Non-Fiction",
+    "IsAvailable": true,
+    "Borrowers": [
+      {
+        "BorrowerId": "cb4f4285-bbfa-42d2-8081-e2b7847284b3",
+        "BorrowerName": "Tanya King",
+        "BorrowDate": "2022-10-29",
+        "DueDate": "2021-03-20"
+      },
+      {
+        "BorrowerId": "8b9ea520-992d-48e7-b2b3-d7639d6d6fc9",
+        "BorrowerName": "Michael Newman",
+        "BorrowDate": "2020-04-19",
+        "DueDate": "2023-07-29"
+      },
+      {
+        "BorrowerId": "7953a1ea-6dc0-45f1-b5b3-a89d26fc6db1",
+        "BorrowerName": "George Fitzpatrick",
+        "BorrowDate": "2021-11-21",
+        "DueDate": "2021-10-02"
+      },
+      {
+        "BorrowerId": "8aa19c8a-c741-4790-a3b0-c730d40e260d",
+        "BorrowerName": "Elizabeth Schneider",
+        "BorrowDate": "2020-08-29",
+        "DueDate": "2023-10-30"
+      }
+    ]
+  },
+  {
+    "BookId": "90fbf5d0-ff5a-4ca9-97db-d1d827527c71",
+    "Title": "Re-contextualized tertiary portal",
+    "Author": "Elijah Miles",
+    "PublicationYear": 1953,
+    "Genre": "Non-Fiction",
+    "IsAvailable": false,
+    "Borrowers": [
+      {
+        "BorrowerId": "4bea3717-424b-4103-a841-d2adca148b46",
+        "BorrowerName": "Ryan Spears",
+        "BorrowDate": "2020-04-08",
+        "DueDate": "2020-07-05"
+      },
+      {
+        "BorrowerId": "46921ca7-09b5-4433-8c0b-479a0c0ddc4a",
+        "BorrowerName": "Carolyn Clayton",
+        "BorrowDate": "2023-09-30",
+        "DueDate": "2020-07-24"
+      }
+    ]
+  },
+  {
+    "BookId": "46849e9a-5f78-46c0-a20f-50d8ae3b2961",
+    "Title": "Re-engineered bottom-line data-warehouse",
+    "Author": "Charles Wright",
+    "PublicationYear": 1992,
+    "Genre": "Non-Fiction",
+    "IsAvailable": true,
+    "Borrowers": [
+      {
+        "BorrowerId": "a50e971e-48e0-46fe-a7f2-0be53b3b55f5",
+        "BorrowerName": "Anthony Russell",
+        "BorrowDate": "2020-05-12",
+        "DueDate": "2020-02-02"
+      },
+      {
+        "BorrowerId": "bd38e0b8-410a-4e58-9a82-3d63ff5bc973",
+        "BorrowerName": "Monica Weaver",
+        "BorrowDate": "2020-05-11",
+        "DueDate": "2022-01-19"
       }
     ]
   },
@@ -453,96 +430,132 @@
     ]
   },
   {
-    "BookId": "079e4d23-d7fa-4eea-8372-67c23ae5ca94",
-    "Title": "Advanced well-modulated firmware",
-    "Author": "Brian Myers",
-    "PublicationYear": 1846,
+    "BookId": "b8cedf43-2146-40f4-8c47-9888bd532842",
+    "Title": "Right-sized modular monitoring",
+    "Author": "Ebony Hicks",
+    "PublicationYear": 1963,
     "Genre": "Science Fiction",
     "IsAvailable": true,
     "Borrowers": [
       {
-        "BorrowerId": "4675e10f-c12e-4be0-be11-b8cbedd62644",
-        "BorrowerName": "Kevin Cooper",
-        "BorrowDate": "2020-03-26",
-        "DueDate": "2023-02-11"
+        "BorrowerId": "c0cc514a-2625-4b35-9c86-88eff7525e0a",
+        "BorrowerName": "Lisa Brown",
+        "BorrowDate": "2022-04-05",
+        "DueDate": "2022-12-21"
       },
       {
-        "BorrowerId": "81fbce0e-0eb3-46cf-848e-db626f4aae0c",
-        "BorrowerName": "Todd Lam",
-        "BorrowDate": "2022-04-27",
-        "DueDate": "2022-09-27"
+        "BorrowerId": "7271b94c-d05a-425a-a704-52f354369e05",
+        "BorrowerName": "Helen Sharp",
+        "BorrowDate": "2020-10-15",
+        "DueDate": "2021-02-06"
+      },
+      {
+        "BorrowerId": "ce3b179a-2699-4328-a787-bbbd0038703a",
+        "BorrowerName": "Shelia Jackson",
+        "BorrowDate": "2020-06-07",
+        "DueDate": "2023-02-08"
+      },
+      {
+        "BorrowerId": "70e7a5e7-0274-4c70-8388-de81b70699a2",
+        "BorrowerName": "Ian Gutierrez",
+        "BorrowDate": "2021-01-16",
+        "DueDate": "2024-01-26"
       }
     ]
   },
   {
-    "BookId": "0070d2d8-8b36-488b-8ded-4f8aa34df8f3",
-    "Title": "Cross-platform coherent portal",
-    "Author": "Chase Brooks",
-    "PublicationYear": 2017,
-    "Genre": "Mystery",
-    "IsAvailable": true,
-    "Borrowers": [
-      {
-        "BorrowerId": "df801d28-aeb6-45b8-aa98-86b7d1f564c0",
-        "BorrowerName": "Kristen Jones",
-        "BorrowDate": "2023-12-21",
-        "DueDate": "2021-09-03"
-      },
-      {
-        "BorrowerId": "df4852a7-1198-41c2-9514-2b1feb0a3ce8",
-        "BorrowerName": "Christopher King",
-        "BorrowDate": "2021-06-09",
-        "DueDate": "2021-11-04"
-      },
-      {
-        "BorrowerId": "20967dc1-a53e-4b08-8c2d-00459c6359f7",
-        "BorrowerName": "Alicia Swanson",
-        "BorrowDate": "2022-03-20",
-        "DueDate": "2021-07-22"
-      }
-    ]
-  },
-  {
-    "BookId": "6ff792a7-53b1-49f7-9716-a829fe7e4aff",
-    "Title": "Networked exuding system engine",
-    "Author": "Danielle Griffin",
-    "PublicationYear": 1879,
-    "Genre": "Science Fiction",
-    "IsAvailable": true,
-    "Borrowers": [
-      {
-        "BorrowerId": "acfb7407-06be-4a9f-b2f3-ac29c7876a49",
-        "BorrowerName": "Spencer Gomez",
-        "BorrowDate": "2020-08-31",
-        "DueDate": "2022-06-12"
-      },
-      {
-        "BorrowerId": "1d1ebbf1-eecf-483e-acdb-a0ff5deafff5",
-        "BorrowerName": "Tara Davis",
-        "BorrowDate": "2023-11-24",
-        "DueDate": "2022-03-27"
-      }
-    ]
-  },
-  {
-    "BookId": "abe5affa-afdf-4403-9e72-ab26ed38186e",
-    "Title": "Face-to-face homogeneous Local Area Network",
-    "Author": "Brendan Schmidt",
-    "PublicationYear": 1952,
+    "BookId": "6933784b-cf26-4650-9eab-e5c247555f1c",
+    "Title": "Seamless 5thgeneration flexibility",
+    "Author": "Caitlin Butler",
+    "PublicationYear": 1831,
     "Genre": "Mystery",
     "IsAvailable": false,
     "Borrowers": [
       {
-        "BorrowerId": "3e70bca9-3a71-4b52-a6f6-dc260669bcc0",
-        "BorrowerName": "Paul Ferguson",
-        "BorrowDate": "2021-09-26",
-        "DueDate": "2020-09-26"
+        "BorrowerId": "5f11d8fd-2288-4241-a534-a9c5524d4d15",
+        "BorrowerName": "Jason Jones",
+        "BorrowDate": "2021-02-22",
+        "DueDate": "2020-08-15"
       },
       {
-        "BorrowerId": "ce3a6975-b4a5-4fe0-8b06-16b514bf8ce9",
-        "BorrowerName": "Sylvia Pacheco",
-        "BorrowDate": "2020-03-07",
-        "DueDate": "2021-04-04"
+        "BorrowerId": "886ff905-eeb7-4d4c-808c-4c1aca2352f0",
+        "BorrowerName": "Matthew Vaughan",
+        "BorrowDate": "2020-09-16",
+        "DueDate": "2022-02-23"
+      },
+      {
+        "BorrowerId": "9168ea64-0eb4-4070-bbc4-2bf90fc35687",
+        "BorrowerName": "Jessica Brady",
+        "BorrowDate": "2022-12-06",
+        "DueDate": "2023-02-20"
+      }
+    ]
+  },
+  {
+    "BookId": "e1198f8b-d9bd-4117-af55-8d7c0c99b426",
+    "Title": "Triple-buffered 5thgeneration attitude",
+    "Author": "Andrea Myers",
+    "PublicationYear": 1865,
+    "Genre": "Mystery",
+    "IsAvailable": true,
+    "Borrowers": [
+      {
+        "BorrowerId": "614d6d0d-6155-401e-8779-a781dbf7c896",
+        "BorrowerName": "Jose Ortiz",
+        "BorrowDate": "2023-05-09",
+        "DueDate": "2020-03-01"
+      },
+      {
+        "BorrowerId": "745e3c7b-4b40-48d0-8bf8-e8f093817564",
+        "BorrowerName": "Robert Lewis",
+        "BorrowDate": "2020-09-19",
+        "DueDate": "2021-06-02"
+      },
+      {
+        "BorrowerId": "fa55c8bf-50b2-4474-b55e-5fdc444cb83e",
+        "BorrowerName": "Joshua Wilson",
+        "BorrowDate": "2020-05-28",
+        "DueDate": "2023-10-02"
+      },
+      {
+        "BorrowerId": "d811b804-44ca-48af-8ec0-36f792490643",
+        "BorrowerName": "Theodore Underwood",
+        "BorrowDate": "2023-06-22",
+        "DueDate": "2022-06-11"
+      }
+    ]
+  },
+  {
+    "BookId": "79d0f553-eaa9-4f3a-86fb-ec63de6ec761",
+    "Title": "Test",
+    "Author": "James Farley",
+    "PublicationYear": 1995,
+    "Genre": "MyGenre",
+    "IsAvailable": false,
+    "Borrowers": [
+      {
+        "BorrowerId": "60defd3d-8ffa-4d27-92b9-e745ce21f745",
+        "BorrowerName": "Lee Mccoy",
+        "BorrowDate": "2023-02-09",
+        "DueDate": "2023-06-26"
+      },
+      {
+        "BorrowerId": "1322de93-8776-4512-ae79-a6ba49817876",
+        "BorrowerName": "Diana Wells",
+        "BorrowDate": "2022-02-03",
+        "DueDate": "2020-04-02"
+      },
+      {
+        "BorrowerId": "23ebfb46-9b9a-45e4-9e78-494559d99e1d",
+        "BorrowerName": "Isaiah Lopez",
+        "BorrowDate": "2023-09-26",
+        "DueDate": "2024-01-17"
+      },
+      {
+        "BorrowerId": "fd2b2f65-ffe5-4557-ac80-8df710272344",
+        "BorrowerName": "Jasmin Cooper",
+        "BorrowDate": "2020-01-11",
+        "DueDate": "2022-02-22"
       }
     ]
   }
