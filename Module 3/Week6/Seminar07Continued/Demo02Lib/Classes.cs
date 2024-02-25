@@ -60,14 +60,52 @@ namespace Demo02Lib
         where T : struct
     {
         List<LimitedNumber<T>> list = new List<LimitedNumber<T>>();
-        Predicate<T> criterion = x => Convert.ToInt32(x) == Convert.ToDouble(x);
+        Predicate<T> criterion = x => Convert.ToInt32(x) == Convert.ToDouble(x) && Convert.ToInt32(x) % 2 == 0;
 
-        public EvenSequence(Predicate<T> criterion, params T[] arr)
+        public EvenSequence(params T[] arr)
         {
-            this.criterion += criterion;
             foreach (var item in arr)
             {
-                LimitedNumber<T> ltdNumber = new LimitedNumber<T>(this.criterion, item);
+                LimitedNumber<T> ltdNumber = new LimitedNumber<T>(criterion, item);
+                list.Add(ltdNumber);
+            }
+        }
+
+        public void AddNumber(T number)
+        {
+            LimitedNumber<T> ltdNumber = new LimitedNumber<T>(criterion, number);
+            list.Add(ltdNumber);
+        }
+
+        public void RemoveNumber(T number)
+        {
+            LimitedNumber<T> ltdNumber = new LimitedNumber<T>(criterion, number);
+            list.RemoveAll(x => x == ltdNumber);
+        }
+
+        public override string ToString()
+        {
+            string res = "";
+            foreach (var item in list)
+            {
+                res += item.ToString() + "\n";
+            }
+            return res;
+        }
+
+    }
+
+    public class OddSequence<T>
+        where T : struct
+    {
+        List<LimitedNumber<T>> list = new List<LimitedNumber<T>>();
+        Predicate<T> criterion = x => Convert.ToInt32(x) == Convert.ToDouble(x) && Convert.ToInt32(x) % 2 == 1;
+
+        public OddSequence(params T[] arr)
+        {
+            foreach (var item in arr)
+            {
+                LimitedNumber<T> ltdNumber = new LimitedNumber<T>(criterion, item);
                 list.Add(ltdNumber);
             }
         }
