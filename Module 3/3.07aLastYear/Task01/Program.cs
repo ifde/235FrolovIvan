@@ -1,4 +1,6 @@
-﻿namespace Task01
+﻿using System.Collections;
+
+namespace Task01
 {
     internal class Program
     {
@@ -11,7 +13,7 @@
         }
     }
 
-    public class A
+    public class A : IEnumerable<string>
     {
         private string[] arr = { "раз ромашка ", "два ромашка ",
                                  "три ромашка ", "пять ромашка ", "шесть ромашка " };
@@ -22,6 +24,11 @@
             {
                 yield return str;
             }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
     } //end of A
 
