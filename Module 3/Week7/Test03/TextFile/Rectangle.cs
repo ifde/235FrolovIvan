@@ -14,6 +14,11 @@ namespace TextFile
         }
 
         public double Area => X * Y;
+
+        public override string ToString()
+        {
+            return $"{X:f3} {Y:f3}";
+        }
     }
 
     public class RectangleList
@@ -21,9 +26,11 @@ namespace TextFile
         private Rectangle[] _rectangles;
         private int[] indices;
 
+        public Rectangle[] Rectangles { get { return _rectangles; } }
+
         public RectangleList(string fileName)
         {
-            string path = @"../../../../data/fileName";
+            string path = @"../../../../data/" + fileName + ".txt";
             try
             {
                 string[] lines = File.ReadAllLines(path);
@@ -34,7 +41,7 @@ namespace TextFile
                 {
                     // CultureInfo.CurrentCulture = new CultureInfo("en-US");
                     double x, y;
-                    string[] sides = line.Split(' ');
+                    string[] sides = line.Split(' ', StringSplitOptions.RemoveEmptyEntries);
                     if (sides.Length != 2) continue;
                     if (!double.TryParse(sides[0], out x)) continue;
                     if (!double.TryParse(sides[1], out y)) continue;
