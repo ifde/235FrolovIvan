@@ -3,6 +3,9 @@ using System.Text.Json;
 using System.Text.RegularExpressions;
 using Main1Lib;
 
+// Фролов Иван Григорьевич 
+// Вариант XXX
+
 namespace Main
 {
     internal class Program
