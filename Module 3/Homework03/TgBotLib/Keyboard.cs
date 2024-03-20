@@ -8,6 +8,9 @@ using Telegram.Bot.Types.ReplyMarkups;
 namespace TgBotLib
 {
     
+    /// <summary>
+    /// Represents a keyboard
+    /// </summary>
     public class Keyboard
     {
         /// <summary>

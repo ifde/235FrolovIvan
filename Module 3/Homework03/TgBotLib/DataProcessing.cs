@@ -86,7 +86,7 @@ namespace TgBotLib
                             select obj).ToList();
                     return list;
                 default:
-                    throw new ArgumentException("Данное поле не поддерживается.");
+                    throw new ArgumentException("Выборка по данному полю не поддерживается.");
             }
         }
     }

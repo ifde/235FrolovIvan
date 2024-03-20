@@ -28,7 +28,7 @@ namespace TgBotLib
         {
             using (var sw = new StreamWriter(@"json_temp.json"))
             {
-                sw.WriteLine(JsonSerializer.Serialize(data, 
+                sw.WriteLine(JsonSerializer.Serialize(data,
                     new JsonSerializerOptions { WriteIndented = true, Encoder = JavaScriptEncoder.Create(UnicodeRanges.All) }));
             }
             return File.Open(@"json_temp.json", FileMode.Open);
@@ -42,9 +42,13 @@ namespace TgBotLib
         /// <exception cref="ArgumentException"></exception>
         public static List<TPU> Read(Stream stream)
         {
-            StreamReader sr = new StreamReader(stream); // used to read from stream
-            List<TPU>? list = JsonSerializer.Deserialize<List<TPU>>(sr.ReadToEnd(), 
+            List<TPU>? list; // method output
+            using (StreamReader sr = new StreamReader(stream)) // used to read from stream
+            {
+                list = JsonSerializer.Deserialize<List<TPU>>(sr.ReadToEnd(),
                 new JsonSerializerOptions { PropertyNameCaseInsensitive = true, Encoder = JavaScriptEncoder.Create(UnicodeRanges.All) });
+            }
+            
 
             if (list == null) throw new ArgumentException("Данные в файле не соответствуют условию.");
 
@@ -52,7 +56,7 @@ namespace TgBotLib
         }
 
         /// <summary>
-        /// A useful method to convert Csv to Json and save it in the same directory with the same names
+        /// A useful method to convert Csv to Json and save it in the same directory with the same name
         /// </summary>
         /// <param name="fileName"></param>
         public static void CsvToJson(string fileName)
@@ -63,6 +67,7 @@ namespace TgBotLib
                 List<TPU> list = CSVProcessing.Read(stream);
                 using var jsonStream = new StreamReader(JSONProcessing.Write(list));
                 System.IO.File.WriteAllText(fileName + ".json", jsonStream.ReadToEnd());
+                jsonStream.Close();
             }
         }
     }

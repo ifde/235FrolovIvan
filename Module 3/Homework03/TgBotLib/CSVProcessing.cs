@@ -66,38 +66,42 @@ namespace TgBotLib
         /// <exception cref="ArgumentException"></exception>
         public static List<TPU> Read(Stream stream)
         {
-            // Getting the headers from the file.
-            var sr = new StreamReader(stream);
-            string header = sr.ReadLine() ?? "";
-            string rusHeader = sr.ReadLine() ?? "";
-
-            // Checking if the headers are correct
-            if (header != "\"ID\";\"TPUName\";\"global_id\";\"AdmArea\";" +
-                "\"District\";\"NearStation\";\"YearOfComissioning\";\"Status\";" +
-                "\"AvailableTransfer\";\"CarCapacity\";\"geodata_center\";\"geoarea\";")
-            {
-                throw new ArgumentException("Данные в файле не соответствуют условию.");
-            }
-
-            if (rusHeader != "\"Локальный идентификатор\";\"Наименование транспортно-пересадочного узла\";\"global_id\";" +
-                "\"Административный округ по адресу\";\"Район\";\"Станция метро или платформа, возле которой находится ТПУ\";" +
-                "\"Год ввода в эксплуатацию\";\"Статус объекта\";\"Возможность пересадки\";\"Количество машиномест\";" +
-                "\"geodata_center\";\"geoarea\";")
-            {
-                throw new ArgumentException("Данные в файле не соответствуют условию.");
-            }
-
             List<TPU> list = new(); // method output
-            string? line; // current line of the file
 
-            // Converting CSV-file into a list of TPUs
-            while((line = sr.ReadLine()) != null)
+            
+            using (var sr = new StreamReader(stream))
             {
-                MatchCollection matches = Regex.Matches(line, @"(?<="")[^""]*(?="";)"); // values of the properties
-                if (matches.Count != 12) throw new ArgumentException("Данные в файле не соответствуют условию.");
-                Match[] values = matches.ToArray();
+                // Getting the headers from the file.
+                string header = sr.ReadLine() ?? "";
+                string rusHeader = sr.ReadLine() ?? "";
 
-                list.Add(new TPU(values));
+                // Checking if the headers are correct
+                if (header != "\"ID\";\"TPUName\";\"global_id\";\"AdmArea\";" +
+                    "\"District\";\"NearStation\";\"YearOfComissioning\";\"Status\";" +
+                    "\"AvailableTransfer\";\"CarCapacity\";\"geodata_center\";\"geoarea\";")
+                {
+                    throw new ArgumentException("Данные в файле не соответствуют условию.");
+                }
+
+                if (rusHeader != "\"Локальный идентификатор\";\"Наименование транспортно-пересадочного узла\";\"global_id\";" +
+                    "\"Административный округ по адресу\";\"Район\";\"Станция метро или платформа, возле которой находится ТПУ\";" +
+                    "\"Год ввода в эксплуатацию\";\"Статус объекта\";\"Возможность пересадки\";\"Количество машиномест\";" +
+                    "\"geodata_center\";\"geoarea\";")
+                {
+                    throw new ArgumentException("Данные в файле не соответствуют условию.");
+                }
+
+                string? line; // current line of the file
+
+                // Converting CSV-file into a list of TPUs
+                while ((line = sr.ReadLine()) != null)
+                {
+                    MatchCollection matches = Regex.Matches(line, @"(?<="")[^""]*(?="";)"); // values of the properties
+                    if (matches.Count != 12) throw new ArgumentException("Данные в файле не соответствуют условию.");
+                    Match[] values = matches.ToArray();
+
+                    list.Add(new TPU(values));
+                }
             }
 
             return list;

@@ -13,16 +13,14 @@ namespace Main
         public static void Main()
         {
 
-            JSONProcessing.CsvToJson(@"transport-changing-points"); // creating "transport-changing-points.json" file
-
             try
             {
+
                 var botClient = new TelegramBotClient("7094277426:AAGYOBRlkSbmYlRyYUioHTD_HiCpkW5NwAc"); // connecting API
 
                 botClient.StartReceiving(Update, Error); // starting the bot
                 Console.ReadLine();
 
-                
             }
             catch (ArgumentException e)
             {
@@ -35,7 +33,11 @@ namespace Main
 
         }
 
-        public void FunctionHandler(int i)
+        /// <summary>
+        /// For Yandex Cloud
+        /// </summary>
+        /// <param name="i"></param>
+        public void FunctionHandler(int _)
         {
             Main();
         }
@@ -66,10 +68,12 @@ namespace Main
                         await client.SendTextMessageAsync(message.Chat.Id, "Жду");
                         return;
                     case "Отсортировать по полю AvailableTransport (по алфавиту)":
-                        Action(client, update, fileType, Options.SortAvailableTransportAscending);
+                        option = Options.SortAvailableTransportAscending;
+                        Action(client, update);
                         return;
                     case "Отсортировать по полю YearOfCommisioning (по убыванию)":
-                        Action(client, update, fileType, Options.SortYearOfCommisioningDescending);
+                        option = Options.SortYearOfCommisioningDescending;
+                        Action(client, update);
                         return;
                     case "Сделать выборку по полю District":
                         option = Options.SelectByDisctrict;
@@ -87,9 +91,7 @@ namespace Main
                         await client.SendTextMessageAsync(message.Chat.Id, "Выберите тип файла.", replyMarkup: Keyboard.FileTypeKeyboard());
                         return;
                     default:
-                        if (option == Options.SelectByDisctrict) Action(client, update, fileType, option, message.Text);
-                        else if (option == Options.SelectByCarCapacity) Action(client, update, fileType, option, message.Text);
-                        else if (option == Options.SelectByStatusAndNearStation) Action(client, update, fileType, option, message.Text);
+                        if (option != Options.Default) Action(client, update, message.Text);
                         else if (fileType != "") await client.SendTextMessageAsync(message.Chat.Id, "Такой команды нет.\nВыберите команду.", replyMarkup: Keyboard.CommandKeyboard()); // the menu
                         else await client.SendTextMessageAsync(message.Chat.Id, "Эта команда не поддерживается.\nВведите /start для повторного запуска.");
                         option = Options.Default;
@@ -102,7 +104,8 @@ namespace Main
             {
                 if (fileType == "")
                 {
-                    await client.SendTextMessageAsync(message.Chat.Id, "Перед отправкой нового файла перезапустите программу.\nВведите /start");
+                    if (fileType == "") await client.SendTextMessageAsync(message.Chat.Id, "Перед отправкой файла выберите его тип", replyMarkup: Keyboard.FileTypeKeyboard());
+                    else await client.SendTextMessageAsync(message.Chat.Id, "Перед отправкой нового файла перезапустите программу.\nВведите /start");
                     return;
                 }
 
@@ -139,7 +142,7 @@ namespace Main
         /// <param name="fileType"></param>
         /// <param name="option"></param>
         /// <param name="value"></param>
-        public static async void Action(ITelegramBotClient client, Update update, string fileType, Options option, params string[] value)
+        public static async void Action(ITelegramBotClient client, Update update, params string[] value)
         {
             var message = update.Message;
             await using Stream stream = System.IO.File.OpenRead("transportation" + fileType);
@@ -170,9 +173,22 @@ namespace Main
                     list = DataProcessing.Select(list, new[] { "CarCapacity" }, new[] { value[0] });
                     break;
                 case Options.SelectByStatusAndNearStation:
-                    string[] values = value[0].Split('\n');
-                    list = DataProcessing.Select(list, new[] { "Status", "NearStation" }, new[] { values[0], values[1] });
+                    try
+                    {
+                        string[] values = value[0].Split('\n');
+                        list = DataProcessing.Select(list, new[] { "Status", "NearStation" }, new[] { values[0], values[1] });
+                    }
+                    catch (Exception)
+                    {
+                        await client.SendTextMessageAsync(message.Chat.Id, "Неверный формат ввода данных. Повторите попытку.");
+                        option = Options.SelectByStatusAndNearStation;
+                        return;
+                    }
                     break;
+
+                default:
+                    await client.SendTextMessageAsync(message.Chat.Id, "Воникла ошибка.\nВведите /start для перезапуска программы.");
+                    return;
             }
 
             // Sending the result back to the user.
@@ -180,14 +196,17 @@ namespace Main
             {
                 using Stream newStream = CSVProcessing.Write(list);
                 await client.SendDocumentAsync(message.Chat.Id, InputFile.FromStream(newStream, fileName));
+                newStream.Close();
             }
             else if (fileType == ".json")
             {
                 using Stream newStream = JSONProcessing.Write(list);
                 await client.SendDocumentAsync(message.Chat.Id, InputFile.FromStream(newStream, fileName));
+                newStream.Close();
             }
 
             fileType = "";
+            stream.Close();
             await client.SendTextMessageAsync(message.Chat.Id, "Введите /start для перезапуска программы.");
         }
 

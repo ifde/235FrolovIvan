@@ -5,7 +5,7 @@ using System.Xml.Linq;
 namespace TgBotLib
 {
     /// <summary>
-    /// Represents TPU
+    /// Represents a TPU
     /// </summary>
     public class TPU
     {
