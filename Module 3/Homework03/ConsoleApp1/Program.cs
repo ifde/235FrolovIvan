@@ -10,6 +10,16 @@ namespace Main
         volatile static string fileName = ""; // the name of the file the user uploaded in the bot
         volatile static Options option = Options.Default; // the option the user chose in the menu of the bot
 
+        /// <summary>
+        /// Restores the fields to default.
+        /// </summary>
+        static void RestoreFields()
+        {
+            fileType = "";
+            fileName = "";
+            option = Options.Default;
+        }
+
         public static void Main()
         {
 
@@ -19,7 +29,7 @@ namespace Main
                 var botClient = new TelegramBotClient("7094277426:AAGYOBRlkSbmYlRyYUioHTD_HiCpkW5NwAc"); // connecting API
 
                 botClient.StartReceiving(Update, Error); // starting the bot
-                Console.ReadLine();
+                Console.ReadLine(); // keeping the console app running
 
             }
             catch (ArgumentException e)
@@ -34,7 +44,7 @@ namespace Main
         }
 
         /// <summary>
-        /// For Yandex Cloud
+        /// For Yandex Cloud.
         /// </summary>
         /// <param name="i"></param>
         public void FunctionHandler(int _)
@@ -43,7 +53,7 @@ namespace Main
         }
 
         /// <summary>
-        /// Receives and manages updates from the bot
+        /// Receives and manages updates from the bot.
         /// </summary>
         /// <param name="client"></param>
         /// <param name="update"></param>
@@ -55,89 +65,101 @@ namespace Main
             var message = update.Message;
             if (message == null) return;
 
-            if (message.Text != null)
+            try
             {
-                switch (message.Text)
+                // Getting messsages from the user.
+                if (message.Text != null)
                 {
-                    case "Прислать CSV файл":
-                        fileType = ".csv";
-                        await client.SendTextMessageAsync(message.Chat.Id, "Жду");
-                        return;
-                    case "Прислать JSON файл":
-                        fileType = ".json";
-                        await client.SendTextMessageAsync(message.Chat.Id, "Жду");
-                        return;
-                    case "Отсортировать по полю AvailableTransport (по алфавиту)":
-                        option = Options.SortAvailableTransportAscending;
-                        Action(client, update);
-                        return;
-                    case "Отсортировать по полю YearOfCommisioning (по убыванию)":
-                        option = Options.SortYearOfCommisioningDescending;
-                        Action(client, update);
-                        return;
-                    case "Сделать выборку по полю District":
-                        option = Options.SelectByDisctrict;
-                        await client.SendTextMessageAsync(message.Chat.Id, "Введите значения поля District:");
-                        return;
-                    case "Сделать выборку по полю CarCapacity":
-                        option = Options.SelectByCarCapacity;
-                        await client.SendTextMessageAsync(message.Chat.Id, "Введите значения поля CarCapacity:");
-                        return;
-                    case "Сделать выборку по полям Status и NearStation":
-                        option = Options.SelectByStatusAndNearStation;
-                        await client.SendTextMessageAsync(message.Chat.Id, "Введите значения полей Status и NearStation (в одном сообщении через перенос строки):");
-                        return;
-                    case "start" or "/start":
-                        await client.SendTextMessageAsync(message.Chat.Id, "Выберите тип файла.", replyMarkup: Keyboard.FileTypeKeyboard());
-                        return;
-                    default:
-                        if (option != Options.Default) Action(client, update, message.Text);
-                        else if (fileType != "")
-                        {
-                            if (fileName == "") await client.SendTextMessageAsync(message.Chat.Id, "Пришлите файл.");
-                            else await client.SendTextMessageAsync(message.Chat.Id, "Такой команды нет.\nВыберите команду.", replyMarkup: Keyboard.CommandKeyboard()); // the menu
-                        }
-                        else await client.SendTextMessageAsync(message.Chat.Id, "Эта команда не поддерживается.\nВведите /start для повторного запуска.");
-                        option = Options.Default; // restroing option
-                        return;
+                    // Depending on the input, choosing the action.
+                    switch (message.Text)
+                    {
+                        case "Прислать CSV файл":
+                            fileType = ".csv";
+                            await client.SendTextMessageAsync(message.Chat.Id, "Жду");
+                            return;
+                        case "Прислать JSON файл":
+                            fileType = ".json";
+                            await client.SendTextMessageAsync(message.Chat.Id, "Жду");
+                            return;
+                        case "Отсортировать по полю AvailableTransport (по алфавиту)":
+                            option = Options.SortAvailableTransportAscending;
+                            Action(client, update);
+                            return;
+                        case "Отсортировать по полю YearOfCommisioning (по убыванию)":
+                            option = Options.SortYearOfCommisioningDescending;
+                            Action(client, update);
+                            return;
+                        case "Сделать выборку по полю District":
+                            option = Options.SelectByDisctrict;
+                            await client.SendTextMessageAsync(message.Chat.Id, "Введите значения поля District:");
+                            return;
+                        case "Сделать выборку по полю CarCapacity":
+                            option = Options.SelectByCarCapacity;
+                            await client.SendTextMessageAsync(message.Chat.Id, "Введите значения поля CarCapacity:");
+                            return;
+                        case "Сделать выборку по полям Status и NearStation":
+                            option = Options.SelectByStatusAndNearStation;
+                            await client.SendTextMessageAsync(message.Chat.Id, "Введите значения полей Status и NearStation (в одном сообщении через перенос строки):");
+                            return;
+                        case "start" or "/start":
+                            RestoreFields();
+                            await client.SendTextMessageAsync(message.Chat.Id, "Выберите тип файла.", replyMarkup: Keyboard.FileTypeKeyboard());
+                            return;
+                        default:
+                            if (option != Options.Default) Action(client, update, message.Text);
+                            else if (fileType != "")
+                            {
+                                if (fileName == "") await client.SendTextMessageAsync(message.Chat.Id, "Пришлите файл.");
+                                else await client.SendTextMessageAsync(message.Chat.Id, "Такой команды нет.\nВыберите команду.", replyMarkup: Keyboard.CommandKeyboard()); // the menu
+                            }
+                            else await client.SendTextMessageAsync(message.Chat.Id, "Эта команда не поддерживается.\nВведите /start для повторного запуска.");
+                            option = Options.Default; // restroing option
+                            return;
+                    }
                 }
-            }
 
-
-            if (message.Document != null)
-            {
-                if (fileType == "")
+                // Getting a file from the user.
+                if (message.Document != null)
                 {
-                    if (fileType == "") await client.SendTextMessageAsync(message.Chat.Id, "Перед отправкой файла выберите его тип", replyMarkup: Keyboard.FileTypeKeyboard());
-                    else await client.SendTextMessageAsync(message.Chat.Id, "Перед отправкой нового файла перезапустите программу.\nВведите /start");
+                    // Checking if the type of the file was chosen.
+                    if (fileType == "")
+                    {
+                        await client.SendTextMessageAsync(message.Chat.Id, "Перед отправкой нового файла перезапустите программу.\nВведите /start");
+                        return;
+                    }
+
+                    // Getting Telegram's filePath.
+                    var field = message.Document.FileId;
+                    var fileInfo = await client.GetFileAsync(field);
+                    var filePath = fileInfo.FilePath;
+
+                    fileName = message.Document.FileName; // saving the original name of the file (to be used later)
+
+                    // Checking that recieved file is in the right format.
+                    if (!filePath.EndsWith(fileType))
+                    {
+                        fileName = "";
+                        await client.SendTextMessageAsync(message.Chat.Id, "Файл имеет неверный формат. Повторите попытку.");
+                        return;
+                    }
+
+                    // Downloading the file from Telegram to our computer
+                    string destinationFilePath = "transportation" + fileType;
+                    await using FileStream fileStream = System.IO.File.Create(destinationFilePath);
+                    await client.DownloadFileAsync(filePath, fileStream);
+                    fileStream.Close();
+
+                    await client.SendTextMessageAsync(message.Chat.Id, "Выберите команду.", replyMarkup: Keyboard.CommandKeyboard()); // the menu
+
                     return;
                 }
-
-                // Getting Telegram's filePath.
-                var field = message.Document.FileId;
-                var fileInfo = await client.GetFileAsync(field);
-                var filePath = fileInfo.FilePath;
-
-                fileName = message.Document.FileName; // saving the original name of the file (to be used later)
-
-                // Checking that recieved file is in the right format.
-                if (!filePath.EndsWith(fileType))
-                {
-                    fileName = "";
-                    await client.SendTextMessageAsync(message.Chat.Id, "Файл имеет неверный формат. Повторите попытку.");
-                    return;
-                }
-
-                // Downloading the file from Telegram to our computer
-                string destinationFilePath = "transportation" + fileType;
-                await using FileStream fileStream = System.IO.File.Create(destinationFilePath);
-                await client.DownloadFileAsync(filePath, fileStream);
-                fileStream.Close();
-
-                await client.SendTextMessageAsync(message.Chat.Id, "Выберите команду.", replyMarkup: Keyboard.CommandKeyboard()); // the menu
-
-                return;
             }
+            catch (Exception)
+            {
+                RestoreFields();
+                await client.SendTextMessageAsync(message.Chat.Id, "Возникла непредвиденная ошибка. Введите /start для перезапуска программы.");
+            }
+
         }
         /// <summary>
         /// This method sorts or selects from the document and sends the output to the user of the bot
@@ -226,10 +248,7 @@ namespace Main
             }
             catch (Exception)
             {
-                // Restoring the fields to default.
-                fileType = "";
-                fileName = "";
-                option = Options.Default;
+                RestoreFields();
                 await client.SendTextMessageAsync(message.Chat.Id, "Возникла непредвиденная ошибка. Введите /start для перезапуска программы.");
             }
             
