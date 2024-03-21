@@ -57,6 +57,7 @@ namespace TgBotLib
 
         /// <summary>
         /// A useful method to convert Csv to Json and save it in the same directory with the same name
+        /// Example: JSONProcessing.CsvToJson(@"transport-changing-points");
         /// </summary>
         /// <param name="fileName"></param>
         public static void CsvToJson(string fileName)

@@ -92,9 +92,13 @@ namespace Main
                         return;
                     default:
                         if (option != Options.Default) Action(client, update, message.Text);
-                        else if (fileType != "") await client.SendTextMessageAsync(message.Chat.Id, "Такой команды нет.\nВыберите команду.", replyMarkup: Keyboard.CommandKeyboard()); // the menu
+                        else if (fileType != "")
+                        {
+                            if (fileName == "") await client.SendTextMessageAsync(message.Chat.Id, "Пришлите файл.");
+                            else await client.SendTextMessageAsync(message.Chat.Id, "Такой команды нет.\nВыберите команду.", replyMarkup: Keyboard.CommandKeyboard()); // the menu
+                        }
                         else await client.SendTextMessageAsync(message.Chat.Id, "Эта команда не поддерживается.\nВведите /start для повторного запуска.");
-                        option = Options.Default;
+                        option = Options.Default; // restroing option
                         return;
                 }
             }
@@ -119,6 +123,7 @@ namespace Main
                 // Checking that recieved file is in the right format.
                 if (!filePath.EndsWith(fileType))
                 {
+                    fileName = "";
                     await client.SendTextMessageAsync(message.Chat.Id, "Файл имеет неверный формат. Повторите попытку.");
                     return;
                 }
@@ -144,70 +149,90 @@ namespace Main
         /// <param name="value"></param>
         public static async void Action(ITelegramBotClient client, Update update, params string[] value)
         {
-            var message = update.Message;
-            await using Stream stream = System.IO.File.OpenRead("transportation" + fileType);
-
-            // Creating a list of TPUs from the file
-            List<TPU> list;
-            if (fileType == ".csv") list = CSVProcessing.Read(stream);
-            else if (fileType == ".json") list = JSONProcessing.Read(stream);
-            else
+            var message = update.Message; // user's info
+            try
             {
-                await client.SendTextMessageAsync(message.Chat.Id, "Неизвестый формат файла.\nВведите /start для перезапуска программы.");
-                return;
-            }
-
-            // Changing the list as the user pleases
-            switch (option)
-            {
-                case Options.SortAvailableTransportAscending:
-                    list = DataProcessing.Sort(list, "AvailableTransfer");
-                    break;
-                case Options.SortYearOfCommisioningDescending:
-                    list = DataProcessing.Sort(list, "YearOfComissioning");
-                    break;
-                case Options.SelectByDisctrict:
-                    list = DataProcessing.Select(list, new[] { "District" }, new[] { value[0] });
-                    break;
-                case Options.SelectByCarCapacity:
-                    list = DataProcessing.Select(list, new[] { "CarCapacity" }, new[] { value[0] });
-                    break;
-                case Options.SelectByStatusAndNearStation:
-                    try
-                    {
-                        string[] values = value[0].Split('\n');
-                        list = DataProcessing.Select(list, new[] { "Status", "NearStation" }, new[] { values[0], values[1] });
-                    }
-                    catch (Exception)
-                    {
-                        await client.SendTextMessageAsync(message.Chat.Id, "Неверный формат ввода данных. Повторите попытку.");
-                        option = Options.SelectByStatusAndNearStation;
-                        return;
-                    }
-                    break;
-
-                default:
-                    await client.SendTextMessageAsync(message.Chat.Id, "Воникла ошибка.\nВведите /start для перезапуска программы.");
+                /*if (fileName == "")
+                {
+                    await client.SendTextMessageAsync(message.Chat.Id, "Вы не прислали файл.\nВведите /start для перезапуска программы.");
                     return;
-            }
+                }*/
 
-            // Sending the result back to the user.
-            if (fileType == ".csv")
-            {
-                using Stream newStream = CSVProcessing.Write(list);
-                await client.SendDocumentAsync(message.Chat.Id, InputFile.FromStream(newStream, fileName));
-                newStream.Close();
-            }
-            else if (fileType == ".json")
-            {
-                using Stream newStream = JSONProcessing.Write(list);
-                await client.SendDocumentAsync(message.Chat.Id, InputFile.FromStream(newStream, fileName));
-                newStream.Close();
-            }
+                await using Stream stream = System.IO.File.OpenRead("transportation" + fileType); // a stream to read the file from
 
-            fileType = "";
-            stream.Close();
-            await client.SendTextMessageAsync(message.Chat.Id, "Введите /start для перезапуска программы.");
+                // Creating a list of TPUs from the file
+                List<TPU> list;
+                if (fileType == ".csv") list = CSVProcessing.Read(stream);
+                else if (fileType == ".json") list = JSONProcessing.Read(stream);
+                else
+                {
+                    await client.SendTextMessageAsync(message.Chat.Id, "Неизвестый формат файла.\nВведите /start для перезапуска программы.");
+                    return;
+                }
+
+                // Changing the list as the user pleases
+                switch (option)
+                {
+                    case Options.SortAvailableTransportAscending:
+                        list = DataProcessing.Sort(list, "AvailableTransfer");
+                        break;
+                    case Options.SortYearOfCommisioningDescending:
+                        list = DataProcessing.Sort(list, "YearOfComissioning");
+                        break;
+                    case Options.SelectByDisctrict:
+                        list = DataProcessing.Select(list, new[] { "District" }, new[] { value[0] });
+                        break;
+                    case Options.SelectByCarCapacity:
+                        list = DataProcessing.Select(list, new[] { "CarCapacity" }, new[] { value[0] });
+                        break;
+                    case Options.SelectByStatusAndNearStation:
+                        try
+                        {
+                            string[] values = value[0].Split('\n');
+                            list = DataProcessing.Select(list, new[] { "Status", "NearStation" }, new[] { values[0], values[1] });
+                        }
+                        catch (Exception)
+                        {
+                            await client.SendTextMessageAsync(message.Chat.Id, "Неверный формат ввода данных. Повторите попытку.");
+                            option = Options.SelectByStatusAndNearStation;
+                            return;
+                        }
+                        break;
+
+                    default:
+                        await client.SendTextMessageAsync(message.Chat.Id, "Воникла ошибка.\nВведите /start для перезапуска программы.");
+                        return;
+                }
+
+                // Sending the result back to the user.
+                if (fileType == ".csv")
+                {
+                    using Stream newStream = CSVProcessing.Write(list);
+                    await client.SendDocumentAsync(message.Chat.Id, InputFile.FromStream(newStream, fileName));
+                    newStream.Close();
+                }
+                else if (fileType == ".json")
+                {
+                    using Stream newStream = JSONProcessing.Write(list);
+                    await client.SendDocumentAsync(message.Chat.Id, InputFile.FromStream(newStream, fileName));
+                    newStream.Close();
+                }
+
+                // Restoring the values to default
+                fileType = "";
+                stream.Close();
+                option = Options.Default;
+                await client.SendTextMessageAsync(message.Chat.Id, "Введите /start для перезапуска программы.");
+            }
+            catch (Exception)
+            {
+                // Restoring the fields to default.
+                fileType = "";
+                fileName = "";
+                option = Options.Default;
+                await client.SendTextMessageAsync(message.Chat.Id, "Возникла непредвиденная ошибка. Введите /start для перезапуска программы.");
+            }
+            
         }
 
         /// <summary>
